@@ -29,7 +29,9 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework:spring-jdbc")
     testCompile("junit:junit")
+    testCompile(group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '6.1.0.jre7')
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.springframework.security:spring-security-test")
 
