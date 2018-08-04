@@ -13,17 +13,19 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
     @Autowired
     private DataSource dataSource;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
 
         auth.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select username, password, enabled"
@@ -47,7 +49,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/", "/home").permitAll()
                 .anyRequest().authenticated()
                 .and()
-                .authorizeRequests().anyRequest().hasAnyRole("ADMIN", "USER")
+                .authorizeRequests().anyRequest().hasAnyRole("ADMIN", "ROLE_ADMIN", "USER")
                 .and()
                 .formLogin()
                 .loginPage("/login")
@@ -67,8 +69,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .password("password")
                         .roles("USER")
                         .build();
-
-        return new InMemoryUserDetailsManager(user);
-    }
-    */
+        UserDetails user2 =
+                User.withDefaultPasswordEncoder()
+                        .username("adam")
+                        .password("stan")
+                        .roles("USER")
+                        .build();
+        return new InMemoryUserDetailsManager(user, user2);
+    }*/
 }
