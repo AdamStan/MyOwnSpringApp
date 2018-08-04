@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome at University</title>
+</head>
+<body>
+<h1 th:inline="text">Hello, do something [[${#httpServletRequest.remoteUser}]]!</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+<div>
+    <p> Check your actual marks: <a href = "/#"> My actual marks</a></p>
+    <p> Check your historical marks <a href = "/#"> My historical marks </a> </p>
+</div>
+</body>
+</html>

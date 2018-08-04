@@ -45,36 +45,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
-                .anyRequest().authenticated()
-                .and()
-                .authorizeRequests().anyRequest().hasAnyRole("ADMIN", "ROLE_ADMIN", "USER")
-                .and()
-                .formLogin()
-                .loginPage("/login")
-                .permitAll()
-                .and()
-                .logout()
-                .permitAll()
-                .and();
+            .authorizeRequests()
+            .antMatchers("/", "/home").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .authorizeRequests().antMatchers("/hello", "/helloAdmin")
+            .access("hasRole('ROLE_ADMIN')")
+            .and()
+            .formLogin()
+            .loginPage("/login")
+            .permitAll()
+            .and()
+            .logout()
+            .permitAll()
+            .and()
+            .authorizeRequests().antMatchers("/hello","/helloStudent")
+            .access("hasRole('ROLE_STUDENT')")
+            .and()
+            .authorizeRequests().antMatchers("/hello","/helloTutor")
+            .access("hasRole('ROLE_TUTOR')")
+            .and();
+            /*.authorizeRequests().antMatchers("/helloAdmmin")
+            .hasAnyRole("ROLE_ADMIN")
+            .and()*/;
     }
-    /*
-    @Bean
-    @Override
-    public UserDetailsService userDetailsService() {
-        UserDetails user =
-                User.withDefaultPasswordEncoder()
-                        .username("user")
-                        .password("password")
-                        .roles("USER")
-                        .build();
-        UserDetails user2 =
-                User.withDefaultPasswordEncoder()
-                        .username("adam")
-                        .password("stan")
-                        .roles("USER")
-                        .build();
-        return new InMemoryUserDetailsManager(user, user2);
-    }*/
 }
