@@ -1,4 +1,4 @@
-package deanoffice;
+package deanoffice.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -12,6 +12,8 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/").setViewName("home");
         registry.addViewController("/hello").setViewName("hello");
         registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/helloAdmin").setViewName("admin/helloAdmin");
+        registry.addViewController("/Admin").setViewName("admin/helloAdmin");
+        registry.addViewController("/Tutor").setViewName("tutor/helloTutor");
+        registry.addViewController("/Student").setViewName("student/helloStudent");
     }
 }

@@ -1,4 +1,4 @@
-package deanoffice;
+package deanoffice.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -35,38 +35,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
 
-    /*@Override
-    protected void configure(HttpSecurity http) throws Exception {
-
-        http.authorizeRequests().anyRequest().hasAnyRole("ADMIN", "USER")
-                .and()
-                .httpBasic(); // Authenticate users with HTTP basic authentication
-    }*/
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            .authorizeRequests()
-            .antMatchers("/", "/home").permitAll()
-            .anyRequest().authenticated()
-            .and()
-            .authorizeRequests().antMatchers("/hello", "/helloAdmin")
-            .access("hasRole('ROLE_ADMIN')")
-            .and()
-            .formLogin()
-            .loginPage("/login")
-            .permitAll()
-            .and()
-            .logout()
-            .permitAll()
-            .and()
-            .authorizeRequests().antMatchers("/hello","/helloStudent")
-            .access("hasRole('ROLE_STUDENT')")
-            .and()
-            .authorizeRequests().antMatchers("/hello","/helloTutor")
-            .access("hasRole('ROLE_TUTOR')")
-            .and();
-            /*.authorizeRequests().antMatchers("/helloAdmmin")
-            .hasAnyRole("ROLE_ADMIN")
-            .and()*/;
+        http.csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/Admin").access("hasRole('ROLE_ADMIN')")
+                .antMatchers("/Student").access("hasRole('ROLE_STUDENT')")
+                .antMatchers("/Tutor").access("hasRole('ROLE_TUTOR')")
+                .anyRequest().authenticated()
+                .and()
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll()
+                .and();
     }
 }

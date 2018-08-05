@@ -1,4 +1,4 @@
-package deanoffice;
+package deanoffice.config;
 
 import javax.sql.DataSource;
 
