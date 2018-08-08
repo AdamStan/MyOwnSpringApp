@@ -1,4 +1,78 @@
 package deanoffice.entities;
 
+import java.util.Set;
+
 public class Subject {
+    // primary key
+    private int id;
+    // normal field
+    private String name;
+    // foreign keys
+    private Faculty faculty;
+    // many-to-many
+    private Set<Tutor> tutors;
+    private Set<Student> students;
+    private Set<Mark> marks;
+
+    public Subject(String name, Faculty faculty) {
+        this.name = name;
+        this.faculty = faculty;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+    public Set<Tutor> getTutors() {
+        return tutors;
+    }
+
+    public void setTutors(Set<Tutor> tutors) {
+        this.tutors = tutors;
+    }
+
+    public Set<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+
+    public Set<Mark> getMarks() {
+        return marks;
+    }
+
+    public void setMarks(Set<Mark> marks) {
+        this.marks = marks;
+    }
+
+    @Override
+    public String toString() {
+        return "Subject{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", faculty=" + faculty +
+                '}';
+    }
 }
