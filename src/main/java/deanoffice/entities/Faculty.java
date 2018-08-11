@@ -1,15 +1,22 @@
 package deanoffice.entities;
 
+import javax.persistence.*;
 import java.util.Set;
 
+@Entity
+@Table(name="faculties")
 public class Faculty {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     // normal fields
     private String name;
     private String description;
-    // many-to-one
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "faculty")
     private Set<Student> students;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "faculty")
     private Set<Tutor> tutors;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "faculty")
     private Set<Subject> subjects;
 
     public Faculty(String name, String description) {
@@ -17,11 +24,11 @@ public class Faculty {
         this.description = description;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

@@ -1,10 +1,15 @@
 package deanoffice.entities;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
 
+@Entity
+@Table(name = "students")
 public class Student {
     // primary key
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int indexNumber;
     // normal fields
     private String name;
@@ -13,10 +18,20 @@ public class Student {
     private Date whenStarted;
     private Date whenFinnished;
     // foreign keys
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id", nullable = true)
     private Address address;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "faculty_id", nullable = true)
     private Faculty faculty;
     // one student to many marks
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "student")
     private Set<Mark> marks;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable( name = "studentToSubject",
+        joinColumns = { @JoinColumn(name = "student_id", nullable = true, updatable = true) },
+        inverseJoinColumns = { @JoinColumn(name = "subject_id", nullable = true, updatable = true) }
+    )
     private Set<Subject> subjects;
 
     public Student(String name, String surname, Address address) {
