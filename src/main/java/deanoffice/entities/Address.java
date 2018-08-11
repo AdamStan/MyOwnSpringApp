@@ -1,15 +1,22 @@
 package deanoffice.entities;
 
-import com.sun.org.apache.xalan.internal.xsltc.dom.AdaptiveResultTreeImpl;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "addresses")
 public class Address {
-
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
     // only normal fields...
     private String city;
     private String Street;
     private String numberOfBuilding;
     private String numberOfFlat;
+
+    public Address(){
+
+    }
 
     public Address(String city, String street, String numberOfBuilding, String numberOfFlat) {
         this.city = city;
@@ -18,20 +25,15 @@ public class Address {
         this.numberOfFlat = numberOfFlat;
     }
 
-    public Address(String city, String numberOfBuilding) {
-        this.city = city;
-        this.numberOfBuilding = numberOfBuilding;
-    }
-
     public Address(String oneString){
 
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -65,5 +67,10 @@ public class Address {
 
     public void setNumberOfFlat(String numberOfFlat) {
         this.numberOfFlat = numberOfFlat;
+    }
+
+    @Override
+    public String toString() {
+        return city + ", " + Street + ", " + numberOfBuilding + ", " + numberOfFlat;
     }
 }
