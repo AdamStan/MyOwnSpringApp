@@ -1,0 +1,124 @@
+package deanoffice.entities;
+
+import java.sql.Date;
+import java.util.Set;
+
+public class Student {
+    // primary key
+    private int indexNumber;
+    // normal fields
+    private String name;
+    private String surname;
+    private String username;
+    private Date whenStarted;
+    private Date whenFinnished;
+    // foreign keys
+    private Address address;
+    private Faculty faculty;
+    // one student to many marks
+    private Set<Mark> marks;
+    private Set<Subject> subjects;
+
+    public Student(String name, String surname, Address address) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+    }
+
+    public Student(String name, String surname, String address) {
+        this.name = name;
+        this.surname = surname;
+        this.address = new Address(address);
+    }
+
+    public int getIndexNumber() {
+        return indexNumber;
+    }
+
+    public void setIndexNumber(int indexNumber) {
+        this.indexNumber = indexNumber;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Date getWhenStarted() {
+        return whenStarted;
+    }
+
+    public void setWhenStarted(Date whenStarted) {
+        this.whenStarted = whenStarted;
+    }
+
+    public Date getWhenFinnished() {
+        return whenFinnished;
+    }
+
+    public void setWhenFinnished(Date whenFinnished) {
+        this.whenFinnished = whenFinnished;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+    public Set<Mark> getMarks() {
+        return marks;
+    }
+
+    public void setMarks(Set<Mark> marks) {
+        this.marks = marks;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "indexNumber=" + indexNumber +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", whenStarted=" + whenStarted +
+                ", address=" + address +
+                '}';
+    }
+}
