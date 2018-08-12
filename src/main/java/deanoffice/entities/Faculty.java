@@ -19,6 +19,10 @@ public class Faculty {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "faculty")
     private Set<Subject> subjects;
 
+    public Faculty(){
+
+    }
+
     public Faculty(String name, String description) {
         this.name = name;
         this.description = description;
@@ -70,5 +74,10 @@ public class Faculty {
 
     public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
+    }
+
+    @Override
+    public String toString() {
+        return  name + ", description = " + description;
     }
 }

@@ -17,11 +17,11 @@ public class Subject {
     @JoinColumn(name = "faculty_id", nullable = true)
     private Faculty faculty;
     // many-to-many
-
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "subjects")
     private Set<Tutor> tutors;
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "subjects")
     private Set<Student> students;
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "subjects")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private Set<Mark> marks;
 
     public Subject(String name, Faculty faculty) {
