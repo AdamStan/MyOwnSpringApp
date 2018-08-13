@@ -34,6 +34,10 @@ public class Student {
     )
     private Set<Subject> subjects;
 
+    public Student(){
+
+    }
+
     public Student(String name, String surname, Address address) {
         this.name = name;
         this.surname = surname;

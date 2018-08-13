@@ -24,6 +24,10 @@ public class Subject {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "subject")
     private Set<Mark> marks;
 
+    public Subject(){
+
+    }
+
     public Subject(String name, Faculty faculty) {
         this.name = name;
         this.faculty = faculty;

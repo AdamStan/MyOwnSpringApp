@@ -125,4 +125,15 @@ public class Tutor {
     public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
     }
+
+    @Override
+    public String toString() {
+        return "Tutor{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", whenStarted=" + whenStarted +
+                ", address=" + address +
+                ", faculty=" + faculty +
+                '}';
+    }
 }

@@ -23,6 +23,10 @@ public class Mark {
     @JoinColumn(name = "tutor_id", nullable = true)
     private Tutor tutor;
 
+    public Mark(){
+
+    }
+
     public Mark(Double value) {
         this.value = value;
     }
