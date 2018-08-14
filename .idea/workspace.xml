@@ -3,25 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="ce42c9b2-ffb6-441c-b8bc-121f789d6def" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/deanoffice/entities/Mark.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/deanoffice/entities/Mark.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/deanoffice/entities/Student.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/deanoffice/entities/Student.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/deanoffice/entities/Subject.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/deanoffice/entities/Subject.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/classes/deanoffice/repositories/MarkRepositoryTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/classes/deanoffice/repositories/StudentRepositoryTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/classes/deanoffice/repositories/SubjectRepositoryTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/test/classes/deanoffice/repositories/TutorRepositoryTest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deanoffice/entities/Mark.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deanoffice/entities/Mark.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deanoffice/entities/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deanoffice/entities/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deanoffice/entities/Subject.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deanoffice/entities/Subject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deanoffice/entities/Tutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deanoffice/entities/Tutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deanoffice/repositories/MarkRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deanoffice/repositories/MarkRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/deanoffice/repositories/StudentRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/deanoffice/repositories/StudentRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/deanoffice/repositories/SubjectRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/deanoffice/repositories/SubjectRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/deanoffice/repositories/TutorRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/deanoffice/repositories/TutorRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/test/classes/deanoffice/repositories/GlobalRepositoryTest.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/test/classes/deanoffice/repositories/GlobalRepositoryTest.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/deanoffice/repositories/StudentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deanoffice/repositories/StudentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deanoffice/repositories/SubjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deanoffice/repositories/SubjectRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deanoffice/repositories/TutorRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deanoffice/repositories/TutorRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/deanoffice/repositories/GlobalRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deanoffice/repositories/GlobalRepositoryTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/deanoffice/repositories/StudentRepositoryTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/deanoffice/repositories/SubjectRepositoryTest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/deanoffice/repositories/TutorRepositoryTest.java" beforeDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -41,10 +29,10 @@
     <session id="-1915399993">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="16" />
+          <entry key="project.closed" value="17" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.36" value="2" />
-          <entry key="project.open.time.37" value="1" />
+          <entry key="project.open.time.37" value="2" />
           <entry key="project.open.time.38" value="1" />
           <entry key="project.open.time.39" value="3" />
           <entry key="project.open.time.42" value="1" />
@@ -54,23 +42,23 @@
           <entry key="project.open.time.51" value="1" />
           <entry key="project.open.time.54" value="1" />
           <entry key="project.open.time.58" value="1" />
-          <entry key="project.opened" value="16" />
+          <entry key="project.opened" value="17" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gradle" value="3" />
           <entry key="html" value="40" />
-          <entry key="java" value="114" />
-          <entry key="properties" value="5" />
+          <entry key="java" value="118" />
+          <entry key="properties" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Groovy" value="3" />
           <entry key="HTML" value="40" />
-          <entry key="JAVA" value="114" />
-          <entry key="Properties" value="5" />
+          <entry key="JAVA" value="118" />
+          <entry key="Properties" value="7" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -78,28 +66,61 @@
           <entry key="dummy" value="2" />
           <entry key="gradle" value="67" />
           <entry key="html" value="958" />
-          <entry key="java" value="7476" />
-          <entry key="properties" value="23" />
+          <entry key="java" value="8473" />
+          <entry key="properties" value="38" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="67" />
           <entry key="HTML" value="958" />
-          <entry key="JAVA" value="7476" />
+          <entry key="JAVA" value="8473" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Properties" value="23" />
+          <entry key="Properties" value="38" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
+            <state relative-caret-position="322">
               <caret line="35" column="38" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/deanoffice/repositories/GlobalRepositoryTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="6" column="38" lean-forward="true" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/repositories/TutorRepository.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -483,7 +504,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/hello/MvcConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/hello/Application.java" />
         <option value="$PROJECT_DIR$/src/main/java/hello/WebSeciurityConfig.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/login.html" />
@@ -530,10 +550,11 @@
         <option value="$PROJECT_DIR$/src/main/java/deanoffice/entities/Subject.java" />
         <option value="$PROJECT_DIR$/src/main/java/deanoffice/entities/Tutor.java" />
         <option value="$PROJECT_DIR$/src/main/java/deanoffice/repositories/MarkRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/deanoffice/repositories/StudentRepository.java" />
-        <option value="$PROJECT_DIR$/src/test/java/deanoffice/repositories/GlobalRepositoryTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/deanoffice/repositories/SubjectRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/deanoffice/repositories/TutorRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/deanoffice/repositories/StudentRepository.java" />
+        <option value="$PROJECT_DIR$/src/test/java/deanoffice/repositories/GlobalRepositoryTest.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
       </list>
     </option>
   </component>
@@ -551,7 +572,6 @@
     <panes>
       <pane id="AndroidView" />
       <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -697,11 +717,12 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1534180900193" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1534273271428" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -831,27 +852,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="GlobalRepositoryTest - 2018.08.13 at 18h 14m 00s.xml">
-      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GlobalRepositoryTest - 2018.08.13 at 18h 17m 13s.xml">
-      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GlobalRepositoryTest - 2018.08.13 at 18h 19m 56s.xml">
-      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GlobalRepositoryTest - 2018.08.13 at 18h 21m 45s.xml">
-      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GlobalRepositoryTest - 2018.08.13 at 18h 23m 43s.xml">
-      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GlobalRepositoryTest - 2018.08.13 at 18h 25m 31s.xml">
-      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="GlobalRepositoryTest - 2018.08.13 at 18h 27m 54s.xml">
-      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="GlobalRepositoryTest_testFetchDataForMark - 2018.08.13 at 18h 58m 55s.xml">
       <configuration name="GlobalRepositoryTest.testFetchDataForMark" configurationId="JUnit" />
     </history-entry>
@@ -861,11 +861,32 @@
     <history-entry file="GlobalRepositoryTest - 2018.08.13 at 19h 15m 09s.xml">
       <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="GlobalRepositoryTest - 2018.08.14 at 20h 26m 16s.xml">
+      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GlobalRepositoryTest - 2018.08.14 at 20h 27m 51s.xml">
+      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GlobalRepositoryTest_testFetchDataForMark - 2018.08.14 at 20h 30m 33s.xml">
+      <configuration name="GlobalRepositoryTest.testFetchDataForMark" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GlobalRepositoryTest - 2018.08.14 at 20h 31m 10s.xml">
+      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GlobalRepositoryTest - 2018.08.14 at 20h 57m 13s.xml">
+      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GlobalRepositoryTest - 2018.08.14 at 21h 00m 03s.xml">
+      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="GlobalRepositoryTest - 2018.08.14 at 21h 00m 57s.xml">
+      <configuration name="GlobalRepositoryTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30484116" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.30937973" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -1075,13 +1096,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="43" lean-forward="true" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/repositories/AddressRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1195,10 +1209,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/build.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="322">
+          <caret line="35" column="38" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/repositories/StudentRepository.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="52" lean-forward="true" selection-start-line="7" selection-start-column="52" selection-end-line="7" selection-end-column="52" />
+        <state relative-caret-position="136">
+          <caret line="8" column="26" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="26" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1225,21 +1246,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/deanoffice/repositories/GlobalRepositoryTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1872">
-          <caret line="136" column="1" lean-forward="true" selection-start-line="136" selection-start-column="1" selection-end-line="136" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1777#1786#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="102">
+          <caret line="6" column="38" lean-forward="true" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/build.gradle">
+    <entry file="file://$PROJECT_DIR$/src/test/java/deanoffice/repositories/GlobalRepositoryTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="35" column="38" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
+        <state relative-caret-position="272">
+          <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

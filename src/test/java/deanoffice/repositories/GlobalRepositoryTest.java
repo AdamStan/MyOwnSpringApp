@@ -45,6 +45,7 @@ public class GlobalRepositoryTest {
         subjectRepository.save(subject);
 
         Student student = new Student("Adam", "Jestem", addressForStudent);
+        student.setUsername("student0");
         studentRepository.save(student);
         mark.setStudent(student);
 
@@ -54,6 +55,7 @@ public class GlobalRepositoryTest {
         Set<Subject> subjects = new HashSet<Subject>();
         subjects.add(subject);
         tutor.setSubjects(subjects);
+        tutor.setUsername("tutor0");
         tutorRepository.save(tutor);
         mark.setTutor(tutor);
         markRepository.save(mark);
@@ -102,7 +104,24 @@ public class GlobalRepositoryTest {
             Assert.assertNotNull(std.getIndexNumber());
             System.out.println(std);
         }
+        // findByIndexNumber
+        Integer i = 1;
+        Student studentByIndexNumber = studentRepository.findByIndexNumber(i);
+        Assert.assertNotNull(studentByIndexNumber);
+        System.out.println("*" + studentByIndexNumber);
+        // findBySurname
+        String surname = "Jestem";
+        Iterable<Student> studentsBySurname = studentRepository.findBySurname(surname);
+        for(Student s : studentsBySurname){
+            Assert.assertEquals(s.getSurname(), surname);
+            System.out.println("**" + s);
+        }
 
+        // findByUsername
+        String username = "student0";
+        Student studentByUsername = studentRepository.findByUsername(username);
+        Assert.assertEquals(studentByUsername.getUsername(), username);
+        System.out.println("***" + studentByUsername);
     }
     @Test
     public void testFetchDataForSubject(){
@@ -111,7 +130,20 @@ public class GlobalRepositoryTest {
             Assert.assertNotNull(sub.getId());
             System.out.println(sub);
         }
-
+        // findByName
+        String subjectName = "Podstawy Programowania 2";
+        Iterable<Subject> subjectsByNsme = subjectRepository.findByName(subjectName);
+        for(Subject sub : subjectsByNsme){
+            Assert.assertEquals(sub.getName(), subjectName);
+            System.out.println("*" + sub);
+        }
+        // findByFaculty
+        Faculty fac = facultyRepository.findByName("WEEIA");
+        Iterable<Subject> subjectsByFaculty = subjectRepository.findByFaculty(fac);
+        for(Subject sub : subjectsByFaculty){
+            Assert.assertEquals(sub.getFaculty().getName(), fac.getName());
+            System.out.println("**" + sub);
+        }
     }
     @Test
     public void testFetchDataForTutor(){
@@ -120,6 +152,25 @@ public class GlobalRepositoryTest {
             Assert.assertNotNull(t.getId());
             System.out.println(t);
         }
+        // findBySurname
+        String surname = "Placek";
+        Iterable<Tutor> tutorsBySurname = tutorRepository.findBySurname(surname);
+        for(Tutor t : tutorsBySurname){
+            Assert.assertEquals(t.getSurname(), surname);
+            System.out.println("*" + t);
+        }
+        // findByFaculty
+        Faculty fac = facultyRepository.findByName("WEEIA");
+        Iterable<Tutor> tutorsByFaculty = tutorRepository.findByFaculty(fac);
+        for(Tutor t : tutorsByFaculty){
+            Assert.assertEquals(t.getFaculty().getName(), fac.getName());
+            System.out.println("**" + t);
+        }
+        // findByUsername
+        String username = "tutor0";
+        Tutor tutorByUsername = tutorRepository.findByUsername(username);
+        Assert.assertEquals(tutorByUsername.getUsername(), username);
+        System.out.println("***" + tutorByUsername);
     }
     public boolean lookingForMark(Iterable<Mark> marks, Mark mark){
         for(Mark m : marks) {
