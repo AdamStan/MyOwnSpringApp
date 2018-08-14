@@ -1,11 +1,16 @@
 package deanoffice.entities;
 
+import javax.persistence.*;
 import java.sql.Date;
 import java.util.Set;
 
+@Entity
+@Table(name = "tutors")
 public class Tutor {
     // primary key
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     // normal fields
     private String name;
     private String surname;
@@ -13,11 +18,25 @@ public class Tutor {
     private Date whenStarted;
     private Date whenFinnished;
     // foreign keys
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "address_id", nullable = true)
     private Address address;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "faculty_id", nullable = false)
     private Faculty faculty;
     //
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "tutor")
     private Set<Mark> marks;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable( name = "tutorToSubject",
+            joinColumns = { @JoinColumn(name = "tutor_id", nullable = true, updatable = true) },
+            inverseJoinColumns = { @JoinColumn(name = "subject_id", nullable = true, updatable = true) }
+    )
     private Set<Subject> subjects;
+
+    public Tutor(){
+
+    }
 
     public Tutor(String name, String surname, Date whenStarted, Address address, Faculty faculty) {
         this.name = name;
@@ -27,11 +46,11 @@ public class Tutor {
         this.faculty = faculty;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -105,5 +124,16 @@ public class Tutor {
 
     public void setSubjects(Set<Subject> subjects) {
         this.subjects = subjects;
+    }
+
+    @Override
+    public String toString() {
+        return "Tutor{" +
+                "name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", whenStarted=" + whenStarted +
+                ", address=" + address +
+                ", faculty=" + faculty +
+                '}';
     }
 }
