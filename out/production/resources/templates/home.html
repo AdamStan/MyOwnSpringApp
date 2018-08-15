@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <title>Spring Security Example</title>
+    <title>Hello page</title>
+    <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
-    <h1>Welcome!</h1>
-    <div>
-        <p> Login as: </p>
+    <div th:replace="fragments/header.html :: header"/>
+    <div class = "container">
+        <p> Aktualności dla [[${#httpServletRequest.remoteUser}]]</p>
         <p> <a href = "/Admin"> admin </a></p>
         <p> <a href = "/Tutor"> tutor </a></p></p>
         <p> <a href = "/Student"> student </a></p></p>
+        <p> <a href = "/login"> login (powinien tak jak chcialbym aby dzialal) </a></p>
     </div>
 </body>
 </html>

@@ -4,13 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome at University</title>
+    <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
-<h1 th:inline="text">Hello, do something [[${#httpServletRequest.remoteUser}]]!</h1>
-<form th:action="@{/logout}" method="post">
-    <input type="submit" value="Sign Out"/>
-</form>
-<div>
+<div th:replace="fragments/header.html :: header"/>
+<div class = "container">
     <p> Check your actual marks: <a href = "/#"> My actual marks</a></p>
     <p> Check your historical marks <a href = "/#"> My historical marks </a> </p>
     <p> Change your personal settings <a href = "/#"> My account </a></p>

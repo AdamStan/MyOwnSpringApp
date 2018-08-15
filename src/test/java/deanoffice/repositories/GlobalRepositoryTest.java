@@ -46,14 +46,15 @@ public class GlobalRepositoryTest {
 
         Student student = new Student("Adam", "Jestem", addressForStudent);
         student.setUsername("student0");
+        Set<Subject> subjects = new HashSet<Subject>();
+        subjects.add(subject);
+        student.setSubjects(subjects);
         studentRepository.save(student);
         mark.setStudent(student);
 
         Tutor tutor = new Tutor();
         tutor.setName("Jacek"); tutor.setSurname("Placek");
         tutor.setFaculty(faculty);
-        Set<Subject> subjects = new HashSet<Subject>();
-        subjects.add(subject);
         tutor.setSubjects(subjects);
         tutor.setUsername("tutor0");
         tutorRepository.save(tutor);

@@ -1,0 +1,49 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="header-css">
+        <!-- this is header-css -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+              integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+              crossorigin="anonymous">
+    </div>
+</head>
+<body>
+<div th:fragment="header">
+    <!-- this is header -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+        <a href="/" class="navbar-brand"> UniversityMainPage </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/#"> My Account </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/hello"> Options </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#"> About us </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/hello"> Test hello </a>
+                </li>
+            </ul>
+            <div class="form-inline mt-2 mt-md-0">
+                <!--
+                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                -->
+                <button class="nav-item btn btn-secondary" onclick="location.href='/logout';">
+                    Logout
+                </button>
+                <button class="nav-item btn btn-secondary" onclick="location.href='/login';">
+                    Login [[${#httpServletRequest.remoteUser}]]
+                </button>
+            </div>
+        </div>
+    </nav>
+</div>
+</body>
+</html>
