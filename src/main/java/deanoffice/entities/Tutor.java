@@ -128,12 +128,9 @@ public class Tutor {
 
     @Override
     public String toString() {
-        return "Tutor{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+        return "name='" + name + ", " + surname + '\'' +
                 ", whenStarted=" + whenStarted +
                 ", address=" + address +
-                ", faculty=" + faculty +
-                '}';
+                ", faculty=" + faculty;
     }
 }

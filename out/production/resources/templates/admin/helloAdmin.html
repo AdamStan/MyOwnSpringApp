@@ -4,17 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome at University</title>
-    <div th:replace="fragments/header.html :: header-css"/>
+<div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"/>
 <div class = "container">
-    <p> Show/edit all marks: <a href = "/#"> Marks </a></p>
-    <p> Show/edit all students: <a href = "/#"> Students </a></p>
-    <p> Show/edit all tutors: <a href = "/#"> Tutors </a></p>
-    <p> Show/edit all subjects: <a href = "/#"> Subjects </a></p>
-    <p> Show/edit users: <a href = "/#"> Users </a></p>
-    <p> Show/edit faculties: <a href = "/admin/allfaculties"> Faculties </a></p>
+    <h2>Show/edit</h2>
+    <p> marks: <a href = "/admin/allmarks"> Marks </a></p>
+    <p> students: <a href = "/admin/allstudents"> Students </a></p>
+    <p> tutors: <a href = "/admin/alltutors"> Tutors </a></p>
+    <p> subjects: <a href = "/admin/allsubjects"> Subjects </a></p>
+    <p> users: <a href = "/admin/allusers"> Users </a></p>
+    <p> roles: <a href="/admin/auths"> Auth </a> </p>
+    <p> faculties: <a href = "/admin/allfaculties"> Faculties </a></p>
 </div>
 </body>
 </html>

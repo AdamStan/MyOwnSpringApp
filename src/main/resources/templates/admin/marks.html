@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
-
+<div th:replace="fragments/header.html :: header"/>
+<div class="container">
+    <table>
+        <thead>
+        <tr>
+            <th> Student's index </th>
+            <th> Tutor </th>
+            <th> Subject </th>
+            <th> Value </th>
+            <th> Date </th>
+            <th> Edit/delete </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="mark: ${marks}">
+            <td th:text="${mark.student.indexNumber}"> std </td>
+            <td th:text="${mark.tutor}"> tutor </td>
+            <td th:text="${mark.subject.name}"> subject </td>
+            <td th:text="${mark.value}"> value </td>
+            <td th:text="${mark.date}"> date</td>
+            <td> <button> delete </button> <button> edit </button> </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <button> Add new </button>
+    </div>
+</div>
 </body>
 </html>

@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Faculties</title>
     <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
@@ -21,10 +21,13 @@
             <tr th:each="faculty: ${faculties}">
                 <td th:text="${faculty.name}"> name </td>
                 <td th:text="${faculty.description}"> description </td>
-                <td> <button> przycisk </button></td>
+                <td> <button> delete </button> <button> edit </button> </td>
             </tr>
         </tbody>
     </table>
+    <div>
+        <button> Add new </button>
+    </div>
 </div>
 </body>
 </html>

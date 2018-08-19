@@ -41,13 +41,17 @@ public class AdminController {
     @RequestMapping(value = "/admin/allstudents", method = RequestMethod.GET)
     public ModelAndView students(){
         Iterable<Student> students = studentRepository.findAll();
-        return new ModelAndView("/admin/students.html");
+        ModelAndView model = new ModelAndView("/admin/students.html");
+        model.addObject("students", students);
+        return model;
     }
 
     @RequestMapping(value = "/admin/alltutors", method = RequestMethod.GET)
     public ModelAndView tutors(){
         Iterable<Tutor> tutors = tutorRepository.findAll();
-        return new ModelAndView("/admin/tutors.html");
+        ModelAndView model = new ModelAndView("/admin/tutors.html");
+        model.addObject("tutors", tutors);
+        return model;
     }
 
     @RequestMapping(value = "/admin/allfaculties", method = RequestMethod.GET)
