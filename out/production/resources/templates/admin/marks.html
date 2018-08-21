@@ -12,7 +12,7 @@
     <table>
         <thead>
         <tr>
-            <th> Student </th>
+            <th> Student's index </th>
             <th> Tutor </th>
             <th> Subject </th>
             <th> Value </th>
@@ -22,9 +22,9 @@
         </thead>
         <tbody>
         <tr th:each="mark: ${marks}">
-            <td th:text="${mark.student}"> std </td>
+            <td th:text="${mark.student.indexNumber}"> std </td>
             <td th:text="${mark.tutor}"> tutor </td>
-            <td th:text="${mark.subject}"> subject </td>
+            <td th:text="${mark.subject.name}"> subject </td>
             <td th:text="${mark.value}"> value </td>
             <td th:text="${mark.date}"> date</td>
             <td> <button> delete </button> <button> edit </button> </td>
