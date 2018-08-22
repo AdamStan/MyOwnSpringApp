@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Add user</title>
+    <div th:replace="fragments/header.html :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header.html :: header"/>
+
+<div class = "container">
+    <div class = "labels">
+        <p> Username </p>
+        <p> Password </p>
+        <p> Role </p>
+        <p> Enabled </p>
+    </div>
+    <div class = "inputs">
+        <p>  <input name = "username" type="text" th:value="${username}"> </p>
+        <p>  <input name = "password" type="password"> </p>
+        <p>  <input name = "role" type="text"> </p>
+        <p>  <input name = "enabled" type="text"> </p>
+    </div>
+    <div class = "buttons">
+        <form action="/admin/allusers/confirm">
+            <input type="submit" value="Add"/>
+        </form>
+        <form action="/admin/allusers/">
+            <input type="submit" value="Camcel"/>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

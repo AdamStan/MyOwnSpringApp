@@ -1,5 +1,8 @@
 package deanoffice.noentities;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 public class User {
     private String username;
     private String password;
@@ -53,31 +56,18 @@ public class User {
         this.enable = enable;
     }
 
-    /**
-     * Change it!
-     */
-    public void encodePassword(){
-        org.springframework.security.crypto.password.PasswordEncoder encoder
-                = new org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder();
-        // $2a$10$lB6/PKg2/JC4XgdMDXyjs.dLC9jFNAuuNbFkL9udcXe/EBjxSyqxW
-        // true
-        // $2a$10$KbQiHKTa1WIsQFTQWQKCiujoTJJB7MCMSaSgG/imVkKRicMPwgN5i
-        // true
-        // $2a$10$5WfW4uxVb4SIdzcTJI9U7eU4ZwaocrvP.2CKkWJkBDKz1dmCh50J2
-        // true
-        // $2a$10$0wR/6uaPxU7kGyUIsx/JS.krbAA9429fwsuCyTlEFJG54HgdR10nK
-        // true
-        // $2a$10$gfmnyiTlf8MDmwG7oqKJG.W8rrag8jt6dNW.31ukgr0.quwGujUuO
-        // true
-        for (int i = 0; i < 5; i++) {
-            // "123456" - plain text - user input from user interface
-            String passwd = encoder.encode("123456");
+    public static String encodePassword(String password){
+        PasswordEncoder encoder = new BCryptPasswordEncoder();
+        return encoder.encode(password);
+    }
 
-            // passwd - password from database
-            System.out.println(passwd); // print hash
-
-            // true for all 5 iteration
-            System.out.println(encoder.matches("123456", passwd));
-        }
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
+                ", enable=" + enable +
+                '}';
     }
 }

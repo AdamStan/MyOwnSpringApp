@@ -8,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.jws.WebParam;
-
 @Controller
 public class AdminController {
     @Autowired
@@ -61,17 +59,4 @@ public class AdminController {
         model.addObject("faculties", faculties);
         return model;
     }
-
-    @RequestMapping(value = "/admin/allusers", method = RequestMethod.GET)
-    public ModelAndView users(){
-        // ?
-        return new ModelAndView("/admin/users.html");
-    }
-
-    @RequestMapping(value = "/admin/auths", method = RequestMethod.GET)
-    public ModelAndView authorities(){
-        // ?
-        return new ModelAndView("/admin/auths.html");
-    }
-
 }
