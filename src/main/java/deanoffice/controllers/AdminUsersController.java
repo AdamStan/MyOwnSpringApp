@@ -27,11 +27,11 @@ public class AdminUsersController {
     }
 
     @RequestMapping(value = "/admin/allusers/deleted", method = RequestMethod.GET)
-    public ModelAndView deleteUser(String username){
+    public ModelAndView deleteUser(HttpServletRequest request){
         //usun z bazy i wczytaj widok tabelki
-        //String username = request.getParameter("username");
+        String username = request.getParameter("username");
         System.out.println("Username for delete: " + username);
-        //new UsersTableData().deleteUserByUsername(username);
+        new UsersTableData().deleteUserByUsernma(username);
         return this.users();
     }
 
@@ -48,9 +48,16 @@ public class AdminUsersController {
         return model;
     }
 
-    @RequestMapping(value = "/admin/allusers/confirm", method = RequestMethod.GET)
+    @RequestMapping(value = "/admin/allusers/confirm", method = RequestMethod.POST)
     public ModelAndView confirmUser(HttpServletRequest request){
         //dodaj do bazy jeszcze
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String role = request.getParameter("role");
+        String enabled = request.getParameter("enabled");
+        System.out.println("Parameters: " + username + ", " +
+                password + ", " + role + ", " + enabled);
+        new UsersTableData().insertUser(username, password, role, enabled);
         return this.users();
     }
 }

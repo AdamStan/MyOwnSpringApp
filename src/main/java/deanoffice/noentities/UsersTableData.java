@@ -55,15 +55,35 @@ public class UsersTableData {
             return user;
         }
     }
-    public void deleteUser(String username){
+    public void deleteUserByUsernma(String username){
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
-            stmt.execute("delete from users " +
-                    " where u.username = '" + username + "' " +
-                    " delete from authorities where username = '" +
-                    username +
-                    "'");
+            stmt.execute(" delete from authorities where username = '" +
+                    username + "'; " + "delete from users " +
+                    " where username = '" + username + "' ");
+            conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+    }
+    public void insertUser(String username, String password,
+                           String role, String enable){
+        int en = 0;
+        if(enable == null){
+
+        } else if (enable.equals("on")){
+            en = 1;
+        }
+        password = User.encodePassword(password);
+        try {
+            Connection conn = DriverManager.getConnection(url);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("insert into users (username, password, enabled) " +
+                    "values ('" +
+                    username + "', '" + password + "', " + en + ");");
+            stmt.executeUpdate("insert into authorities values ('" + username + "', '" + role +"');");
             conn.close();
         } catch (Exception e) {
             System.err.println("Got an exception! ");
