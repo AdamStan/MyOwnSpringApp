@@ -27,12 +27,23 @@
             <td th:text="${student.username}"> username </td>
             <td th:text="${student.faculty}"> faculty </td>
             <td th:text="${student.address}"> address </td>
-            <td> <button> delete </button> <button> edit </button> </td>
+            <td>
+                <form action="/admin/students/delete" id="delete"> </form>
+                <button type="submit" form="delete" name = "indexNumber" th:value = "${student.indexNumber}">
+                    DELETE
+                </button>
+                <form action="/admin/students/edit" id="edit"> </form>
+                <button type="submit" form="edit" name = "indexNumber" th:value = "${student.indexNumber}">
+                    Edit
+                </button>
+            </td>
         </tr>
         </tbody>
     </table>
     <div>
-        <button> Add new </button>
+        <form action="/admin/students/add">
+            <input type="submit" value = "Add new student" />
+        </form>
     </div>
 </div>
 </body>

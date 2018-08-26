@@ -15,6 +15,8 @@ import java.util.Optional;
 @Controller
 public class AdminController {
     @Autowired
+    private AddressRepository addressRepository;
+    @Autowired
     private MarkRepository markRepository;
     @Autowired
     private SubjectRepository subjectRepository;
@@ -174,55 +176,142 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/marks/delete", method = RequestMethod.GET)
     public ModelAndView deleteMark(HttpServletRequest request){
-        String id = request.getParameter("id");
+        String id = request.getParameter("indexNumber");
         Optional<Mark> m = markRepository.findById(Integer.valueOf(id));
         Mark mark = m.get();
         markRepository.delete(mark);
         return this.marks();
     }
-    /*
     //endregion MARK FUNCTIONALITY END
     //region STUDENT FUNCTIONALITY
-    @RequestMapping(value = "/admin/students/add")
+    @RequestMapping(value = "/admin/students/add", method = RequestMethod.GET)
     public ModelAndView addstudent(){
         ModelAndView model = new ModelAndView("/admin/adding/addstudent.html");
         return model;
     }
 
-    @RequestMapping(value = "/admin/students/addconfirm")
+    @RequestMapping(value = "/admin/students/addconfirm", method = RequestMethod.POST)
+    public ModelAndView confirmAddStudent(HttpServletRequest request){
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
+        String username = request.getParameter("username");
+        String city = request.getParameter("city");
+        String street = request.getParameter("street");
+        String numberOfBuilding = request.getParameter("numberofbuilding");
+        String numberOfFlat = request.getParameter("numberofflat");
+        String facultyid = request.getParameter("facultyid");
 
-    @RequestMapping(value = "/admin/students/edit")
-    public ModelAndView editmark(HttpServletRequest request){
-        ModelAndView model = new ModelAndView("/admin/adding/editmark.html");
+        Address ad = new Address(city, street, numberOfBuilding, numberOfFlat);
+        Optional<Faculty> op_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
+        Student std = new Student(name, surname, ad);
+        std.setFaculty(op_faculty.get());
+        std.setUsername(username);
+        std.setWhenStarted(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 
+        addressRepository.save(std.getAddress());
+        studentRepository.save(std);
+
+        return this.students();
+    }
+
+    @RequestMapping(value = "/admin/students/edit", method = RequestMethod.GET)
+    public ModelAndView editstudent(HttpServletRequest request){
+        ModelAndView model = new ModelAndView("/admin/adding/editstudent.html");
+        String id = request.getParameter("indexNumber");
+        model.addObject( studentRepository.findByIndexNumber(Integer.valueOf(id)) );
         return model;
     }
 
-    @RequestMapping(value = "/admin/students/editconfirm")
+    @RequestMapping(value = "/admin/students/editconfirm", method = RequestMethod.POST)
+    public ModelAndView confirmEditStudent(HttpServletRequest request){
+        String id = request.getParameter("indexNumber");
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
+        String username = request.getParameter("username");
+        String city = request.getParameter("city");
+        String street = request.getParameter("street");
+        String numberOfBuilding = request.getParameter("numberofbuilding");
+        String numberOfFlat = request.getParameter("numberofflat");
+        String facultyid = request.getParameter("facultyid");
 
-    @RequestMapping(value = "/admin/students/delete")
+        Address ad = new Address(city, street, numberOfBuilding, numberOfFlat);
+        Optional<Faculty> op_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
+        Student std = studentRepository.findByIndexNumber(Integer.valueOf(id));
+        std.setName(name);
+        std.setSurname(surname);
+        std.setAddress(ad);
+        std.setFaculty(op_faculty.get());
+        std.setUsername(username);
+        std.setWhenStarted(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+
+        addressRepository.save(std.getAddress());
+        studentRepository.save(std);
+
+        return this.students();
+    }
+
+    @RequestMapping(value = "/admin/students/delete", method = RequestMethod.GET)
+    public ModelAndView deleteStudent(HttpServletRequest request){
+        String id = request.getParameter("indexNumber");
+        Student student = studentRepository.findByIndexNumber(Integer.valueOf(id));
+        studentRepository.delete(student);
+        return this.students();
+    }
     //endregion STUDENT FUNCTIONALITY
-    /*
+
     //region SUBJECT FUNCTIONALITY
-    @RequestMapping(value = "/admin/marks/add")
-    public ModelAndView addmark(){
-        ModelAndView model = new ModelAndView("/admin/adding/addmark.html");
+    @RequestMapping(value = "/admin/subjects/add", method = RequestMethod.GET)
+    public ModelAndView addsubject(){
+        ModelAndView model = new ModelAndView("/admin/adding/addsubject.html");
         return model;
     }
 
-    @RequestMapping(value = "/admin/marks/addconfirm")
+    @RequestMapping(value = "/admin/subjects/addconfirm", method = RequestMethod.POST)
+    public ModelAndView confirmAddSubject(HttpServletRequest request){
+        String name = request.getParameter("name");
+        String facultyid = request.getParameter("facultyid");
+        Subject subject = new Subject();
 
-    @RequestMapping(value = "/admin/marks/edit")
-    public ModelAndView editmark(HttpServletRequest request){
+        Optional<Faculty> opt_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
+        subject.setName(name);
+        subject.setFaculty(opt_faculty.get());
+
+        subjectRepository.save(subject);
+        return this.subjects();
+    }
+
+    @RequestMapping(value = "/admin/subjects/edit")
+    public ModelAndView editsubject(HttpServletRequest request){
         ModelAndView model = new ModelAndView("/admin/adding/editmark.html");
-
+        String id = request.getParameter("id");
+        Optional<Subject> subject = subjectRepository.findById(Integer.valueOf(id));
+        model.addObject("subject",subject);
         return model;
     }
 
-    @RequestMapping(value = "/admin/marks/editconfirm")
+    @RequestMapping(value = "/admin/subjects/editconfirm", method = RequestMethod.POST)
+    public ModelAndView confirmEditSubject(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        String facultyid = request.getParameter("facultyid");
 
-    @RequestMapping(value = "/admin/marks/delete")
+        Subject subject = subjectRepository.findById(Integer.valueOf(id)).get();
+        Optional<Faculty> opt_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
+        subject.setName(name);
+        subject.setFaculty(opt_faculty.get());
+
+        subjectRepository.save(subject);
+        return this.subjects();
+    }
+    @RequestMapping(value = "/admin/subjects/delete", method = RequestMethod.POST)
+    public ModelAndView deletesubject(HttpServletRequest request){
+        String id = request.getParameter("id");
+        Subject subject = subjectRepository.findById(Integer.valueOf(id)).get();
+        subjectRepository.delete(subject);
+        return this.subjects();
+    }
     //endregion SUBJECT FUNCTIONALITY
+    /*
     //region TUTOR FUNCTIONALITY
     @RequestMapping(value = "/admin/marks/add")
     public ModelAndView addmark(){

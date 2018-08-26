@@ -2,20 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ce42c9b2-ffb6-441c-b8bc-121f789d6def" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/adding/addmark.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/adding/editmark.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/adding/addstudent.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/adding/addsubject.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/adding/editstudent.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/adding/editsubject.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/student/studentsSubjects.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/tutor/subjects.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/classes/deanoffice/config/WebSecurityConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/deanoffice/config/WebSecurityConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/classes/deanoffice/controllers/AdminController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/deanoffice/controllers/AdminController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/classes/deanoffice/repositories/SubjectRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/classes/deanoffice/repositories/SubjectRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/admin/marks.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/admin/marks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/student/helloStudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/student/helloStudent.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/tutor/helloTutor.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/tutor/helloTutor.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deanoffice/config/WebSecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deanoffice/config/WebSecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/resources/templates/admin/students.html" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/resources/templates/admin/students.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/deanoffice/controllers/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deanoffice/controllers/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/deanoffice/repositories/SubjectRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/deanoffice/repositories/SubjectRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/adding/editfaculty.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/adding/editfaculty.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/marks.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/marks.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/deanoffice/repositories/GlobalRepositoryTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/deanoffice/repositories/GlobalRepositoryTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/adding/addmark.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/adding/addmark.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/admin/students.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/students.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/student/helloStudent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/student/helloStudent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/student/studentsHistoricalMarks.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/adding/addstudent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tutor/helloTutor.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/tutor/helloTutor.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/tutor/historicalMarks.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/admin/adding/addsubject.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/.gradle/" />
@@ -35,14 +38,14 @@
     <session id="-1915399993">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="26" />
+          <entry key="project.closed" value="28" />
           <entry key="project.open.time.2" value="1" />
           <entry key="project.open.time.36" value="4" />
           <entry key="project.open.time.37" value="2" />
           <entry key="project.open.time.38" value="1" />
           <entry key="project.open.time.39" value="4" />
           <entry key="project.open.time.42" value="3" />
-          <entry key="project.open.time.43" value="3" />
+          <entry key="project.open.time.43" value="4" />
           <entry key="project.open.time.44" value="2" />
           <entry key="project.open.time.45" value="1" />
           <entry key="project.open.time.49" value="1" />
@@ -51,22 +54,22 @@
           <entry key="project.open.time.54" value="1" />
           <entry key="project.open.time.58" value="1" />
           <entry key="project.open.time.62" value="1" />
-          <entry key="project.opened" value="27" />
+          <entry key="project.opened" value="28" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="gradle" value="3" />
-          <entry key="html" value="114" />
-          <entry key="java" value="175" />
+          <entry key="html" value="135" />
+          <entry key="java" value="181" />
           <entry key="properties" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Groovy" value="3" />
-          <entry key="HTML" value="114" />
-          <entry key="JAVA" value="175" />
+          <entry key="HTML" value="135" />
+          <entry key="JAVA" value="181" />
           <entry key="Properties" value="8" />
         </counts>
       </usages-collector>
@@ -74,21 +77,21 @@
         <counts>
           <entry key="dummy" value="2" />
           <entry key="gradle" value="67" />
-          <entry key="html" value="4759" />
-          <entry key="java" value="17105" />
+          <entry key="html" value="5134" />
+          <entry key="java" value="18885" />
           <entry key="jsp" value="21" />
           <entry key="jspl" value="135" />
           <entry key="properties" value="63" />
-          <entry key="txt" value="104" />
+          <entry key="txt" value="110" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="Groovy" value="67" />
-          <entry key="HTML" value="4759" />
-          <entry key="JAVA" value="17105" />
+          <entry key="HTML" value="5134" />
+          <entry key="JAVA" value="18885" />
           <entry key="JSP" value="21" />
-          <entry key="PLAIN_TEXT" value="241" />
+          <entry key="PLAIN_TEXT" value="247" />
           <entry key="Properties" value="63" />
         </counts>
       </usages-collector>
@@ -99,50 +102,51 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.gradle">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="298">
+            <state>
               <caret line="35" column="38" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/controllers/AdminController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="195" lean-forward="true" selection-start-line="195" selection-end-line="195" />
+            <state relative-caret-position="237">
+              <caret line="304" column="5" lean-forward="true" selection-start-line="304" selection-start-column="5" selection-end-line="304" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="n#!!doc;n#addFaculty#0;n#AdminController#0" />
-                <element signature="e#5773#5803#0" />
-                <element signature="e#6418#6446#0" />
+                <element signature="e#4576#4603#0" />
+                <element signature="e#7695#7725#0" />
+                <element signature="e#11930#11958#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/config/WebSecurityConfig.java">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/adding/addsubject.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
+            <state relative-caret-position="153">
+              <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/adding/editmark.html">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/adding/editsubject.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="153">
+              <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/subjects.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="138">
-              <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/users.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="39" column="12" lean-forward="true" selection-start-line="39" selection-start-column="12" selection-end-line="39" selection-end-column="12" />
+              <caret line="25" column="16" lean-forward="true" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -150,8 +154,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/marks.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-134">
-              <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
+            <state relative-caret-position="297">
+              <caret line="41" column="12" lean-forward="true" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -545,12 +549,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/deanoffice/repositories/FacultyRepositoryTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/deanoffice/entities/Faculty.java" />
-        <option value="$PROJECT_DIR$/src/test/java/deanoffice/repositories/StudentRepositoryTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/deanoffice/repositories/SubjectRepositoryTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/deanoffice/repositories/TutorRepositoryTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/deanoffice/repositories/MarkRepositoryTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/deanoffice/entities/Mark.java" />
         <option value="$PROJECT_DIR$/src/main/java/deanoffice/entities/Student.java" />
         <option value="$PROJECT_DIR$/src/main/java/deanoffice/entities/Subject.java" />
@@ -577,12 +575,9 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/adding/adduser.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/adding/edituser.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/home.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/students.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/subjects.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/tutors.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/helloAdmin.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/tutor/helloTutor.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/student/helloStudent.html" />
         <option value="$PROJECT_DIR$/src/main/java/deanoffice/controllers/AdminFacultyController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/users.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/adding/addfaculty.html" />
@@ -591,13 +586,28 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/adding/editfaculty.html" />
         <option value="$PROJECT_DIR$/src/main/java/deanoffice/repositories/SubjectRepository.java" />
         <option value="$PROJECT_DIR$/src/test/java/deanoffice/repositories/GlobalRepositoryTest.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/adding/addmark.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/marks.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/admin/adding/editmark.html" />
-        <option value="$PROJECT_DIR$/src/main/java/deanoffice/controllers/AdminController.java" />
         <option value="$PROJECT_DIR$/src/main/java/deanoffice/config/WebSecurityConfig.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/adding/addmark.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/adding/addstudent.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/adding/editstudent.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/students.html" />
+        <option value="$PROJECT_DIR$/src/main/java/deanoffice/controllers/AdminController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/adding/addsubject.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/admin/adding/editsubject.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/student/studentsSubjects.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/student/helloStudent.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/tutor/helloTutor.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/tutor/subjects.html" />
       </list>
     </option>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand />
+      <select />
+    </treeState>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="10" />
@@ -611,8 +621,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="AndroidView" />
       <pane id="Scope" />
+      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
@@ -773,7 +783,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535311999744" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1535317970754" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
@@ -917,7 +927,14 @@
       <option name="project" value="LOCAL" />
       <updated>1535279345820</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="delete/add/edit marks works correctly">
+      <created>1535312040317</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1535312040317</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -963,9 +980,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.35930407" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.36459908" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -974,13 +990,13 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3289689" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49848714" visible="true" weight="0.3289689" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4977307" weight="0.3289689" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.5015129" side_tool="true" weight="0.3289689" />
+      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50226927" side_tool="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="bottom" id="Build" order="10" weight="0.299509" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.3289689" />
@@ -992,7 +1008,7 @@
       <window_info anchor="right" id="Gradle" order="5" />
       <window_info anchor="right" id="Theme Preview" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
-      <window_info anchor="right" id="Maven Projects" order="8" />
+      <window_info anchor="right" id="Maven Projects" order="8" weight="0.32980332" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -1001,48 +1017,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add &amp; delete works" />
     <MESSAGE value="delete/add/edit users works correctly" />
-    <option name="LAST_COMMIT_MESSAGE" value="delete/add/edit users works correctly" />
+    <MESSAGE value="delete/add/edit marks works correctly" />
+    <option name="LAST_COMMIT_MESSAGE" value="delete/add/edit marks works correctly" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/deanoffice/repositories/FacultyRepositoryTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" selection-start-line="11" selection-end-line="12" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/deanoffice/repositories/StudentRepositoryTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/deanoffice/repositories/SubjectRepositoryTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/test/java/deanoffice/repositories/TutorRepositoryTest.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/repositories/MarkRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="50" lean-forward="true" selection-start-line="11" selection-start-column="50" selection-end-line="11" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/repositories/StudentRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="12" selection-end-line="8" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/repositories/TutorRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/auths.html" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/Application.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/config/AppConfig.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -1068,20 +1046,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="322">
           <caret line="128" column="13" lean-forward="true" selection-start-line="128" selection-start-column="13" selection-end-line="128" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/entities/Subject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="25" selection-start-line="25" selection-end-line="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/entities/Address.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="24" lean-forward="true" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -1151,13 +1115,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/subjects.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="17" column="13" lean-forward="true" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/tutors.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="53">
@@ -1172,42 +1129,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/tutor/helloTutor.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="17" column="4" selection-start-line="17" selection-start-column="4" selection-end-line="19" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/student/helloStudent.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="33" lean-forward="true" selection-start-line="11" selection-start-column="33" selection-end-line="11" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/controllers/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="70">
-          <caret line="38" column="13" lean-forward="true" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/controllers/AdminFacultyController.java" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/helloAdmin.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
           <caret line="17" column="44" lean-forward="true" selection-start-line="17" selection-start-column="44" selection-end-line="17" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/controllers/AdminUsersController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="22" column="34" lean-forward="true" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1246,13 +1172,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/entities/Student.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/repositories/SubjectRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -1284,10 +1203,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/adding/addmark.html">
+    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/config/WebSecurityConfig.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+        <state relative-caret-position="127">
+          <caret line="45" column="41" selection-start-line="45" selection-start-column="41" selection-end-line="45" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -1298,51 +1217,162 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/students.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="10" column="49" selection-start-line="10" selection-start-column="49" selection-end-line="10" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/marks.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-134">
-          <caret line="11" column="25" lean-forward="true" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/adding/editmark.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
+        <state relative-caret-position="750">
           <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/entities/Student.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-255">
+          <caret line="16" column="28" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="16" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/adding/addmark.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="28" selection-end-column="14" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
+        <state>
           <caret line="35" column="38" selection-start-line="35" selection-start-column="38" selection-end-line="35" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/adding/addstudent.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="359">
+          <caret line="66" column="51" selection-start-line="66" selection-start-column="51" selection-end-line="66" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/entities/Address.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="14" column="31" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/students.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="104">
+          <caret line="30" column="65" selection-start-line="30" selection-start-column="65" selection-end-line="30" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/adding/editstudent.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="87">
+          <caret line="82" column="84" selection-start-line="82" selection-start-column="84" selection-end-line="82" selection-end-column="84" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/entities/Subject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="24" column="25" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/controllers/AdminUsersController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="342">
+          <caret line="22" column="34" lean-forward="true" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/controllers/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="38" column="13" lean-forward="true" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/student/studentsHistoricalMarks.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/student/studentsMarks.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/student/myAccount.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/student/studentsSubjects.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/tutor/helloTutor.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="67" lean-forward="true" selection-start-line="12" selection-start-column="67" selection-end-line="12" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/tutor/subjects.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/student/helloStudent.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/adding/addsubject.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/adding/editsubject.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="7" lean-forward="true" selection-start-line="9" selection-start-column="7" selection-end-line="9" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/marks.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="297">
+          <caret line="41" column="12" lean-forward="true" selection-start-line="41" selection-start-column="12" selection-end-line="41" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/admin/subjects.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="25" column="16" lean-forward="true" selection-start-line="25" selection-start-column="16" selection-end-line="25" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/controllers/AdminController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="195" lean-forward="true" selection-start-line="195" selection-end-line="195" />
+        <state relative-caret-position="237">
+          <caret line="304" column="5" lean-forward="true" selection-start-line="304" selection-start-column="5" selection-end-line="304" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="n#!!doc;n#addFaculty#0;n#AdminController#0" />
-            <element signature="e#5773#5803#0" />
-            <element signature="e#6418#6446#0" />
+            <element signature="e#4576#4603#0" />
+            <element signature="e#7695#7725#0" />
+            <element signature="e#11930#11958#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/deanoffice/config/WebSecurityConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="43" column="34" selection-start-line="43" selection-start-column="34" selection-end-line="43" selection-end-column="34" />
         </state>
       </provider>
     </entry>
