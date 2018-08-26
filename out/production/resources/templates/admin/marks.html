@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>All marks</title>
     <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
@@ -27,12 +27,23 @@
             <td th:text="${mark.subject.name}"> subject </td>
             <td th:text="${mark.value}"> value </td>
             <td th:text="${mark.date}"> date</td>
-            <td> <button> delete </button> <button> edit </button> </td>
+            <td>
+                <form action="/admin/marks/delete" id="delete"> </form>
+                <button type="submit" form="delete" name = "id" th:value = "${mark.id}">
+                    DELETE
+                </button>
+                <form action="/admin/marks/edit" id="edit"> </form>
+                <button type="submit" form="edit" name = "id" th:value = "${mark.id}">
+                    Edit
+                </button>
+            </td>
         </tr>
         </tbody>
     </table>
     <div>
-        <button> Add new </button>
+        <form action="/admin/marks/add">
+            <input type="submit" value = "Add new mark" />
+        </form>
     </div>
 </div>
 </body>

@@ -40,15 +40,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/home").permitAll()
-                .antMatchers("/Admin",
-                        "/admin/allfaculties", "/admin/allmarks",
-                        "/admin/allsubjects", "/admin/allstudents",
-                        "/admin/alltutors",  "/admin/allusers",
-                        "/admin/allusers/deleted", "/admin/allusers/edituser",
-                        "/admin/addnewuser")
+                .antMatchers("/Admin", "/admin/**")
                         .access("hasRole('ROLE_ADMIN')")
-                .antMatchers("/Student").access("hasRole('ROLE_STUDENT')")
-                .antMatchers("/Tutor").access("hasRole('ROLE_TUTOR')")
+                .antMatchers("/Student","/student/**").access("hasRole('ROLE_STUDENT')")
+                .antMatchers("/Tutor", "/tutor/**").access("hasRole('ROLE_TUTOR')")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

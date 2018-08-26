@@ -9,9 +9,15 @@
 <body>
 <div th:replace="fragments/header.html :: header"/>
 <div class = "container">
-    <p> Show your students with marks: <a href = "/#"> Marks</a></p>
-    <p> Your historical marks: <a href = "/#"> Historical marks </a> </p>
-    <p> Change your personal settings <a href = "/#"> My account </a></p>
+    <p> Show your students with marks:
+        <a href = "/tutor/marks" class="btn btn-primary"> Marks</a>
+    </p>
+    <p> Your historical marks:
+        <a href = "/tutor/historicalmarks" class="btn btn-primary"> Historical marks </a>
+    </p>
+    <p> See all my subjects
+        <a href = "/tutor/subjects" class="btn btn-primary"> My subject </a>
+    </p>
 </div>
 </body>
 </html>
