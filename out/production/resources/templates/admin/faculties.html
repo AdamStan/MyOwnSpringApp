@@ -8,25 +8,38 @@
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"/>
-<div class="container">
-    <table>
+<div class="container bg-secondary text-light p-4">
+    <table class = "table">
         <thead>
             <tr>
+                <th> Faculty's Id</th>
                 <th> Faculty's name </th>
                 <th> description </th>
-                <th> edit/delete </th>
+                <th> delete/edit </th>
             </tr>
         </thead>
         <tbody>
             <tr th:each="faculty: ${faculties}">
+                <td th:text="${faculty.id}"> id</td>
                 <td th:text="${faculty.name}"> name </td>
                 <td th:text="${faculty.description}"> description </td>
-                <td> <button> delete </button> <button> edit </button> </td>
+                <td>
+                    <form action="/admin/faculty/delete" id="delete" method="get"> </form>
+                    <button type="submit" form="delete" name = "id" th:value = "${faculty.id}">
+                        DELETE
+                    </button>
+                    <form action="/admin/faculty/editfaculty" id="edit"> </form>
+                    <button type="submit" form="edit" name = "id" th:value = "${faculty.id}">
+                        EDIT
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
     <div>
-        <button> Add new </button>
+        <form action="/admin/addnewfaculty">
+            <input type="submit" value = "Add new faculty" />
+        </form>
     </div>
 </div>
 </body>

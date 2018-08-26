@@ -10,13 +10,13 @@
 <div th:replace="fragments/header.html :: header"/>
 
 <div class = "container bg-secondary text-light p-4">
-    <form action="/admin/allusers/confirm" id = "user-inform" method="POST">
+    <form action="/admin/allusers/confirmedit" id = "user-inform" method="POST">
         <div class="row">
             <div class="col">
                 <label> Username </label>
             </div>
             <div class="col">
-                <input name = "username" type="text" th:value="${username}">
+                <input name = "username" type="text" th:value="${username}"> Don't change it
             </div>
         </div>
         <div class="row">
@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="row">
-            <input type ="submit" class="btn btn-primary" value="ADD">
+            <input type ="submit" class="btn btn-primary" value="EDIT">
             <a href="/admin/allusers/" class="btn btn-info"> CANCEL </a>
         </div>
     </form>

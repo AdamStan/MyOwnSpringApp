@@ -90,4 +90,26 @@ public class UsersTableData {
             System.err.println(e.getMessage());
         }
     }
+    public void updateUser(String username, String password,
+                           String role, String enable){
+        int en = 0;
+        if(enable == null){
+
+        } else if (enable.equals("on")){
+            en = 1;
+        }
+        password = User.encodePassword(password);
+        try {
+            Connection conn = DriverManager.getConnection(url);
+            Statement stmt = conn.createStatement();
+            stmt.executeUpdate("update users set password = '" + password + "', enabled = " + en + " " +
+                            "where username = '"  + username + "'; ");
+            stmt.executeUpdate("update authorities set authority = '" + role +"'" +
+                    " where username = '" + username + "'");
+            conn.close();
+        } catch (Exception e) {
+            System.err.println("Got an exception! ");
+            System.err.println(e.getMessage());
+        }
+    }
 }

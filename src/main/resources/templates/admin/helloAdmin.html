@@ -8,14 +8,14 @@
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"/>
-<div class = "container">
+<div class = "container bg-secondary text-light text-center p-4">
     <h2>Show/edit</h2>
-    <p> marks: <a href = "/admin/allmarks"> Marks </a></p>
-    <p> students: <a href = "/admin/allstudents"> Students </a></p>
-    <p> tutors: <a href = "/admin/alltutors"> Tutors </a></p>
-    <p> subjects: <a href = "/admin/allsubjects"> Subjects </a></p>
-    <p> users: <a href = "/admin/allusers"> Users </a></p>
-    <p> faculties: <a href = "/admin/allfaculties"> Faculties </a></p>
+    <a href = "/admin/allmarks" class="btn btn-primary"> Marks </a>
+    <a href = "/admin/allstudents" class="btn btn-primary"> Students </a>
+    <a href = "/admin/alltutors" class="btn btn-primary"> Tutors </a>
+    <a href = "/admin/allsubjects" class="btn btn-primary"> Subjects </a>
+    <a href = "/admin/allusers" class="btn btn-primary"> Users </a>
+    <a href = "/admin/allfaculties" class="btn btn-primary"> Faculties </a>
 </div>
 </body>
 </html>

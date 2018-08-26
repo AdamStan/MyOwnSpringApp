@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import java.util.Optional;
+
 @Controller
 public class AdminController {
     @Autowired
@@ -59,4 +62,40 @@ public class AdminController {
         model.addObject("faculties", faculties);
         return model;
     }
+    /** FACULTY FUNCTIONALITY START */
+    @RequestMapping(value = "/admin/addnewfaculty", method = RequestMethod.GET)
+    public ModelAndView addFaculty(){
+        ModelAndView modelAndView = new ModelAndView("/admin/adding/addfaculty.html");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/faculty/editfaculty", method = RequestMethod.GET)
+    public ModelAndView editFaculty(){
+        ModelAndView modelAndView = new ModelAndView("/admin/adding/editfaculty.html");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/admin/faculty/delete", method = RequestMethod.GET)
+    public ModelAndView deleteFaculty(HttpServletRequest request){
+        String id = request.getParameter("id");
+        Optional<Faculty> faculty = facultyRepository.findById(Integer.valueOf(id));
+        facultyRepository.delete(faculty.get());
+        return this.faculties();
+    }
+
+    @RequestMapping(value = "/admin/faculty/confirm", method = RequestMethod.POST)
+    public ModelAndView confirmAddFaculty(HttpServletRequest request){
+        String name = request.getParameter("name");
+        String desc = request.getParameter("desc");
+        Faculty newFaculty = new Faculty(name, desc);
+        facultyRepository.save(newFaculty);
+        return this.faculties();
+    }
+
+    @RequestMapping(value = "/admin/faculty/confirmedit", method = RequestMethod.POST)
+    public ModelAndView confirmEditFaculty(){
+
+        return this.faculties();
+    }
+    /** FACULTY FUNCTIONALITY END */
 }

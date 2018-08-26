@@ -5,7 +5,6 @@ import deanoffice.noentities.UsersTableData;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,14 +37,26 @@ public class AdminUsersController {
     @RequestMapping(value = "/admin/allusers/edituser", method = RequestMethod.GET)
     public ModelAndView editUser(HttpServletRequest request){
         String username = request.getParameter("username");
-        System.out.println("User for edit: " + username);
-        User user = new UsersTableData().findUserByUsername(username);
-        ModelAndView model = new ModelAndView("/admin/users.html");
-        if(username == null){
-            model = new ModelAndView("/admin/adding/adduser.html");
-            model.addObject(user);
+        if(username != null){
+            System.out.println("User for edit: " + username);
+            ModelAndView model = new ModelAndView("/admin/adding/edituser.html");
+            model.addObject("username", username);
+            return model;
         }
-        return model;
+        return this.users();
+    }
+
+    @RequestMapping(value = "/admin/allusers/confirmedit", method = RequestMethod.POST)
+    public ModelAndView confirmEditUser(HttpServletRequest request){
+        //dodaj do bazy jeszcze
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String role = request.getParameter("role");
+        String enabled = request.getParameter("enabled");
+        System.out.println("Parameters: " + username + ", " +
+                password + ", " + role + ", " + enabled);
+        new UsersTableData().updateUser(username, password, role, enabled);
+        return this.users();
     }
 
     @RequestMapping(value = "/admin/allusers/confirm", method = RequestMethod.POST)
