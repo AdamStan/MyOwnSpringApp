@@ -282,10 +282,10 @@ public class AdminController {
 
     @RequestMapping(value = "/admin/subjects/edit")
     public ModelAndView editsubject(HttpServletRequest request){
-        ModelAndView model = new ModelAndView("/admin/adding/editmark.html");
+        ModelAndView model = new ModelAndView("/admin/adding/editsubject.html");
         String id = request.getParameter("id");
         Optional<Subject> subject = subjectRepository.findById(Integer.valueOf(id));
-        model.addObject("subject",subject);
+        model.addObject("subject",subject.get());
         return model;
     }
 

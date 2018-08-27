@@ -21,12 +21,23 @@
         <tr th:each="subject: ${subjects}">
             <td th:text="${subject.name}"> name </td>
             <td th:text="${subject.faculty.name}"> description </td>
-            <td> <button> delete </button> <button> edit </button> </td>
+            <td>
+                <form action="/admin/subjects/delete" id="delete" method="POST"> </form>
+                <button type="submit" form="delete" name = "id" th:value = "${subject.id}">
+                    DELETE
+                </button>
+                <form action="/admin/subjects/edit" id="edit"> </form>
+                <button type="submit" form="edit" name = "id" th:value = "${subject.id}">
+                    Edit
+                </button>
+            </td>
         </tr>
         </tbody>
     </table>
     <div>
-        <button> Add new </button>
+        <form action="/admin/subjects/add">
+            <input type="submit" value = "Add new mark" />
+        </form>
     </div>
 </div>
 </body>
