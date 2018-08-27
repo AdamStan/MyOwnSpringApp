@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Optional;
 
@@ -233,6 +234,8 @@ public class AdminController {
         String numberOfBuilding = request.getParameter("numberofbuilding");
         String numberOfFlat = request.getParameter("numberofflat");
         String facultyid = request.getParameter("facultyid");
+        String whenStarted = request.getParameter("whenStarted");
+        String whenFinnished = request.getParameter("whenFinnished");
 
         Address ad = new Address(city, street, numberOfBuilding, numberOfFlat);
         Optional<Faculty> op_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
@@ -243,6 +246,21 @@ public class AdminController {
         std.setFaculty(op_faculty.get());
         std.setUsername(username);
         std.setWhenStarted(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+
+        try{
+            System.out.println(whenStarted);
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date = sdf1.parse(whenStarted);
+            java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
+            std.setWhenStarted(sqlStartDate);
+
+            SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date2 = sdf2.parse(whenFinnished);
+            java.sql.Date sqlStartDate2 = new java.sql.Date(date2.getTime());
+            std.setWhenFinnished(sqlStartDate2);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
 
         addressRepository.save(std.getAddress());
         studentRepository.save(std);
@@ -280,7 +298,7 @@ public class AdminController {
         return this.subjects();
     }
 
-    @RequestMapping(value = "/admin/subjects/edit")
+    @RequestMapping(value = "/admin/subjects/edit", method = RequestMethod.GET)
     public ModelAndView editsubject(HttpServletRequest request){
         ModelAndView model = new ModelAndView("/admin/adding/editsubject.html");
         String id = request.getParameter("id");
@@ -311,26 +329,108 @@ public class AdminController {
         return this.subjects();
     }
     //endregion SUBJECT FUNCTIONALITY
-    /*
     //region TUTOR FUNCTIONALITY
-    @RequestMapping(value = "/admin/marks/add")
-    public ModelAndView addmark(){
-        ModelAndView model = new ModelAndView("/admin/adding/addmark.html");
+    @RequestMapping(value = "/admin/tutors/add", method = RequestMethod.GET)
+    public ModelAndView addtutor(){
+        ModelAndView model = new ModelAndView("/admin/adding/addtutor.html");
         return model;
     }
 
-    @RequestMapping(value = "/admin/marks/addconfirm")
+    @RequestMapping(value = "/admin/tutors/addconfirm", method = RequestMethod.POST)
+    public ModelAndView confirmAddTutor(HttpServletRequest request){
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
+        String username = request.getParameter("username");
+        String city = request.getParameter("city");
+        String street = request.getParameter("street");
+        String numberOfBuilding = request.getParameter("numberofbuilding");
+        String numberOfFlat = request.getParameter("numberofflat");
+        String facultyid = request.getParameter("facultyid");
+        String whenStarted = request.getParameter("whenStarted");
 
-    @RequestMapping(value = "/admin/marks/edit")
-    public ModelAndView editmark(HttpServletRequest request){
-        ModelAndView model = new ModelAndView("/admin/adding/editmark.html");
+        Address ad = new Address(city, street, numberOfBuilding, numberOfFlat);
+        Optional<Faculty> op_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
+        Tutor tutor = new Tutor(name, surname, ad);
+        tutor.setFaculty(op_faculty.get());
+        tutor.setUsername(username);
+        tutor.setWhenStarted(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 
+        try{
+            System.out.println(whenStarted);
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date = sdf1.parse(whenStarted);
+            java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
+            tutor.setWhenStarted(sqlStartDate);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        addressRepository.save(tutor.getAddress());
+        tutorRepository.save(tutor);
+
+        return this.tutors();
+    }
+
+    @RequestMapping(value = "/admin/tutors/edit", method = RequestMethod.GET)
+    public ModelAndView edittutor(HttpServletRequest request){
+        ModelAndView model = new ModelAndView("/admin/adding/edittutor.html");
+        String id = request.getParameter("id");
+        Optional<Tutor> tutor = tutorRepository.findById(Integer.valueOf(id));
+        model.addObject("tutor", tutor.get());
         return model;
     }
 
-    @RequestMapping(value = "/admin/marks/editconfirm")
+    @RequestMapping(value = "/admin/tutors/editconfirm", method = RequestMethod.POST)
+    public ModelAndView confirmEditTutor(HttpServletRequest request){
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        String surname = request.getParameter("surname");
+        String username = request.getParameter("username");
+        String city = request.getParameter("city");
+        String street = request.getParameter("street");
+        String numberOfBuilding = request.getParameter("numberofbuilding");
+        String numberOfFlat = request.getParameter("numberofflat");
+        String facultyid = request.getParameter("facultyid");
+        String whenStarted = request.getParameter("whenStarted");
+        String whenFinnished = request.getParameter("whenFinnished");
 
-    @RequestMapping(value = "/admin/marks/delete")
+        Address ad = new Address(city, street, numberOfBuilding, numberOfFlat);
+        Optional<Faculty> op_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
+        Tutor tutor = tutorRepository.findById(Integer.valueOf(id)).get();
+        tutor.setName(name);
+        tutor.setSurname(surname);
+        tutor.setAddress(ad);
+        tutor.setFaculty(op_faculty.get());
+        tutor.setUsername(username);
+        tutor.setWhenStarted(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+
+        try{
+            System.out.println(whenStarted);
+            SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date = sdf1.parse(whenStarted);
+            java.sql.Date sqlStartDate = new java.sql.Date(date.getTime());
+            tutor.setWhenStarted(sqlStartDate);
+
+            SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd");
+            java.util.Date date2 = sdf2.parse(whenFinnished);
+            java.sql.Date sqlStartDate2 = new java.sql.Date(date2.getTime());
+            tutor.setWhenFinnished(sqlStartDate2);
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        addressRepository.save(tutor.getAddress());
+        tutorRepository.save(tutor);
+
+        return this.tutors();
+    }
+
+    @RequestMapping(value = "/admin/tutors/delete", method = RequestMethod.POST)
+    public ModelAndView deleteTutor(HttpServletRequest request){
+        String id = request.getParameter("id");
+        Optional<Tutor> tutor = tutorRepository.findById(Integer.valueOf(id));
+        tutorRepository.delete(tutor.get());
+        return this.tutors();
+    }
     //endregion TUTOR FUNCTIONALITY
-    */
 }

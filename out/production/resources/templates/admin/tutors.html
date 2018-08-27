@@ -14,7 +14,7 @@
         <tr>
             <th> Name </th>
             <th> Surname </th>
-            <th> Faculty </th>
+            <th> DATE </th>
             <th> edit/delete </th>
         </tr>
         </thead>
@@ -22,13 +22,25 @@
         <tr th:each="tutor: ${tutors}">
             <td th:text="${tutor.name}"> name </td>
             <td th:text="${tutor.surname}"> description </td>
+            <td th:text="${tutor.whenStarted}"> date </td>
             <td th:text="${tutor.faculty.name}"> description </td>
-            <td> <button> delete </button> <button> edit </button> </td>
+            <td>
+                <form action="/admin/tutors/delete" id="delete" method="post"> </form>
+                <button type="submit" form="delete" name = "id" th:value = "${tutor.id}">
+                    DELETE
+                </button>
+                <form action="/admin/tutors/edit" id="edit"> </form>
+                <button type="submit" form="edit" name = "id" th:value = "${tutor.id}">
+                    Edit
+                </button>
+            </td>
         </tr>
         </tbody>
     </table>
     <div>
-        <button> Add new </button>
+        <form action="/admin/tutors/add">
+            <input type="submit" value = "Add new tutor" />
+        </form>
     </div>
 </div>
 </body>
