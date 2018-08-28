@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Add user</title>
+    <div th:replace="fragments/header.html :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header.html :: header"/>
+
+<div class = "container bg-secondary text-light p-4">
+    <form action="/admin/faculty/confirmedit" id = "faculty-inform" method="POST">
+        <div class="row">
+            <div class="col">
+                <label> ID </label>
+            </div>
+            <div class="col">
+                <input name = "id" type="text" th:value="${id}"> Don't change it
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Name </label>
+            </div>
+            <div class="col">
+                <input name = "name" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Description </label>
+            </div>
+            <div class="col">
+                <input name = "desc" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <input type ="submit" class="btn btn-primary" value="EDIT">
+            <a href="/admin/allfaculties/" class="btn btn-info"> CANCEL </a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

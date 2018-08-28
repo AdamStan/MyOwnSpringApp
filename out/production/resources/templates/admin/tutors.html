@@ -1,10 +1,47 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Tutors</title>
+    <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
-
+<div th:replace="fragments/header.html :: header"/>
+<div class="container bg-secondary text-light p-4">
+    <table class ="table">
+        <thead>
+        <tr>
+            <th> Name </th>
+            <th> Surname </th>
+            <th> DATE </th>
+            <th> edit/delete </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tutor: ${tutors}">
+            <td th:text="${tutor.name}"> name </td>
+            <td th:text="${tutor.surname}"> description </td>
+            <td th:text="${tutor.whenStarted}"> date </td>
+            <td th:text="${tutor.faculty.name}"> description </td>
+            <td>
+                <form action="/admin/tutors/delete" id="delete" method="post"> </form>
+                <button type="submit" form="delete" name = "id" th:value = "${tutor.id}">
+                    DELETE
+                </button>
+                <form action="/admin/tutors/edit" id="edit"> </form>
+                <button type="submit" form="edit" name = "id" th:value = "${tutor.id}">
+                    Edit
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <form action="/admin/tutors/add">
+            <input type="submit" value = "Add new tutor" />
+        </form>
+    </div>
+</div>
 </body>
 </html>

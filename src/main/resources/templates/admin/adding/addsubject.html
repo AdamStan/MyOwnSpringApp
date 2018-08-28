@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Add subject</title>
+    <div th:replace="fragments/header.html :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header.html :: header"/>
+
+<div class = "container bg-secondary text-light p-4">
+    <form action="/admin/subjects/addconfirm" id = "subject-inform" method="POST">
+        <div class="row">
+            <div class="col">
+                <label> Name </label>
+            </div>
+            <div class="col">
+                <input name = "name" type="text">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Faculty id </label>
+            </div>
+            <div class="col">
+                <input type="number" name="facultyid" min="1">
+            </div>
+        </div>
+        <div class="row">
+            <input type ="submit" class="btn btn-primary" value="ADD">
+            <a href="/admin/allsubjects/" class="btn btn-info"> CANCEL </a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -38,6 +38,12 @@ public class Tutor {
 
     }
 
+    public Tutor(String name, String surname, Address address) {
+        this.name = name;
+        this.surname = surname;
+        this.address = address;
+    }
+
     public Tutor(String name, String surname, Date whenStarted, Address address, Faculty faculty) {
         this.name = name;
         this.surname = surname;
@@ -128,12 +134,9 @@ public class Tutor {
 
     @Override
     public String toString() {
-        return "Tutor{" +
-                "name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
+        return "name='" + name + ", " + surname + '\'' +
                 ", whenStarted=" + whenStarted +
                 ", address=" + address +
-                ", faculty=" + faculty +
-                '}';
+                ", faculty=" + faculty;
     }
 }

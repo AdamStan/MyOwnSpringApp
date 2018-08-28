@@ -1,10 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Users</title>
+    <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
-
+<div th:replace="fragments/header.html :: header"/>
+<div class="container bg-secondary text-light p-4">
+    <table class = "table">
+        <thead>
+        <tr>
+            <th> username </th>
+            <th> password </th>
+            <th> role </th>
+            <th> enable </th>
+            <th> edit/delete </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${users}">
+            <td th:text="${user.username}"> name </td>
+            <td th:text="${user.password}"> description </td>
+            <td th:text="${user.role}"> description </td>
+            <td th:text="${user.enable}"> description </td>
+            <td>
+                <form action="/admin/allusers/deleted" id="delete"> </form>
+                <button type="submit" form="delete" name = "username" th:value = "${user.username}">
+                    DELETE
+                </button>
+                <form action="/admin/allusers/edituser" id="edit"> </form>
+                <button type="submit" form="edit" name = "username" th:value = "${user.username}">
+                    Edit
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <form action="/admin/addnewuser">
+            <input type="submit" value = "Add new user" />
+        </form>
+    </div>
+</div>
 </body>
 </html>

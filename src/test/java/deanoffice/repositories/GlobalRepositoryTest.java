@@ -132,12 +132,12 @@ public class GlobalRepositoryTest {
             System.out.println(sub);
         }
         // findByName
-        String subjectName = "Podstawy Programowania 2";
+        /*String subjectName = "Podstawy Programowania 2";
         Iterable<Subject> subjectsByNsme = subjectRepository.findByName(subjectName);
         for(Subject sub : subjectsByNsme){
             Assert.assertEquals(sub.getName(), subjectName);
             System.out.println("*" + sub);
-        }
+        }*/
         // findByFaculty
         Faculty fac = facultyRepository.findByName("WEEIA");
         Iterable<Subject> subjectsByFaculty = subjectRepository.findByFaculty(fac);

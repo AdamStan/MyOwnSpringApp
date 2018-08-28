@@ -8,10 +8,16 @@
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"/>
-<div class = "container">
-    <p> Check your actual marks: <a href = "/#"> My actual marks</a></p>
-    <p> Check your historical marks <a href = "/#"> My historical marks </a> </p>
-    <p> Change your personal settings <a href = "/#"> My account </a></p>
+<div class = "container bg-secondary text-light text-center p-4">
+    <p> Check your actual marks:
+        <a href = "/student/marks" class="btn btn-primary"> My actual marks</a>
+    </p>
+    <p> Check your historical marks (not suported yet)
+        <a href = "/#" class="btn btn-primary"> My historical marks </a>
+    </p>
+    <p> See all my subjects
+        <a href = "/student/subjects" class="btn btn-primary"> My subject </a>
+    </p>
 </div>
 </body>
 </html>

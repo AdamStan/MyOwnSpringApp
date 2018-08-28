@@ -4,16 +4,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Welcome at University</title>
-    <div th:replace="fragments/header.html :: header-css"/>
+<div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"/>
-<div class = "container">
-    <p> Show/edit all marks: <a href = "/#"> Marks </a></p>
-    <p> Show/edit all students: <a href = "/#"> Students </a></p>
-    <p> Show/edit all tutors: <a href = "/#"> Tutors </a></p>
-    <p> Show/edit all subjects: <a href = "/#"> Subjects </a></p>
-    <p> Show/edit users: <a href = "/#"> Users </a></p>
+<div class = "container bg-secondary text-light text-center p-4">
+    <h2>Show/edit</h2>
+    <a href = "/admin/allmarks" class="btn btn-primary"> Marks </a>
+    <a href = "/admin/allstudents" class="btn btn-primary"> Students </a>
+    <a href = "/admin/alltutors" class="btn btn-primary"> Tutors </a>
+    <a href = "/admin/allsubjects" class="btn btn-primary"> Subjects </a>
+    <a href = "/admin/allusers" class="btn btn-primary"> Users </a>
+    <a href = "/admin/allfaculties" class="btn btn-primary"> Faculties </a>
+    <a href = "/admin/studenttosubject/" class="btn btn-primary"> Student to subject </a>
+    <a href = "/admin/tutortosubject/" class="btn btn-primary"> Tutor to subject </a>
 </div>
 </body>
 </html>

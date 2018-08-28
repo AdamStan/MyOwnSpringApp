@@ -1,10 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Subjects</title>
+    <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
-
+<div th:replace="fragments/header.html :: header"/>
+<div class="container bg-secondary text-light p-4">
+    <table class = "table">
+        <thead>
+        <tr>
+            <th> Subject's id</th>
+            <th> Subject's name </th>
+            <th> Faculty </th>
+            <th> edit/delete </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="subject: ${subjects}">
+            <td th:text="${subject.id}"> name </td>
+            <td th:text="${subject.name}"> name </td>
+            <td th:text="${subject.faculty.name}"> description </td>
+            <td>
+                <form action="/admin/subjects/delete" id="delete" method="POST"> </form>
+                <button type="submit" form="delete" name = "id" th:value = "${subject.id}">
+                    DELETE
+                </button>
+                <form action="/admin/subjects/edit" id="edit"> </form>
+                <button type="submit" form="edit" name = "id" th:value = "${subject.id}">
+                    Edit
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <form action="/admin/subjects/add">
+            <input type="submit" value = "Add new mark" />
+        </form>
+    </div>
+</div>
 </body>
 </html>
