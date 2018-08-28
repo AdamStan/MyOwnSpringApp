@@ -12,6 +12,7 @@
     <table class = "table">
         <thead>
         <tr>
+            <th> Subject's id</th>
             <th> Subject's name </th>
             <th> Faculty </th>
             <th> edit/delete </th>
@@ -19,6 +20,7 @@
         </thead>
         <tbody>
         <tr th:each="subject: ${subjects}">
+            <td th:text="${subject.id}"> name </td>
             <td th:text="${subject.name}"> name </td>
             <td th:text="${subject.faculty.name}"> description </td>
             <td>
