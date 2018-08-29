@@ -1,8 +1,12 @@
 package deanoffice.controllers;
 
 import deanoffice.entities.Mark;
+import deanoffice.entities.Student;
 import deanoffice.entities.Subject;
 import deanoffice.entities.Tutor;
+import deanoffice.repositories.MarkRepository;
+import deanoffice.repositories.StudentRepository;
+import deanoffice.repositories.SubjectRepository;
 import deanoffice.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,12 +16,19 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Set;
 
 @Controller
 public class TutorController {
     @Autowired
     private TutorRepository tutorRepository;
+    @Autowired
+    private MarkRepository markRepository;
+    @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
+    private SubjectRepository subjectRepository;
 
     @RequestMapping(value = "/tutor/marks", method = RequestMethod.GET)
     public ModelAndView marks(HttpServletRequest request){
@@ -48,29 +59,79 @@ public class TutorController {
 
     @RequestMapping(value = "/tutor/marks/add", method = RequestMethod.GET)
     public ModelAndView addMark(HttpServletRequest request){
-        ModelAndView model = new ModelAndView();
+        ModelAndView model = new ModelAndView("/tutor/addmark.html");
+        String username = request.getRemoteUser();
+        Tutor tutor = tutorRepository.findByUsername(username);
+        System.out.print(tutor);
+        model.addObject("tutorid", tutor.getId());
         return model;
     }
     @RequestMapping(value = "/tutor/marks/addconfirm", method = RequestMethod.POST)
     public ModelAndView addMarkConfirm(HttpServletRequest request){
-        ModelAndView model = new ModelAndView();
-        return model;
+        String tutorid = request.getParameter("tutorid");
+        String studentid = request.getParameter("studentid");
+        String value = request.getParameter("value");
+        String subjectname = request.getParameter("subjectname");
+
+        System.out.println("tutor's id: " + tutorid);
+
+        Tutor tutor = tutorRepository.findById(Integer.valueOf(tutorid)).get();
+        Student student = studentRepository.findByIndexNumber(Integer.valueOf(studentid));
+        Subject subject = subjectRepository.findByName(subjectname);
+
+        Mark mark = new Mark();
+        mark.setValue(Double.valueOf(value));
+        mark.setTutor(tutor);
+        mark.setSubject(subject);
+        mark.setStudent(student);
+        mark.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+
+        markRepository.save(mark);
+
+        return this.marks(request);
     }
 
     @RequestMapping(value = "/tutor/marks/delete", method = RequestMethod.POST)
     public ModelAndView deletMark(HttpServletRequest request){
-        String markid = request.getParameter("");
-        ModelAndView model = new ModelAndView();
-        return model;
+        String markid = request.getParameter("id");
+        Mark mark = markRepository.findById(Integer.valueOf(markid)).get();
+        markRepository.delete(mark);
+        return this.marks(request);
     }
     @RequestMapping(value = "/tutor/marks/edit", method = RequestMethod.GET)
     public ModelAndView editMark(HttpServletRequest request){
-        ModelAndView model = new ModelAndView();
+        Mark mark = markRepository.findById(Integer.valueOf(request.getParameter("id"))).get();
+        ModelAndView model = new ModelAndView("/tutor/editmark.html");
+        String username = request.getRemoteUser();
+        Tutor tutor = tutorRepository.findByUsername(username);
+        System.out.print(tutor);
+        model.addObject("tutorid", tutor.getId());
+        model.addObject("mark", mark);
         return model;
     }
     @RequestMapping(value = "/tutor/marks/editconfirm", method = RequestMethod.POST)
     public ModelAndView editMarkConfirm(HttpServletRequest request){
-        ModelAndView model = new ModelAndView();
-        return model;
+        String markid = request.getParameter("markid");
+        String tutorid = request.getParameter("tutorid");
+        String studentid = request.getParameter("studentid");
+        String value = request.getParameter("value");
+        String subjectname = request.getParameter("subjectname");
+
+        System.out.println("tutor's id: " + tutorid);
+
+        Tutor tutor = tutorRepository.findById(Integer.valueOf(tutorid)).get();
+        Student student = studentRepository.findByIndexNumber(Integer.valueOf(studentid));
+        Subject subject = subjectRepository.findByName(subjectname);
+
+        Mark mark = markRepository.findById(Integer.valueOf(markid)).get();
+        mark.setValue(Double.valueOf(value));
+        mark.setTutor(tutor);
+        mark.setSubject(subject);
+        mark.setStudent(student);
+        mark.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+
+        markRepository.save(mark);
+
+        return this.marks(request);
     }
 }

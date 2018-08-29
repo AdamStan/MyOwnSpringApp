@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit mark</title>
+    <div th:replace="fragments/header.html :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header.html :: header"/>
+
+<div class = "container bg-secondary text-light p-4">
+    <form action="/tutor/marks/editconfirm" id = "mark-inform" method="POST">
+        <div class="row">
+            <div class="col">
+                <label> Mark's id </label>
+            </div>
+            <div class="col">
+                <input type="number" name="markid" th:value="${mark.id}" min="1" disabled>
+                <input type="number" name="markid" th:value="${mark.id}" min="1" hidden>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Value </label>
+            </div>
+            <div class="col">
+                <input type="number" name="value" th:value="${mark.value}" min="2" max="5" step="0.5">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Index-number </label>
+            </div>
+            <div class="col">
+                <input type="number" name="studentid" th:value="${mark.student.indexNumber}" min="1">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Tutor's id </label>
+            </div>
+            <div class="col">
+                <input type="number" name="tutorid" th:value="${tutorid}" min="1" disabled>
+                <input type="number" name="tutorid" th:value="${tutorid}" min="1" hidden>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Subject's name </label>
+            </div>
+            <div class="col">
+                <input type="text" name="subjectname" th:value="${mark.subject.name}">
+            </div>
+        </div>
+        <div class="row">
+            <input type ="submit" class="btn btn-primary" value="EDIT">
+            <a href="/tutor/marks/" class="btn btn-info"> CANCEL </a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
