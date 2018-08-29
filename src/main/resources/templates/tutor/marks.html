@@ -1,10 +1,50 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>All marks from your subjects</title>
+    <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
-
+<div th:replace="fragments/header.html :: header"/>
+<div class="container bg-secondary text-light p-4">
+    <table class="table">
+        <thead>
+        <tr>
+            <th> Student's index </th>
+            <th> Tutor </th>
+            <th> Subject </th>
+            <th> Value </th>
+            <th> Date </th>
+            <th> Edit/delete </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="mark: ${marks}">
+            <td th:text="${mark.student.indexNumber}"> std </td>
+            <td th:text="${mark.tutor}"> tutor </td>
+            <td th:text="${mark.subject.name}"> subject </td>
+            <td th:text="${mark.value}"> value </td>
+            <td th:text="${mark.date}"> date</td>
+            <td>
+                <form action="/tutor/marks/delete" id="delete" method="post"> </form>
+                <button type="submit" form="delete" name = "id" th:value = "${mark.id}">
+                    DELETE
+                </button>
+                <form action="/tutor/marks/edit" id="edit"> </form>
+                <button type="submit" form="edit" name = "id" th:value = "${mark.id}">
+                    EDIT
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <form action="/tutor/marks/add">
+            <input type="submit" value = "Add new mark" />
+        </form>
+    </div>
+</div>
 </body>
 </html>

@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Subjects</title>
+    <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
-
+<div th:replace="fragments/header.html :: header"/>
+<div class="container bg-secondary text-light p-4">
+    <table class = "table">
+        <thead>
+        <tr>
+            <th> Subject's id</th>
+            <th> Subject's name </th>
+            <th> Faculty </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="subject: ${subjects}">
+            <td th:text="${subject.id}"> name </td>
+            <td th:text="${subject.name}"> name </td>
+            <td th:text="${subject.faculty.name}"> description </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

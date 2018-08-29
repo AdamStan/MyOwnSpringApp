@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Add mark</title>
+    <div th:replace="fragments/header.html :: header-css"/>
+</head>
+<body>
+<div th:replace="fragments/header.html :: header"/>
+
+<div class = "container bg-secondary text-light p-4">
+    <form action="/tutor/marks/addconfirm" id = "mark-inform" method="POST">
+        <div class="row">
+            <div class="col">
+                <label> Value </label>
+            </div>
+            <div class="col">
+                <input type="number" name="value" min="2" max="5" step="0.5">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Index-number </label>
+            </div>
+            <div class="col">
+                <input type="number" name="studentid" min="1">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Tutor's id </label>
+            </div>
+            <div class="col">
+                <input type="number" name="tutorid" th:value="${tutorid}" min="1" disabled>
+                <input type="number" name="tutorid" th:value="${tutorid}" min="1" hidden>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Subject's name </label>
+            </div>
+            <div class="col">
+                <input type="text" name="subjectname">
+            </div>
+        </div>
+        <div class="row">
+            <input type ="submit" class="btn btn-primary" value="ADD">
+            <a href="/tutor/marks/" class="btn btn-info"> CANCEL </a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
