@@ -28,7 +28,7 @@
             <td th:text="${mark.value}"> value </td>
             <td th:text="${mark.date}"> date</td>
             <td>
-                <form action="/admin/marks/delete" id="delete"> </form>
+                <form action="/admin/marks/delete" id="delete" method="post"> </form>
                 <button type="submit" form="delete" name = "id" th:value = "${mark.id}">
                     DELETE
                 </button>
@@ -41,8 +41,8 @@
         </tbody>
     </table>
     <div>
-        <form action="/admin/subject/add">
-            <input type="submit" value = "Add new subject" />
+        <form action="/admin/marks/add">
+            <input type="submit" value = "Add new mark" />
         </form>
     </div>
 </div>
