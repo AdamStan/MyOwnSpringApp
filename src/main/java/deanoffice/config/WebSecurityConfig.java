@@ -39,11 +39,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/home").permitAll()
+                .antMatchers("/", "/home", "news/**").permitAll()
                 .antMatchers("/Admin", "/admin/**","/useroptions/admin")
                         .access("hasRole('ROLE_ADMIN')")
                 .antMatchers("/Student","/student/**", "/useroptions/student").access("hasRole('ROLE_STUDENT')")
                 .antMatchers("/Tutor", "/tutor/**","/useroptions/tutor").access("hasRole('ROLE_TUTOR')")
+                .antMatchers("/news/**").anonymous()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

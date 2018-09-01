@@ -16,11 +16,12 @@ import org.springframework.web.servlet.view.JstlView;
 public class MvcConfig implements WebMvcConfigurer {
 
     public void addViewControllers(ViewControllerRegistry registry) {
-
+        registry.addViewController("/news/news1").setViewName("news/news1.html");
+        registry.addViewController("/news/news2").setViewName("news/news2.html");
     }
     /** Doesn't work
      * */
-    @Bean
+    /*@Bean
     public ViewResolver getViewResolver() {
         InternalResourceViewResolver viewResolver
                 = new InternalResourceViewResolver();
@@ -28,5 +29,5 @@ public class MvcConfig implements WebMvcConfigurer {
         viewResolver.setPrefix("/WEB-INF/view");
         viewResolver.setSuffix("");
         return viewResolver;
-    }
+    }*/
 }
