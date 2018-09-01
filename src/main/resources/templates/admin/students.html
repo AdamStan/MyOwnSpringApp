@@ -16,7 +16,7 @@
             <th> Surname </th>
             <th> Username </th>
             <th> Faculty </th>
-            <th> Address </th>
+            <th> City </th>
             <th> edit/delete </th>
         </tr>
         </thead>
@@ -26,7 +26,7 @@
             <td th:text="${student.surname}"> surname </td>
             <td th:text="${student.username}"> username </td>
             <td th:text="${student.faculty}"> faculty </td>
-            <td th:text="${student.address}"> address </td>
+            <td th:text="${student.city}"> city </td>
             <td>
                 <form action="/admin/students/delete" id="delete"> </form>
                 <button type="submit" form="delete" name = "indexNumber" th:value = "${student.indexNumber}">

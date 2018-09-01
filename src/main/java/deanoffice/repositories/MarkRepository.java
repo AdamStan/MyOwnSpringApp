@@ -7,7 +7,7 @@ import deanoffice.entities.Tutor;
 import org.springframework.data.repository.CrudRepository;
 
 public interface MarkRepository extends CrudRepository<Mark, Integer> {
-    Mark findByStudent(Student student);
+    Iterable<Mark> findByStudent(Student student);
     Iterable<Mark> findByTutor(Tutor tutor);
     Iterable<Mark> findBySubject(Subject subject);
 }

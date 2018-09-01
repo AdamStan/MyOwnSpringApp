@@ -17,10 +17,11 @@ public class Student {
     private String username;
     private Date whenStarted;
     private Date whenFinnished;
+    private String city;
+    private String street;
+    private String numberOfBuilding;
+    private String numberOfFlat;
     // foreign keys
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "address_id", nullable = true)
-    private Address address;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "faculty_id", nullable = true)
     private Faculty faculty;
@@ -38,16 +39,45 @@ public class Student {
 
     }
 
-    public Student(String name, String surname, Address address) {
+    public Student(String name, String surname, String city, String street, String numberOfBuilding, String numberOfFlat) {
         this.name = name;
         this.surname = surname;
-        this.address = address;
+        this.city = city;
+        this.street = street;
+        this.numberOfBuilding = numberOfBuilding;
+        this.numberOfFlat = numberOfFlat;
     }
 
-    public Student(String name, String surname, String address) {
-        this.name = name;
-        this.surname = surname;
-        this.address = new Address(address);
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return this.street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getNumberOfBuilding() {
+        return numberOfBuilding;
+    }
+
+    public void setNumberOfBuilding(String numberOfBuilding) {
+        this.numberOfBuilding = numberOfBuilding;
+    }
+
+    public String getNumberOfFlat() {
+        return numberOfFlat;
+    }
+
+    public void setNumberOfFlat(String numberOfFlat) {
+        this.numberOfFlat = numberOfFlat;
     }
 
     public int getIndexNumber() {
@@ -98,14 +128,6 @@ public class Student {
         this.whenFinnished = whenFinnished;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
     public Faculty getFaculty() {
         return faculty;
     }
@@ -136,8 +158,7 @@ public class Student {
                 "indexNumber=" + indexNumber +
                 ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
-                ", whenStarted=" + whenStarted +
-                ", address=" + address +
-                '}';
+                ", whenStarted=" + whenStarted
+                + username + "}";
     }
 }

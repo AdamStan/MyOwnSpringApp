@@ -16,8 +16,6 @@ import java.util.Optional;
 @Controller
 public class AdminController {
     @Autowired
-    private AddressRepository addressRepository;
-    @Autowired
     private MarkRepository markRepository;
     @Autowired
     private SubjectRepository subjectRepository;
@@ -202,14 +200,12 @@ public class AdminController {
         String numberOfFlat = request.getParameter("numberofflat");
         String facultyid = request.getParameter("facultyid");
 
-        Address ad = new Address(city, street, numberOfBuilding, numberOfFlat);
         Optional<Faculty> op_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
-        Student std = new Student(name, surname, ad);
+        Student std = new Student(name, surname, city, street, numberOfBuilding, numberOfFlat);
         std.setFaculty(op_faculty.get());
         std.setUsername(username);
         std.setWhenStarted(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 
-        addressRepository.save(std.getAddress());
         studentRepository.save(std);
 
         return this.students();
@@ -237,12 +233,14 @@ public class AdminController {
         String whenStarted = request.getParameter("whenStarted");
         String whenFinnished = request.getParameter("whenFinnished");
 
-        Address ad = new Address(city, street, numberOfBuilding, numberOfFlat);
         Optional<Faculty> op_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
         Student std = studentRepository.findByIndexNumber(Integer.valueOf(id));
         std.setName(name);
         std.setSurname(surname);
-        std.setAddress(ad);
+        std.setCity(city);
+        std.setStreet(street);
+        std.setNumberOfBuilding(numberOfBuilding);
+        std.setNumberOfFlat(numberOfFlat);
         std.setFaculty(op_faculty.get());
         std.setUsername(username);
         std.setWhenStarted(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
@@ -262,7 +260,6 @@ public class AdminController {
             System.out.println(e.getMessage());
         }
 
-        addressRepository.save(std.getAddress());
         studentRepository.save(std);
 
         return this.students();
@@ -348,9 +345,8 @@ public class AdminController {
         String facultyid = request.getParameter("facultyid");
         String whenStarted = request.getParameter("whenStarted");
 
-        Address ad = new Address(city, street, numberOfBuilding, numberOfFlat);
         Optional<Faculty> op_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
-        Tutor tutor = new Tutor(name, surname, ad);
+        Tutor tutor = new Tutor(name, surname, city, street, numberOfBuilding, numberOfFlat);
         tutor.setFaculty(op_faculty.get());
         tutor.setUsername(username);
         tutor.setWhenStarted(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
@@ -365,7 +361,6 @@ public class AdminController {
             System.out.println(e.getMessage());
         }
 
-        addressRepository.save(tutor.getAddress());
         tutorRepository.save(tutor);
 
         return this.tutors();
@@ -394,12 +389,14 @@ public class AdminController {
         String whenStarted = request.getParameter("whenStarted");
         String whenFinnished = request.getParameter("whenFinnished");
 
-        Address ad = new Address(city, street, numberOfBuilding, numberOfFlat);
         Optional<Faculty> op_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
         Tutor tutor = tutorRepository.findById(Integer.valueOf(id)).get();
         tutor.setName(name);
         tutor.setSurname(surname);
-        tutor.setAddress(ad);
+        tutor.setCity(city);
+        tutor.setStreet(street);
+        tutor.setNumberOfBuilding(numberOfBuilding);
+        tutor.setNumberOfFlat(numberOfFlat);
         tutor.setFaculty(op_faculty.get());
         tutor.setUsername(username);
         tutor.setWhenStarted(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
@@ -419,7 +416,6 @@ public class AdminController {
             System.out.println(e.getMessage());
         }
 
-        addressRepository.save(tutor.getAddress());
         tutorRepository.save(tutor);
 
         return this.tutors();

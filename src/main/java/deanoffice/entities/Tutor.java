@@ -18,9 +18,10 @@ public class Tutor {
     private Date whenStarted;
     private Date whenFinnished;
     // foreign keys
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "address_id", nullable = true)
-    private Address address;
+    private String city;
+    private String street;
+    private String numberOfBuilding;
+    private String numberOfFlat;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "faculty_id", nullable = false)
     private Faculty faculty;
@@ -38,18 +39,51 @@ public class Tutor {
 
     }
 
-    public Tutor(String name, String surname, Address address) {
+    public Tutor(String name, String surname, String city, String street, String numberOfBuilding, String numberOfFlat) {
         this.name = name;
         this.surname = surname;
-        this.address = address;
+        this.city = city;
+        this.street = street;
+        this.numberOfBuilding = numberOfBuilding;
+        this.numberOfFlat = numberOfFlat;
     }
 
-    public Tutor(String name, String surname, Date whenStarted, Address address, Faculty faculty) {
+    public Tutor(String name, String surname, Faculty faculty) {
         this.name = name;
         this.surname = surname;
-        this.whenStarted = whenStarted;
-        this.address = address;
         this.faculty = faculty;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
+    public String getNumberOfBuilding() {
+        return numberOfBuilding;
+    }
+
+    public void setNumberOfBuilding(String numberOfBuilding) {
+        this.numberOfBuilding = numberOfBuilding;
+    }
+
+    public String getNumberOfFlat() {
+        return numberOfFlat;
+    }
+
+    public void setNumberOfFlat(String numberOfFlat) {
+        this.numberOfFlat = numberOfFlat;
     }
 
     public Integer getId() {
@@ -100,14 +134,6 @@ public class Tutor {
         this.whenFinnished = whenFinnished;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
     public Faculty getFaculty() {
         return faculty;
     }
@@ -136,7 +162,6 @@ public class Tutor {
     public String toString() {
         return "name='" + name + ", " + surname + '\'' +
                 ", whenStarted=" + whenStarted +
-                ", address=" + address +
                 ", faculty=" + faculty;
     }
 }

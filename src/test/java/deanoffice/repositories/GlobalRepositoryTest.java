@@ -18,8 +18,6 @@ import java.util.HashSet;
 @SpringBootTest
 public class GlobalRepositoryTest {
     @Autowired
-    private AddressRepository addressRepository;
-    @Autowired
     private FacultyRepository facultyRepository;
     @Autowired
     private MarkRepository markRepository;
@@ -33,33 +31,94 @@ public class GlobalRepositoryTest {
     public void setUp(){
         Mark mark = new Mark(3.5);
         mark.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+        Mark mark2 = new Mark(4.0);
+        mark2.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+        Mark mark3 = new Mark(4.5);
+        mark3.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
+        Mark mark4 = new Mark(5.0);
+        mark4.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
 
-        Address addressForStudent = new Address("Tomaszow Mazowiecki", "Wesola", "38", "");
-        addressRepository.save(addressForStudent);
-
-        Faculty faculty = new Faculty("WEEIA", "Dlugi opis weeii");
+        Faculty faculty = new Faculty("WEEIA", "Wydzial Elektroniki, Elektrotechniki Informatyki i Automatyki");
+        Faculty faculty2 = new Faculty("WBINOŻ", "Wydzial Biotechnologii i Nauk o Żywności");
+        Faculty faculty3 = new Faculty("WFTIMS", "Wydzial Fyzyki Technicznej i Informatyki Stosowanej");
         facultyRepository.save(faculty);
+        facultyRepository.save(faculty2);
+        facultyRepository.save(faculty3);
 
-        Subject subject = new Subject("Podstawy Programowania 2", faculty);
+        Subject subject = new Subject("Podstawy Programowania 1", faculty);
+        Subject subject2 = new Subject("Analiza Matematyczna", faculty);
+        Subject subject3 = new Subject("Fizyka", faculty);
         mark.setSubject(subject);
+        mark2.setSubject(subject2);
+        mark3.setSubject(subject3);
+        mark4.setSubject(subject);
         subjectRepository.save(subject);
+        subjectRepository.save(subject2);
+        subjectRepository.save(subject3);
 
-        Student student = new Student("Adam", "Jestem", addressForStudent);
-        student.setUsername("student0");
+        Student student = new Student("Adam",
+                "Jestem",
+                "Tomaszow Mazowiecki",
+                "Wesola",
+                "38",
+                "");
+        Student student2 = new Student("Anna",
+                "Kowalska",
+                "Piotrkow Trybunalski",
+                "Osiedle Mickiewicza",
+                "12",
+                "7");
+        student.setUsername("student1");
+        student2.setUsername("student2");
+
         Set<Subject> subjects = new HashSet<Subject>();
         subjects.add(subject);
+        subjects.add(subject2);
         student.setSubjects(subjects);
+        student.setFaculty(faculty);
+
+        Set<Subject> subjects2 = new HashSet<Subject>();
+        subjects2.add(subject3);
+        subjects2.add(subject);
+        student2.setSubjects(subjects2);
+        student2.setFaculty(faculty);
+
         studentRepository.save(student);
+        studentRepository.save(student2);
+
         mark.setStudent(student);
+        mark2.setStudent(student);
+        mark3.setStudent(student2);
+        mark4.setStudent(student2);
 
         Tutor tutor = new Tutor();
         tutor.setName("Jacek"); tutor.setSurname("Placek");
         tutor.setFaculty(faculty);
-        tutor.setSubjects(subjects);
+        Set<Subject> subjectsForTutor = new HashSet<Subject>();
+        subjectsForTutor.add(subject);
+        tutor.setSubjects(subjectsForTutor);
         tutor.setUsername("tutor0");
         tutorRepository.save(tutor);
+
+        Tutor tutor2 = new Tutor();
+        tutor2.setName("Jaroslawa"); tutor2.setSurname("Bezsława");
+        tutor2.setFaculty(faculty);
+        Set<Subject> subjectsForTutor2 = new HashSet<Subject>();
+        subjectsForTutor2.add(subject2);
+        subjectsForTutor2.add(subject3);
+        tutor2.setSubjects(subjectsForTutor2);
+        tutor2.setUsername("tutor1");
+        tutorRepository.save(tutor2);
+
         mark.setTutor(tutor);
+        mark2.setTutor(tutor2);
+        mark3.setTutor(tutor2);
+        mark4.setTutor(tutor);
+
         markRepository.save(mark);
+        markRepository.save(mark2);
+        markRepository.save(mark3);
+        markRepository.save(mark4);
     }
     @Test
     public void testFetchDataForMark() {
@@ -81,8 +140,11 @@ public class GlobalRepositoryTest {
             System.out.println(m);
         }
         // testing findByStudent
-        Mark markByStudent = markRepository.findByStudent(student);
-        Assert.assertEquals(mark.getId(), markByStudent.getId());
+        System.out.println("Student: " + student);
+        Iterable<Mark> markByStudent = markRepository.findByStudent(student);
+        for(Mark m : markByStudent){
+            Assert.assertEquals(m.getStudent().getIndexNumber(), student.getIndexNumber());
+        }
         System.out.println("*** ONE MARK = findByStudent ***");
         System.out.println(markByStudent);
         // testing findByTutor
@@ -119,10 +181,10 @@ public class GlobalRepositoryTest {
         }
 
         // findByUsername
-        String username = "student0";
+        String username = "student1";
         Student studentByUsername = studentRepository.findByUsername(username);
-        Assert.assertEquals(studentByUsername.getUsername(), username);
         System.out.println("***" + studentByUsername);
+        Assert.assertEquals(studentByUsername.getUsername(), username);
     }
     @Test
     public void testFetchDataForSubject(){
@@ -132,12 +194,10 @@ public class GlobalRepositoryTest {
             System.out.println(sub);
         }
         // findByName
-        /*String subjectName = "Podstawy Programowania 2";
-        Iterable<Subject> subjectsByNsme = subjectRepository.findByName(subjectName);
-        for(Subject sub : subjectsByNsme){
-            Assert.assertEquals(sub.getName(), subjectName);
-            System.out.println("*" + sub);
-        }*/
+        String subjectName = "Podstawy Programowania 1";
+        Subject sub1 = subjectRepository.findByName(subjectName);
+        Assert.assertEquals(sub1.getName(), subjectName);
+        System.out.println("*" + sub1);
         // findByFaculty
         Faculty fac = facultyRepository.findByName("WEEIA");
         Iterable<Subject> subjectsByFaculty = subjectRepository.findByFaculty(fac);

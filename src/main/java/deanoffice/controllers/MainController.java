@@ -46,4 +46,25 @@ public class MainController {
         }
         return new ModelAndView("hello.html");
     }
+    @RequestMapping(value = "/useroptions", method = RequestMethod.GET)
+    public ModelAndView editProfile(){
+        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        
+        String username = user.getUsername();
+
+        ModelAndView model = new ModelAndView("hello.html");
+        for(Object o : user.getAuthorities()){
+            System.out.println("Who wants more options? " + o.toString());
+            if(o.toString().equals("ROLE_ADMIN")){
+                model = new ModelAndView("admin/myAccount.html");
+            }
+            else if(o.toString().equals("ROLE_TUTOR")){
+                model = new ModelAndView("tutor/myAccount.html");
+            }
+            else if(o.toString().equals("ROLE_STUDENT")){
+                model = new ModelAndView("student/myAccount.html");
+            }
+        }
+        return model;
+    }
 }
