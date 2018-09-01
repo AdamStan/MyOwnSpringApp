@@ -154,11 +154,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "indexNumber=" + indexNumber +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", whenStarted=" + whenStarted
-                + username + "}";
+        return indexNumber + ", " + name + ", " + surname;
     }
 }

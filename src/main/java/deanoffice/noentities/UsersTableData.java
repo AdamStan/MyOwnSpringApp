@@ -76,7 +76,11 @@ public class UsersTableData {
         } else if (enable.equals("on")){
             en = 1;
         }
-        password = User.encodePassword(password);
+
+        if(password.length() < 42) {
+            password = User.encodePassword(password);
+        }
+
         try {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
@@ -91,11 +95,11 @@ public class UsersTableData {
         }
     }
     public void updateUser(String username, String password,
-                           String role, String enable){
+                           String role, String enable) {
         int en = 0;
-        if(enable == null){
+        if (enable == null) {
 
-        } else if (enable.equals("on")){
+        } else if (enable.equals("on")) {
             en = 1;
         }
         password = User.encodePassword(password);
@@ -103,8 +107,8 @@ public class UsersTableData {
             Connection conn = DriverManager.getConnection(url);
             Statement stmt = conn.createStatement();
             stmt.executeUpdate("update users set password = '" + password + "', enabled = " + en + " " +
-                            "where username = '"  + username + "'; ");
-            stmt.executeUpdate("update authorities set authority = '" + role +"'" +
+                    "where username = '" + username + "'; ");
+            stmt.executeUpdate("update authorities set authority = '" + role + "'" +
                     " where username = '" + username + "'");
             conn.close();
         } catch (Exception e) {

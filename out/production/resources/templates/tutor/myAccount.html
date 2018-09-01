@@ -1,10 +1,102 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Edit tutor</title>
+    <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
+<div th:replace="fragments/header.html :: header"/>
 
+<div class = "container bg-secondary text-light p-4">
+    <form action="/useroptions/tutor" id = "tutor-inform" method="POST">
+        <div class="row">
+            <div class="col">
+                <label> Id </label>
+            </div>
+            <div class="col">
+                <input type="text" th:value="${tutor.id}" name="id" hidden>
+                <input type="text" th:value="${tutor.id}" name="id" disabled>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Name </label>
+            </div>
+            <div class="col">
+                <input type="text" th:value="${tutor.name}" name="name">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Surname </label>
+            </div>
+            <div class="col">
+                <input type="text" th:value="${tutor.surname}" name="surname">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Username </label>
+            </div>
+            <div class="col">
+                <input type="text" th:value="${tutor.username}" name="username">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Password </label>
+            </div>
+            <div class="col">
+                <input type="text" name="password" th:value="${password}">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> City </label>
+            </div>
+            <div class="col">
+                <input type="text" th:value="${tutor.city}" name="city">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Street </label>
+            </div>
+            <div class="col">
+                <input type="text" th:value="${tutor.street}" name="street">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> numberofbuilding </label>
+            </div>
+            <div class="col">
+                <input type="text" th:value="${tutor.numberOfBuilding}" name="numberofbuilding">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> numberofflat </label>
+            </div>
+            <div class="col">
+                <input type="text" th:value="${tutor.numberOfFlat}" name="numberofflat">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label> Faculty id </label>
+            </div>
+            <div class="col">
+                <input type="number" th:value="${tutor.faculty.id}" name="facultyid" min="1" disabled>
+            </div>
+        </div>
+        <div class="row">
+            <input type ="submit" class="btn btn-primary" value="EDIT">
+            <a href="/admin/alltutors/" class="btn btn-info"> CANCEL </a>
+        </div>
+    </form>
+</div>
 </body>
 </html>
