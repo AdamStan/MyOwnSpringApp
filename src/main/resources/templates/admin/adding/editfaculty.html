@@ -16,7 +16,8 @@
                 <label> ID </label>
             </div>
             <div class="col">
-                <input name = "id" type="text" th:value="${id}"> Don't change it
+                <input name = "id" type="text" th:value="${id}" hidden>
+                <input name = "id" type="text" th:value="${id}" disabled>
             </div>
         </div>
         <div class="row">

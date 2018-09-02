@@ -160,6 +160,6 @@ public class Tutor {
 
     @Override
     public String toString() {
-        return name + ", " + surname;
+        return id + ", " + name + ", " + surname;
     }
 }

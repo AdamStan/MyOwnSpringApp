@@ -2,7 +2,6 @@ package deanoffice.repositories;
 
 import deanoffice.entities.*;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,33 +55,20 @@ public class GlobalRepositoryTest {
         subjectRepository.save(subject2);
         subjectRepository.save(subject3);
 
-        Student student = new Student("Adam",
-                "Jestem",
-                "Tomaszow Mazowiecki",
-                "Wesola",
-                "38",
-                "");
-        Student student2 = new Student("Anna",
-                "Kowalska",
-                "Piotrkow Trybunalski",
-                "Osiedle Mickiewicza",
-                "12",
-                "7");
+        Student student = new Student("Adam", "Jestem", "Tomaszow Mazowiecki", "Wesola", "38", "");
+        Student student2 = new Student("Anna", "Kowalska", "Piotrkow Trybunalski", "Osiedle Mickiewicza", "12", "7");
         student.setUsername("student1");
         student2.setUsername("student2");
-
         Set<Subject> subjects = new HashSet<Subject>();
         subjects.add(subject);
         subjects.add(subject2);
         student.setSubjects(subjects);
         student.setFaculty(faculty);
-
         Set<Subject> subjects2 = new HashSet<Subject>();
         subjects2.add(subject3);
         subjects2.add(subject);
         student2.setSubjects(subjects2);
         student2.setFaculty(faculty);
-
         studentRepository.save(student);
         studentRepository.save(student2);
 
@@ -99,7 +85,6 @@ public class GlobalRepositoryTest {
         tutor.setSubjects(subjectsForTutor);
         tutor.setUsername("tutor0");
         tutorRepository.save(tutor);
-
         Tutor tutor2 = new Tutor();
         tutor2.setName("Jaroslawa"); tutor2.setSurname("Bezsława");
         tutor2.setFaculty(faculty);

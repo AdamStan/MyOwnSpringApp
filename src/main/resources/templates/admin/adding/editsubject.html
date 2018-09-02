@@ -13,10 +13,11 @@
     <form action="/admin/subjects/editconfirm" id = "subject-inform" method="POST">
         <div class="row">
             <div class="col">
-                <label> Id (don't change it) </label>
+                <label> Id </label>
             </div>
             <div class="col">
-                <input name = "id" th:value="${subject.id}" type="text">
+                <input name = "id" th:value="${subject.id}" type="text" hidden>
+                <input name = "id" th:value="${subject.id}" type="text" disabled>
             </div>
         </div>
         <div class="row">

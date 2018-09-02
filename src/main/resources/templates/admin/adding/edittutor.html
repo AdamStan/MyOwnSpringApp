@@ -13,10 +13,11 @@
     <form action="/admin/tutors/editconfirm" id = "tutor-inform" method="POST">
         <div class="row">
             <div class="col">
-                <label> Id (don't change it) </label>
+                <label> Id </label>
             </div>
             <div class="col">
-                <input type="text" th:value="${tutor.id}" name="id">
+                <input type="text" th:value="${tutor.id}" name="id" hidden>
+                <input type="text" th:value="${tutor.id}" name="id" disabled>
             </div>
         </div>
         <div class="row">

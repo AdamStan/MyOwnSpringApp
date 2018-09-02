@@ -13,10 +13,11 @@
     <form action="/admin/students/editconfirm" id = "student-inform" method="POST">
         <div class="row">
             <div class="col">
-                <label> Index (don't edit, pls) </label>
+                <label> Index </label>
             </div>
             <div class="col">
-                <input type="text" name="indexNumber" th:value="${student.indexNumber}">
+                <input type="text" name="indexNumber" th:value="${student.indexNumber}" hidden>
+                <input type="text" name="indexNumber" th:value="${student.indexNumber}" disabled>
             </div>
         </div>
         <div class="row">

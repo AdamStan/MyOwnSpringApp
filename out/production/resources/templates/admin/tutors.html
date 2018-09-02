@@ -12,6 +12,7 @@
     <table class ="table">
         <thead>
         <tr>
+            <th> Id </th>
             <th> Name </th>
             <th> Surname </th>
             <th> DATE </th>
@@ -21,6 +22,7 @@
         </thead>
         <tbody>
         <tr th:each="tutor: ${tutors}">
+            <td th:text="${tutor.id}"> id </td>
             <td th:text="${tutor.name}"> name </td>
             <td th:text="${tutor.surname}"> description </td>
             <td th:text="${tutor.whenStarted}"> date </td>

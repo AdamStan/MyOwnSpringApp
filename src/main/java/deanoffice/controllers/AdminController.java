@@ -126,14 +126,15 @@ public class AdminController {
 
         Student student = studentRepository.findByIndexNumber(Integer.valueOf(studentid));
         Optional<Tutor> t = tutorRepository.findById(Integer.valueOf(tutorid));
-        Tutor tutor = t.get();
         Subject subject = subjectRepository.findByName(subjectname);
 
         newMark.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
         newMark.setValue(Double.valueOf(value));
         newMark.setStudent(student);
         newMark.setSubject(subject);
-        newMark.setTutor(tutor);
+        if(t.get() != null){
+            newMark.setTutor(t.get());
+        }
         markRepository.save(newMark);
         return this.marks();
     }
@@ -161,14 +162,15 @@ public class AdminController {
 
         Student student = studentRepository.findByIndexNumber(Integer.valueOf(studentid));
         Optional<Tutor> t = tutorRepository.findById(Integer.valueOf(tutorid));
-        Tutor tutor = t.get();
+
         Subject subject = subjectRepository.findByName(subjectname);
 
         mark.setValue(Double.valueOf(newValue));
         mark.setStudent(student);
         mark.setSubject(subject);
-        mark.setTutor(tutor);
-
+        if(t.get() != null) {
+            mark.setTutor(t.get());
+        }
         markRepository.save(mark);
         return this.marks();
     }
@@ -273,7 +275,6 @@ public class AdminController {
         return this.students();
     }
     //endregion STUDENT FUNCTIONALITY
-
     //region SUBJECT FUNCTIONALITY
     @RequestMapping(value = "/admin/subjects/add", method = RequestMethod.GET)
     public ModelAndView addsubject(){
