@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Edit tutor</title>
+    <title> My Account </title>
     <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
@@ -49,7 +49,7 @@
                 <label> Password </label>
             </div>
             <div class="col">
-                <input type="text" name="password" th:value="${password}">
+                <input type="password" name="password" th:value="${password}">
             </div>
         </div>
         <div class="row">
