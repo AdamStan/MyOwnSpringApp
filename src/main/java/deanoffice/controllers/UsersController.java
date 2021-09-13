@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Controller
-public class MainController {
+public class UsersController {
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
@@ -28,7 +28,7 @@ public class MainController {
 
     @RequestMapping(value = {"/whodidit"}, method = RequestMethod.GET)
     public ModelAndView authors() {
-        return new ModelAndView("aboutus.html");
+        return new ModelAndView("about.html");
     }
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
@@ -144,7 +144,6 @@ public class MainController {
         tutor.setStreet(street);
         tutor.setNumberOfBuilding(numberOfBuilding);
         tutor.setNumberOfFlat(numberOfFlat);
-
 
         u.deleteUserByUsername(tutor.getUsername());
         u.insertUser(username, password, "ROLE_TUTOR", "on");

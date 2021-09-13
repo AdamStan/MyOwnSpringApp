@@ -1,4 +1,4 @@
-package deanoffice.controllers;
+package deanoffice.controllers.admin;
 
 import deanoffice.entities.Student;
 import deanoffice.entities.Subject;

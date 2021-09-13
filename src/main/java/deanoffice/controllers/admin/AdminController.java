@@ -1,4 +1,4 @@
-package deanoffice.controllers;
+package deanoffice.controllers.admin;
 
 import deanoffice.entities.*;
 import deanoffice.repositories.*;
@@ -16,8 +16,6 @@ import java.util.Optional;
 @Controller
 public class AdminController {
     @Autowired
-    private MarkRepository markRepository;
-    @Autowired
     private SubjectRepository subjectRepository;
     @Autowired
     private StudentRepository studentRepository;
@@ -26,13 +24,6 @@ public class AdminController {
     @Autowired
     private FacultyRepository facultyRepository;
 
-    @RequestMapping(value = "/admin/allmarks", method = RequestMethod.GET)
-    public ModelAndView marks(){
-        Iterable<Mark> marks = markRepository.findAll();
-        ModelAndView model = new ModelAndView("/admin/marks.html");
-        model.addObject("marks", marks);
-        return model;
-    }
     @RequestMapping(value = "/admin/allsubjects", method = RequestMethod.GET)
     public ModelAndView subjects(){
         Iterable<Subject> subjects = subjectRepository.findAll();
@@ -109,81 +100,6 @@ public class AdminController {
         return this.faculties();
     }
     //endregion FACULTY FUNCTIONALITY END
-    //region MARK FUNCTIONALITY
-    @RequestMapping(value = "/admin/marks/add", method = RequestMethod.GET)
-    public ModelAndView addmark(){
-        ModelAndView model = new ModelAndView("/admin/adding/addmark.html");
-        return model;
-    }
-
-    @RequestMapping(value = "/admin/marks/addconfirm", method = RequestMethod.POST)
-    public ModelAndView confirmAddMark(HttpServletRequest request){
-        String value = request.getParameter("value");
-        String studentid = request.getParameter("studentid");
-        String tutorid = request.getParameter("tutorid");
-        String subjectname = request.getParameter("subjectname");
-        Mark newMark = new Mark();
-
-        Student student = studentRepository.findByIndexNumber(Integer.valueOf(studentid));
-        Optional<Tutor> t = tutorRepository.findById(Integer.valueOf(tutorid));
-        Subject subject = subjectRepository.findByName(subjectname);
-
-        newMark.setDate(new java.sql.Date(Calendar.getInstance().getTime().getTime()));
-        newMark.setValue(Double.valueOf(value));
-        newMark.setStudent(student);
-        newMark.setSubject(subject);
-        if(t.get() != null){
-            newMark.setTutor(t.get());
-        }
-        markRepository.save(newMark);
-        return this.marks();
-    }
-
-    @RequestMapping(value = "/admin/marks/edit", method = RequestMethod.GET)
-    public ModelAndView editmark(HttpServletRequest request){
-        ModelAndView model = new ModelAndView("/admin/adding/editmark.html");
-        String id = request.getParameter("id");
-        Optional<Mark> mark = markRepository.findById(Integer.valueOf(id));
-        model.addObject(mark.get());
-        return model;
-    }
-
-    @RequestMapping(value = "/admin/marks/editconfirm", method = RequestMethod.POST)
-    public ModelAndView confirmEditMark(HttpServletRequest request){
-        String id = request.getParameter("id");
-        String newValue = request.getParameter("value");
-        String studentid = request.getParameter("studentid");
-        String tutorid = request.getParameter("tutorid");
-        String subjectname = request.getParameter("subjectname");
-
-        Optional<Mark> m = markRepository.findById(Integer.valueOf(id));
-        Mark mark = m.get();
-
-
-        Student student = studentRepository.findByIndexNumber(Integer.valueOf(studentid));
-        Optional<Tutor> t = tutorRepository.findById(Integer.valueOf(tutorid));
-
-        Subject subject = subjectRepository.findByName(subjectname);
-
-        mark.setValue(Double.valueOf(newValue));
-        mark.setStudent(student);
-        mark.setSubject(subject);
-        if(t.get() != null) {
-            mark.setTutor(t.get());
-        }
-        markRepository.save(mark);
-        return this.marks();
-    }
-
-    @RequestMapping(value = "/admin/marks/delete", method = RequestMethod.GET)
-    public ModelAndView deleteMark(HttpServletRequest request){
-        String id = request.getParameter("indexNumber");
-        Optional<Mark> m = markRepository.findById(Integer.valueOf(id));
-        Mark mark = m.get();
-        markRepository.delete(mark);
-        return this.marks();
-    }
-    //endregion MARK FUNCTIONALITY END
     //region STUDENT FUNCTIONALITY
     @RequestMapping(value = "/admin/students/add", method = RequestMethod.GET)
     public ModelAndView addstudent(){
