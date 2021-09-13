@@ -137,4 +137,16 @@ public class MarksManagementControllerTest extends BaseAdminControllersTest {
         verify(markRepository, times(1)).delete(mark);
     }
 
+    @Test
+    public void testShowEditMarkPage() throws Exception {
+        int id = 1;
+        Mark mark = new Mark();
+        when(markRepository.findById(any())).thenReturn(Optional.of(mark));
+
+        mockMvc.perform(get("/admin/marks/edit")
+                        .param("id", Integer.toString(id)))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/admin/adding/editmark.html"));
+    }
+
 }

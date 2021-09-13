@@ -107,4 +107,16 @@ public class FacultiesManagementControllerTest extends BaseAdminControllersTest 
 
         verify(facultyRepository, times(1)).delete(faculty);
     }
+
+    @Test
+    public void testEditPage() throws Exception {
+        int id = 1;
+        Faculty faculty = new Faculty();
+        when(facultyRepository.findById(id)).thenReturn(Optional.of(faculty));
+
+        mockMvc.perform(get("/admin/faculty/editfaculty")
+                        .param("id", String.valueOf(id)))
+                .andExpect(status().isOk())
+                .andExpect(view().name("/admin/adding/editfaculty.html"));
+    }
 }
