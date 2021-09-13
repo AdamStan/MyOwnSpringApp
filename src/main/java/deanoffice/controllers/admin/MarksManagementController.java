@@ -46,7 +46,7 @@ public class MarksManagementController {
     }
 
     @RequestMapping(value = "/marks/addconfirm", method = RequestMethod.POST)
-    public ModelAndView confirmAddMark(HttpServletRequest request){
+    public String confirmAddMark(HttpServletRequest request){
         String value = request.getParameter("value");
         String studentid = request.getParameter("studentid");
         String tutorid = request.getParameter("tutorid");
@@ -63,7 +63,7 @@ public class MarksManagementController {
         newMark.setSubject(subject);
         t.ifPresent(newMark::setTutor);
         markRepository.save(newMark);
-        return this.marks();
+        return "redirect:/admin/allmarks";
     }
 
     @RequestMapping(value = "/marks/edit", method = RequestMethod.GET)
@@ -76,14 +76,14 @@ public class MarksManagementController {
     }
 
     @RequestMapping(value = "/marks/editconfirm", method = RequestMethod.POST)
-    public ModelAndView confirmEditMark(HttpServletRequest request){
+    public String confirmEditMark(HttpServletRequest request){
         String id = request.getParameter("id");
         String newValue = request.getParameter("value");
         String studentid = request.getParameter("studentid");
         String tutorid = request.getParameter("tutorid");
         String subjectname = request.getParameter("subjectname");
 
-        Optional<Mark> m = markRepository.findById(Integer.valueOf(id));
+        Optional<Mark> m = markRepository.findById(Integer.parseInt(id));
         Mark mark = m.get();
 
         Student student = studentRepository.findByIndexNumber(Integer.valueOf(studentid));
@@ -97,15 +97,15 @@ public class MarksManagementController {
         t.ifPresent(mark::setTutor);
 
         markRepository.save(mark);
-        return this.marks();
+        return "redirect:/admin/allmarks";
     }
 
     @RequestMapping(value = "/marks/delete", method = RequestMethod.POST)
-    public ModelAndView deleteMark(HttpServletRequest request){
+    public String deleteMark(HttpServletRequest request){
         String id = request.getParameter("id");
         Optional<Mark> m = markRepository.findById(Integer.valueOf(id));
         Mark mark = m.get();
         markRepository.delete(mark);
-        return this.marks();
+        return "redirect:/admin/allmarks";
     }
 }
