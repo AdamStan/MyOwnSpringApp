@@ -10,68 +10,69 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.logging.Logger;
 
 @Controller
 public class AdminUsersController {
+    private static final Logger log = Logger.getLogger(AdminUsersController.class.getName());
 
     @Autowired
     private UsersTableData data;
 
     @RequestMapping(value = "/admin/allusers", method = RequestMethod.GET)
-    public ModelAndView users(){
+    public ModelAndView users() {
         ArrayList<User> users = data.getAllUsers();
         ModelAndView model = new ModelAndView("/admin/users.html");
         model.addObject("users", users);
         return model;
     }
-    @RequestMapping(value = "/admin/addnewuser", method = RequestMethod.GET)
-    public ModelAndView addUser(){
-        ModelAndView model = new ModelAndView("/admin/adding/adduser.html");
-        return model;
-    }
 
     @RequestMapping(value = "/admin/allusers/deleted", method = RequestMethod.GET)
-    public ModelAndView deleteUser(HttpServletRequest request){
-        //usun z bazy i wczytaj widok tabelki
+    public ModelAndView deleteUser(HttpServletRequest request) {
         String username = request.getParameter("username");
-        System.out.println("Username for delete: " + username);
+        log.info("Username for delete: " + username);
         data.deleteUserByUsername(username);
         return this.users();
     }
 
     @RequestMapping(value = "/admin/allusers/edituser", method = RequestMethod.GET)
-    public ModelAndView editUser(HttpServletRequest request){
+    public ModelAndView editUser(HttpServletRequest request) {
         String username = request.getParameter("username");
-        if(username != null){
-            System.out.println("User for edit: " + username);
+        if (username != null) {
+            log.info("User for edit: " + username);
+            User user = data.findUserByUsername(username);
             ModelAndView model = new ModelAndView("/admin/adding/edituser.html");
-            model.addObject("username", username);
+            model.addObject("user", user);
             return model;
         }
         return this.users();
     }
 
     @RequestMapping(value = "/admin/allusers/confirmedit", method = RequestMethod.POST)
-    public ModelAndView confirmEditUser(HttpServletRequest request){
-        //dodaj do bazy jeszcze
+    public ModelAndView confirmEditUser(HttpServletRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String role = request.getParameter("role");
         String enabled = request.getParameter("enabled");
-        System.out.println("Parameters: " + username + ", " +
+        log.info("Parameters: " + username + ", " +
                 password + ", " + role + ", " + enabled);
         data.updateUser(username, password, role, enabled);
         return this.users();
     }
 
+    @RequestMapping(value = "/admin/addnewuser", method = RequestMethod.GET)
+    public ModelAndView addUserForm() {
+        ModelAndView model = new ModelAndView("/admin/adding/adduser.html");
+        return model;
+    }
+
     @RequestMapping(value = "/admin/allusers/confirm", method = RequestMethod.POST)
-    public ModelAndView confirmUser(HttpServletRequest request){
-        //dodaj do bazy jeszcze
+    public ModelAndView confirmUser(HttpServletRequest request) {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String role = request.getParameter("role");
         String enabled = request.getParameter("enabled");
-        System.out.println("Parameters: " + username + ", " +
+        log.info("Parameters: " + username + ", " +
                 password + ", " + role + ", " + enabled);
         data.insertUser(username, password, role, enabled);
         return this.users();

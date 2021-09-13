@@ -29,16 +29,14 @@
                 </li>
             </ul>
             <div class="form-inline mt-2 mt-md-0">
-                <!--
-                <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                -->
-                <button class="nav-item btn btn-secondary" onclick="location.href='/logout';">
-                    Logout
-                </button>
-                <button class="nav-item btn btn-secondary" onclick="location.href='/login';">
-                    Login [[${#httpServletRequest.remoteUser}]]
-                </button>
+                <div th:switch="${#httpServletRequest.remoteUser}">
+                    <button th:case="null" class="nav-item btn btn-secondary" onclick="location.href='/login';">
+                        Login
+                    </button>
+                    <button th:case="*" class="nav-item btn btn-secondary" onclick="location.href='/logout';">
+                        Logout [[${#httpServletRequest.remoteUser}]]
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
