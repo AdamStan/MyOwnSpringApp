@@ -47,58 +47,7 @@ public class AdminController {
         model.addObject("tutors", tutors);
         return model;
     }
-
-    @RequestMapping(value = "/admin/allfaculties", method = RequestMethod.GET)
-    public ModelAndView faculties(){
-        Iterable<Faculty> faculties = facultyRepository.findAll();
-        ModelAndView model = new ModelAndView("/admin/faculties.html");
-        model.addObject("faculties", faculties);
-        return model;
-    }
     //region FACULTY FUNCTIONALITY
-    @RequestMapping(value = "/admin/addnewfaculty", method = RequestMethod.GET)
-    public ModelAndView addFaculty(){
-        ModelAndView modelAndView = new ModelAndView("/admin/adding/addfaculty.html");
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/admin/faculty/editfaculty", method = RequestMethod.GET)
-    public ModelAndView editFaculty(HttpServletRequest request){
-        String id = request.getParameter("id");
-        ModelAndView modelAndView = new ModelAndView("/admin/adding/editfaculty.html");
-        modelAndView.addObject("id", id);
-        return modelAndView;
-    }
-
-    @RequestMapping(value = "/admin/faculty/delete", method = RequestMethod.GET)
-    public ModelAndView deleteFaculty(HttpServletRequest request){
-        String id = request.getParameter("id");
-        Optional<Faculty> faculty = facultyRepository.findById(Integer.valueOf(id));
-        facultyRepository.delete(faculty.get());
-        return this.faculties();
-    }
-
-    @RequestMapping(value = "/admin/faculty/confirm", method = RequestMethod.POST)
-    public ModelAndView confirmAddFaculty(HttpServletRequest request){
-        String name = request.getParameter("name");
-        String desc = request.getParameter("desc");
-        Faculty newFaculty = new Faculty(name, desc);
-        facultyRepository.save(newFaculty);
-        return this.faculties();
-    }
-
-    @RequestMapping(value = "/admin/faculty/confirmedit", method = RequestMethod.POST)
-    public ModelAndView confirmEditFaculty(HttpServletRequest request){
-        String id = request.getParameter("id");
-        String name = request.getParameter("name");
-        String description = request.getParameter("desc");
-        Optional<Faculty> opf = facultyRepository.findById(Integer.valueOf(id));
-        Faculty facultyUpdate = opf.get();
-        facultyUpdate.setName(name);
-        facultyUpdate.setDescription(description);
-        facultyRepository.save(facultyUpdate);
-        return this.faculties();
-    }
     //endregion FACULTY FUNCTIONALITY END
     //region STUDENT FUNCTIONALITY
     @RequestMapping(value = "/admin/students/add", method = RequestMethod.GET)

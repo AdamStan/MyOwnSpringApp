@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 @Controller
-public class UsersManagementController {
-    private static final Logger log = Logger.getLogger(UsersManagementController.class.getName());
+public class UsersThemselvesManagementController {
+    private static final Logger log = Logger.getLogger(UsersThemselvesManagementController.class.getName());
 
     @Autowired
     private UsersTableData data;

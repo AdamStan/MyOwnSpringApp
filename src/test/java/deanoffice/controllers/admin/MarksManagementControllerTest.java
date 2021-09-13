@@ -1,6 +1,5 @@
-package deanoffice.controllers;
+package deanoffice.controllers.admin;
 
-import deanoffice.controllers.admin.MarksManagementController;
 import deanoffice.entities.Mark;
 import deanoffice.entities.Student;
 import deanoffice.entities.Subject;
@@ -24,7 +23,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-public class MarkControllerTest extends BaseControllersTest {
+public class MarksManagementControllerTest extends BaseAdminControllersTest {
 
     @InjectMocks
     private MarksManagementController marksController;
