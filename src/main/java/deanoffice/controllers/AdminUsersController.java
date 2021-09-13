@@ -2,6 +2,7 @@ package deanoffice.controllers;
 
 import deanoffice.noentities.User;
 import deanoffice.noentities.UsersTableData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,9 +13,13 @@ import java.util.ArrayList;
 
 @Controller
 public class AdminUsersController {
+
+    @Autowired
+    private UsersTableData data;
+
     @RequestMapping(value = "/admin/allusers", method = RequestMethod.GET)
     public ModelAndView users(){
-        ArrayList<User> users = new UsersTableData().getAllUsers();
+        ArrayList<User> users = data.getAllUsers();
         ModelAndView model = new ModelAndView("/admin/users.html");
         model.addObject("users", users);
         return model;
@@ -30,7 +35,7 @@ public class AdminUsersController {
         //usun z bazy i wczytaj widok tabelki
         String username = request.getParameter("username");
         System.out.println("Username for delete: " + username);
-        new UsersTableData().deleteUserByUsernma(username);
+        data.deleteUserByUsername(username);
         return this.users();
     }
 
@@ -55,7 +60,7 @@ public class AdminUsersController {
         String enabled = request.getParameter("enabled");
         System.out.println("Parameters: " + username + ", " +
                 password + ", " + role + ", " + enabled);
-        new UsersTableData().updateUser(username, password, role, enabled);
+        data.updateUser(username, password, role, enabled);
         return this.users();
     }
 
@@ -68,7 +73,7 @@ public class AdminUsersController {
         String enabled = request.getParameter("enabled");
         System.out.println("Parameters: " + username + ", " +
                 password + ", " + role + ", " + enabled);
-        new UsersTableData().insertUser(username, password, role, enabled);
+        data.insertUser(username, password, role, enabled);
         return this.users();
     }
 }

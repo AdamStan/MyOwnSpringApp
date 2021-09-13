@@ -23,6 +23,9 @@ public class MainController {
     @Autowired
     private TutorRepository tutorRepository;
 
+    @Autowired
+    private UsersTableData u;
+
     @RequestMapping(value = {"/whodidit"}, method = RequestMethod.GET)
     public ModelAndView authors() {
         return new ModelAndView("aboutus.html");
@@ -95,7 +98,6 @@ public class MainController {
         String numberOfFlat = request.getParameter("numberofflat");
         String password = request.getParameter("password");
 
-        UsersTableData u = new UsersTableData();
         Student std = studentRepository.findByIndexNumber(Integer.valueOf(id));
 
         if (u.findUserByUsername(username).getUsername() != null && !username.equals(std.getName())) {
@@ -109,7 +111,7 @@ public class MainController {
         std.setNumberOfBuilding(numberOfBuilding);
         std.setNumberOfFlat(numberOfFlat);
 
-        u.deleteUserByUsernma(std.getUsername());
+        u.deleteUserByUsername(std.getUsername());
         u.insertUser(username, password, "ROLE_STUDENT", "on");
         std.setUsername(username);
 
@@ -130,7 +132,6 @@ public class MainController {
         String numberOfFlat = request.getParameter("numberofflat");
         String password = request.getParameter("password");
 
-        UsersTableData u = new UsersTableData();
         Tutor tutor = tutorRepository.findById(Integer.valueOf(id)).get();
 
         if (u.findUserByUsername(username).getUsername() != null && !username.equals(tutor.getName())) {
@@ -145,7 +146,7 @@ public class MainController {
         tutor.setNumberOfFlat(numberOfFlat);
 
 
-        u.deleteUserByUsernma(tutor.getUsername());
+        u.deleteUserByUsername(tutor.getUsername());
         u.insertUser(username, password, "ROLE_TUTOR", "on");
 
         tutor.setUsername(username);
@@ -165,13 +166,11 @@ public class MainController {
         System.out.println("Parameters: " + username + ", " +
                 password + ", " + role + ", " + enabled);
 
-        UsersTableData u = new UsersTableData();
-
         if (u.findUserByUsername(username).getUsername() != null && !username.equals(oldusername)) {
             throw new Exception("Username is in use!");
         }
 
-        u.deleteUserByUsernma(oldusername);
+        u.deleteUserByUsername(oldusername);
         u.insertUser(username, password, role, enabled);
 
         return new ModelAndView("/informlogout.html");
@@ -180,7 +179,7 @@ public class MainController {
     private ModelAndView studentsOptions(String username) { //student & password
         ModelAndView model = new ModelAndView("student/myAccount.html");
         Student student = studentRepository.findByUsername(username);
-        deanoffice.noentities.User user = new UsersTableData().findUserByUsername(username);
+        deanoffice.noentities.User user = u.findUserByUsername(username);
         model.addObject("student", student);
         model.addObject("password", user.getPassword());
         return model;
@@ -189,7 +188,7 @@ public class MainController {
     private ModelAndView tutortsOptions(String username) { //tutor & password
         ModelAndView model = new ModelAndView("tutor/myAccount.html");
         Tutor tutor = tutorRepository.findByUsername(username);
-        deanoffice.noentities.User user = new UsersTableData().findUserByUsername(username);
+        deanoffice.noentities.User user = u.findUserByUsername(username);
         model.addObject("tutor", tutor);
         model.addObject("password", user.getPassword());
         return model;
@@ -197,7 +196,7 @@ public class MainController {
 
     private ModelAndView adminsOptions(String username) { //all from users & autorithy table
         ModelAndView model = new ModelAndView("admin/myAccount.html");
-        deanoffice.noentities.User user = new UsersTableData().findUserByUsername(username);
+        deanoffice.noentities.User user = u.findUserByUsername(username);
         model.addObject("user", user);
         return model;
     }
