@@ -1,7 +1,9 @@
 package deanoffice.controllers.admin;
 
-import deanoffice.entities.*;
-import deanoffice.repositories.*;
+import deanoffice.entities.Faculty;
+import deanoffice.entities.Student;
+import deanoffice.repositories.FacultyRepository;
+import deanoffice.repositories.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,23 +16,12 @@ import java.util.Calendar;
 import java.util.Optional;
 
 @Controller
-public class AdminController {
-    @Autowired
-    private SubjectRepository subjectRepository;
+public class StudentsManagementController {
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
-    private TutorRepository tutorRepository;
-    @Autowired
     private FacultyRepository facultyRepository;
 
-    @RequestMapping(value = "/admin/allsubjects", method = RequestMethod.GET)
-    public ModelAndView subjects(){
-        Iterable<Subject> subjects = subjectRepository.findAll();
-        ModelAndView model = new ModelAndView("/admin/subjects.html");
-        model.addObject("subjects", subjects);
-        return model;
-    }
 
     @RequestMapping(value = "/admin/allstudents", method = RequestMethod.GET)
     public ModelAndView students(){
@@ -40,8 +31,6 @@ public class AdminController {
         return model;
     }
 
-
-    //region STUDENT FUNCTIONALITY
     @RequestMapping(value = "/admin/students/add", method = RequestMethod.GET)
     public ModelAndView addstudent(){
         ModelAndView model = new ModelAndView("/admin/adding/addstudent.html");
@@ -49,7 +38,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/students/addconfirm", method = RequestMethod.POST)
-    public ModelAndView confirmAddStudent(HttpServletRequest request){
+    public String confirmAddStudent(HttpServletRequest request){
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         String username = request.getParameter("username");
@@ -67,7 +56,7 @@ public class AdminController {
 
         studentRepository.save(std);
 
-        return this.students();
+        return "redirect:/admin/allstudents";
     }
 
     @RequestMapping(value = "/admin/students/edit", method = RequestMethod.GET)
@@ -79,7 +68,7 @@ public class AdminController {
     }
 
     @RequestMapping(value = "/admin/students/editconfirm", method = RequestMethod.POST)
-    public ModelAndView confirmEditStudent(HttpServletRequest request){
+    public String confirmEditStudent(HttpServletRequest request){
         String id = request.getParameter("indexNumber");
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
@@ -121,67 +110,14 @@ public class AdminController {
 
         studentRepository.save(std);
 
-        return this.students();
+        return "redirect:/admin/allstudents";
     }
 
     @RequestMapping(value = "/admin/students/delete", method = RequestMethod.GET)
-    public ModelAndView deleteStudent(HttpServletRequest request){
+    public String deleteStudent(HttpServletRequest request){
         String id = request.getParameter("indexNumber");
         Student student = studentRepository.findByIndexNumber(Integer.valueOf(id));
         studentRepository.delete(student);
-        return this.students();
+        return "redirect:/admin/allstudents";
     }
-    //endregion STUDENT FUNCTIONALITY
-    //region SUBJECT FUNCTIONALITY
-    @RequestMapping(value = "/admin/subjects/add", method = RequestMethod.GET)
-    public ModelAndView addsubject(){
-        ModelAndView model = new ModelAndView("/admin/adding/addsubject.html");
-        return model;
-    }
-
-    @RequestMapping(value = "/admin/subjects/addconfirm", method = RequestMethod.POST)
-    public ModelAndView confirmAddSubject(HttpServletRequest request){
-        String name = request.getParameter("name");
-        String facultyid = request.getParameter("facultyid");
-        Subject subject = new Subject();
-
-        Optional<Faculty> opt_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
-        subject.setName(name);
-        subject.setFaculty(opt_faculty.get());
-
-        subjectRepository.save(subject);
-        return this.subjects();
-    }
-
-    @RequestMapping(value = "/admin/subjects/edit", method = RequestMethod.GET)
-    public ModelAndView editsubject(HttpServletRequest request){
-        ModelAndView model = new ModelAndView("/admin/adding/editsubject.html");
-        String id = request.getParameter("id");
-        Optional<Subject> subject = subjectRepository.findById(Integer.valueOf(id));
-        model.addObject("subject",subject.get());
-        return model;
-    }
-
-    @RequestMapping(value = "/admin/subjects/editconfirm", method = RequestMethod.POST)
-    public ModelAndView confirmEditSubject(HttpServletRequest request){
-        String id = request.getParameter("id");
-        String name = request.getParameter("name");
-        String facultyid = request.getParameter("facultyid");
-
-        Subject subject = subjectRepository.findById(Integer.valueOf(id)).get();
-        Optional<Faculty> opt_faculty = facultyRepository.findById(Integer.valueOf(facultyid));
-        subject.setName(name);
-        subject.setFaculty(opt_faculty.get());
-
-        subjectRepository.save(subject);
-        return this.subjects();
-    }
-    @RequestMapping(value = "/admin/subjects/delete", method = RequestMethod.POST)
-    public ModelAndView deletesubject(HttpServletRequest request){
-        String id = request.getParameter("id");
-        Subject subject = subjectRepository.findById(Integer.valueOf(id)).get();
-        subjectRepository.delete(subject);
-        return this.subjects();
-    }
-    //endregion SUBJECT FUNCTIONALITY
 }

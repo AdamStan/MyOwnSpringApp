@@ -1,8 +1,6 @@
 package deanoffice.controllers;
 
-import deanoffice.controllers.admin.FacultiesManagementControllerTest;
-import deanoffice.controllers.admin.MarksManagementControllerTest;
-import deanoffice.controllers.admin.TutorsManagementControllerTest;
+import deanoffice.controllers.admin.*;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
@@ -11,6 +9,8 @@ import org.junit.runners.Suite;
         MarksManagementControllerTest.class,
         FacultiesManagementControllerTest.class,
         TutorsManagementControllerTest.class,
+        StudentsManagementControllerTest.class,
+        SubjectsManagementControllerTest.class
 })
 public class AllControllersTests {
 }

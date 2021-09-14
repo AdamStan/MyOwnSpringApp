@@ -83,6 +83,6 @@ public class Subject {
 
     @Override
     public String toString() {
-        return this.id + ", " + this.name + ", " + this.faculty.getName();
+        return this.id + ", " + this.name + ", " + this.faculty;
     }
 }
