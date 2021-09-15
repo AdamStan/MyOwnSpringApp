@@ -26,15 +26,17 @@ public class FacultiesManagementController {
 
     @RequestMapping(value = "/admin/addnewfaculty", method = RequestMethod.GET)
     public ModelAndView addFaculty(){
-        ModelAndView modelAndView = new ModelAndView("/admin/adding/addfaculty.html");
+        ModelAndView modelAndView = new ModelAndView("/admin/adding/facultyform.html");
+        Faculty faculty = new Faculty();
+        modelAndView.addObject(faculty);
         return modelAndView;
     }
 
     @RequestMapping(value = "/admin/faculty/editfaculty", method = RequestMethod.GET)
     public ModelAndView editFaculty(HttpServletRequest request){
         String id = request.getParameter("id");
-        ModelAndView modelAndView = new ModelAndView("/admin/adding/editfaculty.html");
-        modelAndView.addObject("id", id);
+        ModelAndView modelAndView = new ModelAndView("/admin/adding/facultyform.html");
+        modelAndView.addObject("faculty", facultyRepository.findById(Integer.valueOf(id)));
         return modelAndView;
     }
 
@@ -47,24 +49,8 @@ public class FacultiesManagementController {
     }
 
     @RequestMapping(value = "/admin/faculty/confirm", method = RequestMethod.POST)
-    public String confirmAddFaculty(HttpServletRequest request){
-        String name = request.getParameter("name");
-        String desc = request.getParameter("desc");
-        Faculty newFaculty = new Faculty(name, desc);
-        facultyRepository.save(newFaculty);
-        return "redirect:/admin/allfaculties";
-    }
-
-    @RequestMapping(value = "/admin/faculty/confirmedit", method = RequestMethod.POST)
-    public String confirmEditFaculty(HttpServletRequest request){
-        String id = request.getParameter("id");
-        String name = request.getParameter("name");
-        String description = request.getParameter("desc");
-        Optional<Faculty> opf = facultyRepository.findById(Integer.valueOf(id));
-        Faculty facultyUpdate = opf.get();
-        facultyUpdate.setName(name);
-        facultyUpdate.setDescription(description);
-        facultyRepository.save(facultyUpdate);
+    public String confirmFaculty(Faculty faculty){
+        facultyRepository.save(faculty);
         return "redirect:/admin/allfaculties";
     }
 }

@@ -3,29 +3,21 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Add user</title>
+    <title>Faculty - add/edit</title>
     <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
 <div th:replace="fragments/header.html :: header"/>
 
 <div class = "container bg-secondary text-light p-4">
-    <form action="/admin/faculty/confirmedit" id = "faculty-inform" method="POST">
-        <div class="row">
-            <div class="col">
-                <label> ID </label>
-            </div>
-            <div class="col">
-                <input name = "id" type="text" th:value="${id}" hidden>
-                <input name = "id" type="text" th:value="${id}" disabled>
-            </div>
-        </div>
+    <form action="/admin/faculty/confirm"  th:object="${faculty}" id = "faculty-inform" method="POST">
+        <input type="hidden" th:field="*{id}">
         <div class="row">
             <div class="col">
                 <label> Name </label>
             </div>
             <div class="col">
-                <input name = "name" type="text">
+                <input name = "name" type="text" th:field="*{name}">
             </div>
         </div>
         <div class="row">
@@ -33,11 +25,11 @@
                 <label> Description </label>
             </div>
             <div class="col">
-                <input name = "desc" type="text">
+                <input name = "desc" type="text" th:field="*{description}">
             </div>
         </div>
         <div class="row">
-            <input type ="submit" class="btn btn-primary" value="EDIT">
+            <input type ="submit" class="btn btn-primary" value="ADD">
             <a href="/admin/allfaculties/" class="btn btn-info"> CANCEL </a>
         </div>
     </form>

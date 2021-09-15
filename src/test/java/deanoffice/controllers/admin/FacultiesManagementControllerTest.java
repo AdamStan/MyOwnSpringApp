@@ -48,7 +48,7 @@ public class FacultiesManagementControllerTest extends BaseAdminControllersTest 
     public void testAddForm() throws Exception {
         mockMvc.perform(get("/admin/addnewfaculty"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/adding/addfaculty.html"));
+                .andExpect(view().name("/admin/adding/facultyform.html"));
     }
 
     @Test
@@ -58,7 +58,7 @@ public class FacultiesManagementControllerTest extends BaseAdminControllersTest 
 
         mockMvc.perform(post("/admin/faculty/confirm")
                         .param("name", name)
-                        .param("desc", description)
+                        .param("description", description)
                 )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/admin/allfaculties"));
@@ -77,12 +77,13 @@ public class FacultiesManagementControllerTest extends BaseAdminControllersTest 
         String description = "short description";
 
         Faculty faculty = new Faculty();
+        faculty.setId(Integer.valueOf(id));
         when(facultyRepository.findById(any())).thenReturn(Optional.of(faculty));
 
-        mockMvc.perform(post("/admin/faculty/confirmedit")
+        mockMvc.perform(post("/admin/faculty/confirm")
                         .param("id", id)
                         .param("name", name)
-                        .param("desc", description)
+                        .param("description", description)
                 )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/admin/allfaculties"));
@@ -91,6 +92,7 @@ public class FacultiesManagementControllerTest extends BaseAdminControllersTest 
         verify(facultyRepository).save(facultyArgumentCaptor.capture());
         assertEquals(name, facultyArgumentCaptor.getValue().getName());
         assertEquals(description, facultyArgumentCaptor.getValue().getDescription());
+        assertEquals(faculty.getId(), facultyArgumentCaptor.getValue().getId());
     }
 
     @Test
@@ -117,6 +119,6 @@ public class FacultiesManagementControllerTest extends BaseAdminControllersTest 
         mockMvc.perform(get("/admin/faculty/editfaculty")
                         .param("id", String.valueOf(id)))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/adding/editfaculty.html"));
+                .andExpect(view().name("/admin/adding/facultyform.html"));
     }
 }
