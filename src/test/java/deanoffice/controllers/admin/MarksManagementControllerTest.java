@@ -4,11 +4,14 @@ import deanoffice.entities.Mark;
 import deanoffice.entities.Student;
 import deanoffice.entities.Subject;
 import deanoffice.entities.Tutor;
+import deanoffice.services.MarkService;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
@@ -32,6 +35,12 @@ public class MarksManagementControllerTest extends BaseAdminControllersTest {
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(marksController).build();
+        MarkService markService = new MarkService();
+        markService.setMarkRepository(markRepository);
+        markService.setStudentRepository(studentRepository);
+        markService.setSubjectRepository(subjectRepository);
+        markService.setTutorRepository(tutorRepository);
+        marksController.setMarkService(markService);
     }
 
     @Test
@@ -51,11 +60,11 @@ public class MarksManagementControllerTest extends BaseAdminControllersTest {
     public void testAddForm() throws Exception {
         mockMvc.perform(get("/admin/marks/add"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/adding/addmark.html"));
+                .andExpect(view().name("/admin/adding/markform.html"));
     }
 
     @Test
-    public void testConfirmAddingMark_correctData() throws Exception {
+    public void testConfirmAddingMark_correctData2() throws Exception {
         String value = "4.5";
         String studentId = "1";
         String tutorId = "1";
@@ -69,7 +78,8 @@ public class MarksManagementControllerTest extends BaseAdminControllersTest {
         when(studentRepository.findByIndexNumber(any())).thenReturn(student);
         when(subjectRepository.findByName(any())).thenReturn(subject);
 
-        mockMvc.perform(post("/admin/marks/addconfirm")
+        mockMvc.perform(post("/admin/marks/editconfirm")
+                        .param("id", "-1")
                         .param("value", value)
                         .param("studentid", studentId)
                         .param("tutorid", tutorId)
@@ -146,7 +156,7 @@ public class MarksManagementControllerTest extends BaseAdminControllersTest {
         mockMvc.perform(get("/admin/marks/edit")
                         .param("id", Integer.toString(id)))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/adding/editmark.html"));
+                .andExpect(view().name("/admin/adding/markform.html"));
     }
 
 }

@@ -101,7 +101,8 @@ public class TutorController {
     @RequestMapping(value = "/tutor/marks/edit", method = RequestMethod.GET)
     public ModelAndView editMark(HttpServletRequest request){
         Mark mark = markRepository.findById(Integer.valueOf(request.getParameter("id"))).get();
-        ModelAndView model = new ModelAndView("/tutor/editmark.html");
+        // TODO: please fix!!!
+        ModelAndView model = new ModelAndView("/tutor/markform.html");
         String username = request.getRemoteUser();
         Tutor tutor = tutorRepository.findByUsername(username);
         System.out.print(tutor);
