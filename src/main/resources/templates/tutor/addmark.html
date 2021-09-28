@@ -41,7 +41,9 @@
                 <label> Subject's name </label>
             </div>
             <div class="col">
-                <input type="text" name="subjectname">
+                <select name="subjectname">
+                    <option th:each="subject : ${subjects}" th:value="${subject.name}" th:text="${subject.name}">Name here</option>
+                </select>
             </div>
         </div>
         <div class="row">

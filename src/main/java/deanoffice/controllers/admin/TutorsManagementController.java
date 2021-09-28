@@ -68,7 +68,7 @@ public class TutorsManagementController {
 
         tutorRepository.save(tutor);
 
-        return "redirect:/admin/allfaculties";
+        return "redirect:/admin/alltutors";
     }
 
     @RequestMapping(value = "/tutors/edit", method = RequestMethod.GET)
@@ -123,7 +123,7 @@ public class TutorsManagementController {
 
         tutorRepository.save(tutor);
 
-        return "redirect:/admin/allfaculties";
+        return "redirect:/admin/alltutors";
     }
 
     @RequestMapping(value = "/tutors/delete", method = RequestMethod.POST)
