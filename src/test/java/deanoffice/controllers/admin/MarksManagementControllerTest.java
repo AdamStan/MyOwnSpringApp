@@ -4,11 +4,12 @@ import deanoffice.entities.Mark;
 import deanoffice.entities.Student;
 import deanoffice.entities.Subject;
 import deanoffice.entities.Tutor;
+import deanoffice.services.MarkService;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.MockitoAnnotations;
+import org.mockito.Spy;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -27,11 +27,16 @@ public class MarksManagementControllerTest extends BaseAdminControllersTest {
 
     @InjectMocks
     private MarksManagementController marksController;
+    @Spy
+    private MarkService markService;
 
     @Before
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(marksController).build();
+        doNothing().when(markService).update(any(), any(), any(), any(), any());
+        doNothing().when(markService).removeObject(any());
+        marksController.setMarkService(markService);
     }
 
     @Test
@@ -40,7 +45,7 @@ public class MarksManagementControllerTest extends BaseAdminControllersTest {
         marks.add(new Mark());
         marks.add(new Mark());
 
-        when(markRepository.findAll()).thenReturn(marks);
+        doReturn(marks).when(markService).getAll();
         mockMvc.perform(get("/admin/allmarks"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("/admin/marks.html"))
@@ -51,39 +56,7 @@ public class MarksManagementControllerTest extends BaseAdminControllersTest {
     public void testAddForm() throws Exception {
         mockMvc.perform(get("/admin/marks/add"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/adding/addmark.html"));
-    }
-
-    @Test
-    public void testConfirmAddingMark_correctData() throws Exception {
-        String value = "4.5";
-        String studentId = "1";
-        String tutorId = "1";
-        String subjectName = "subject";
-
-        Tutor tutor = new Tutor();
-        Student student = new Student();
-        Subject subject = new Subject();
-
-        when(tutorRepository.findById(any())).thenReturn(Optional.of(tutor));
-        when(studentRepository.findByIndexNumber(any())).thenReturn(student);
-        when(subjectRepository.findByName(any())).thenReturn(subject);
-
-        mockMvc.perform(post("/admin/marks/addconfirm")
-                        .param("value", value)
-                        .param("studentid", studentId)
-                        .param("tutorid", tutorId)
-                        .param("subjectname", subjectName)
-                )
-                .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/admin/allmarks"));
-
-        ArgumentCaptor<Mark> boundMark = ArgumentCaptor.forClass(Mark.class);
-        verify(markRepository).save(boundMark.capture());
-        assertEquals(Double.parseDouble(value), boundMark.getValue().getValue());
-        assertEquals(tutor, boundMark.getValue().getTutor());
-        assertEquals(student, boundMark.getValue().getStudent());
-        assertEquals(subject, boundMark.getValue().getSubject());
+                .andExpect(view().name("/admin/adding/markform.html"));
     }
 
     @Test
@@ -113,40 +86,30 @@ public class MarksManagementControllerTest extends BaseAdminControllersTest {
                 )
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/admin/allmarks"));
-
-        ArgumentCaptor<Mark> boundMark = ArgumentCaptor.forClass(Mark.class);
-        verify(markRepository).save(boundMark.capture());
-        assertEquals(Double.parseDouble(value), boundMark.getValue().getValue());
-        assertEquals(tutor, boundMark.getValue().getTutor());
-        assertEquals(student, boundMark.getValue().getStudent());
-        assertEquals(subject, boundMark.getValue().getSubject());
+        verify(markService, times(1)).update(markId, value, studentId, tutorId, subjectName);
     }
 
     @Test
     public void testDeleteMark() throws Exception {
-        Integer id = 1;
-
-        Mark mark = new Mark();
-        when(markRepository.findById(id)).thenReturn(Optional.of(mark));
+        int id = 1;
 
         mockMvc.perform(post("/admin/marks/delete/")
-                        .param("id", id.toString()))
+                        .param("id", String.valueOf(id)))
                 .andExpect(status().is3xxRedirection())
                 .andExpect(view().name("redirect:/admin/allmarks"));
 
-        verify(markRepository, times(1)).delete(mark);
+        verify(markService, times(1)).removeObject(String.valueOf(id));
     }
 
     @Test
     public void testShowEditMarkPage() throws Exception {
         int id = 1;
         Mark mark = new Mark();
-        when(markRepository.findById(any())).thenReturn(Optional.of(mark));
-
+        doReturn(mark).when(markService).getObjectToEdit(String.valueOf(id));
         mockMvc.perform(get("/admin/marks/edit")
                         .param("id", Integer.toString(id)))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/admin/adding/editmark.html"));
+                .andExpect(view().name("/admin/adding/markform.html"));
     }
 
 }

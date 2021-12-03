@@ -50,7 +50,10 @@
                 <label> Subject's name </label>
             </div>
             <div class="col">
-                <input type="text" name="subjectname" th:value="${mark.subject.name}">
+                <select class="form-select" name="subjectname">
+                    <option th:value="${mark.subject.name}" th:text="${mark.subject.name}">Subject</option>
+                    <option th:each="subject : ${subjects}" th:value="${subject.name}" th:text="${subject.name}">Name here</option>
+                </select>
             </div>
         </div>
         <div class="row">
