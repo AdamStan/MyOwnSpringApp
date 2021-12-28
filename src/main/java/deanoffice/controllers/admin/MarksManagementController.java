@@ -26,6 +26,7 @@ public class MarksManagementController {
 
     @RequestMapping(value = "/allmarks", method = RequestMethod.GET)
     public ModelAndView marks(){
+        log.info("MarksManagementController - called /allmarks");
         List<Mark> marks = markService.getAll();
         ModelAndView model = new ModelAndView("/admin/marks.html");
         model.addObject("marks", marks);

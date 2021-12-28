@@ -1,6 +1,5 @@
 package deanoffice.services;
 
-import deanoffice.controllers.admin.MarksManagementController;
 import deanoffice.entities.Mark;
 import deanoffice.entities.Student;
 import deanoffice.entities.Subject;

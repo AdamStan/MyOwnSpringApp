@@ -1,10 +1,10 @@
-package deanoffice.controllers.admin;
+package deanoffice.controllers;
 
 import deanoffice.repositories.*;
 import org.mockito.Mock;
 import org.springframework.test.web.servlet.MockMvc;
 
-public class BaseAdminControllersTest {
+public class BaseControllersTest {
     @Mock
     protected MarkRepository markRepository;
     @Mock

@@ -10,7 +10,8 @@ import org.junit.runners.Suite;
         FacultiesManagementControllerTest.class,
         TutorsManagementControllerTest.class,
         StudentsManagementControllerTest.class,
-        SubjectsManagementControllerTest.class
+        SubjectsManagementControllerTest.class,
+        StudentControllerTest.class
 })
 public class AllControllersTests {
 }
