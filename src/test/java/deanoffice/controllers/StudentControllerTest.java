@@ -8,6 +8,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.Before;
@@ -37,7 +38,7 @@ public class StudentControllerTest extends BaseControllersTest {
         marks.add(new Mark());
         Student student = new Student();
         student.setMarks(marks);
-        when(studentRepository.findByUsername(any())).thenReturn(student);
+        when(studentRepository.findByUsername(any())).thenReturn(Optional.of(student));
         mockMvc.perform(get("/student/marks"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("/student/studentsMarks.html"))
@@ -50,7 +51,7 @@ public class StudentControllerTest extends BaseControllersTest {
         subjects.add(new Subject());
         Student student = new Student();
         student.setSubjects(subjects);
-        when(studentRepository.findByUsername(any())).thenReturn(student);
+        when(studentRepository.findByUsername(any())).thenReturn(Optional.of(student));
         mockMvc.perform(get("/student/subjects"))
                 .andExpect(status().isOk())
                 .andExpect(view().name("/student/studentsSubjects.html"))

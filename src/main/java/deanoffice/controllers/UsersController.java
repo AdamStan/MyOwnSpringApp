@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.core.userdetails.User;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -177,9 +179,9 @@ public class UsersController {
 
     private ModelAndView studentsOptions(String username) { //student & password
         ModelAndView model = new ModelAndView("student/myAccount.html");
-        Student student = studentRepository.findByUsername(username);
+        Optional<Student> student = studentRepository.findByUsername(username);
         deanoffice.noentities.User user = u.findUserByUsername(username);
-        model.addObject("student", student);
+        model.addObject("student", student.get());
         model.addObject("password", user.getPassword());
         return model;
     }
