@@ -105,7 +105,7 @@ public class TutorsManagementControllerTest extends BaseAdminControllersTest {
                         .param("whenStarted", whenStarted)
                 )
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/admin/allfaculties"));
+                .andExpect(view().name("redirect:/admin/alltutors"));
 
         ArgumentCaptor<Tutor> tutorArgumentCaptor = ArgumentCaptor.forClass(Tutor.class);
         verify(tutorRepository).save(tutorArgumentCaptor.capture());
@@ -147,7 +147,7 @@ public class TutorsManagementControllerTest extends BaseAdminControllersTest {
                         .param("whenFinnished", whenFinnished)
                 )
                 .andExpect(status().is3xxRedirection())
-                .andExpect(view().name("redirect:/admin/allfaculties"));
+                .andExpect(view().name("redirect:/admin/alltutors"));
 
         ArgumentCaptor<Tutor> tutorArgumentCaptor = ArgumentCaptor.forClass(Tutor.class);
         verify(tutorRepository).save(tutorArgumentCaptor.capture());
