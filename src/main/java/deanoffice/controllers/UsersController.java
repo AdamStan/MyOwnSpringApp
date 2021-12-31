@@ -6,10 +6,12 @@ import deanoffice.noentities.UsersTableData;
 import deanoffice.repositories.StudentRepository;
 import deanoffice.repositories.TutorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.security.core.userdetails.User;
 
@@ -188,7 +190,10 @@ public class UsersController {
 
     private ModelAndView tutortsOptions(String username) { //tutor & password
         ModelAndView model = new ModelAndView("tutor/myAccount.html");
-        Tutor tutor = tutorRepository.findByUsername(username);
+        Optional<Tutor> tutor = tutorRepository.findByUsername(username);
+        if (tutor.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tutor doesn't exist");
+        }
         deanoffice.noentities.User user = u.findUserByUsername(username);
         model.addObject("tutor", tutor);
         model.addObject("password", user.getPassword());
