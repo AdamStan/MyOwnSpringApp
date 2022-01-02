@@ -5,15 +5,17 @@ import deanoffice.entities.Tutor;
 import deanoffice.noentities.UsersTableData;
 import deanoffice.repositories.StudentRepository;
 import deanoffice.repositories.TutorRepository;
+import deanoffice.security.UserSecurityProvider;
+
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
 
@@ -22,13 +24,16 @@ import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class UsersController {
+    private static final Logger log = Logger.getLogger(UsersController.class);
+
     @Autowired
     private StudentRepository studentRepository;
     @Autowired
     private TutorRepository tutorRepository;
-
     @Autowired
-    private UsersTableData u;
+    private UsersTableData userTable;
+    @Autowired
+    private UserSecurityProvider fromContext;
 
     @RequestMapping(value = {"/whodidit"}, method = RequestMethod.GET)
     public ModelAndView authors() {
@@ -37,15 +42,13 @@ public class UsersController {
 
     @RequestMapping(value = {"/", "/home"}, method = RequestMethod.GET)
     public ModelAndView home(HttpServletRequest request, HttpServletResponse response) {
-        ModelAndView loginPage;
         String username = request.getRemoteUser();
         if (username != null) {
-            User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            System.out.println("Nazwa uzytkownika: " + username);
-            System.out.println("ROLA: " + user.getAuthorities());
+            UserDetails user = fromContext.getCurrentSecurityUser().get();
+            log.info("User's name: " + username);
+            log.info("Authorities: " + user.getAuthorities());
         }
-        loginPage = new ModelAndView("/home.html");
-        return loginPage;
+        return new ModelAndView("home.html");
     }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
@@ -55,10 +58,13 @@ public class UsersController {
 
     @RequestMapping(value = "/hello", method = RequestMethod.GET)
     public ModelAndView hello() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        Optional<UserDetails> user = fromContext.getCurrentSecurityUser();
+        if (user.isEmpty()) {
+            return new ModelAndView("hello.html");
+        }
 
-        for (Object o : user.getAuthorities()) {
-            System.out.println("Who wants more options? " + o.toString());
+        for (Object o : user.get().getAuthorities()) {
+            log.info("Who wants more options? " + o.toString());
             if (o.toString().equals("ROLE_ADMIN")) {
                 return new ModelAndView("admin/helloAdmin.html");
             } else if (o.toString().equals("ROLE_TUTOR")) {
@@ -72,13 +78,16 @@ public class UsersController {
 
     @RequestMapping(value = "/useroptions", method = RequestMethod.GET)
     public ModelAndView editProfile() {
-        User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        String username = user.getUsername();
-
         ModelAndView model = new ModelAndView("hello.html");
-        for (Object o : user.getAuthorities()) {
-            System.out.println("Who wants more options? " + o.toString());
+        Optional<UserDetails> user = fromContext.getCurrentSecurityUser();
+
+        if (user.isEmpty()) {
+            return model;
+        }
+        String username = user.get().getUsername();
+
+        for (Object o : user.get().getAuthorities()) {
+            log.info("Who wants more options? " + o.toString());
             if (o.toString().equals("ROLE_ADMIN")) {
                 model = this.adminsOptions(username);
             } else if (o.toString().equals("ROLE_TUTOR")) {
@@ -104,7 +113,7 @@ public class UsersController {
 
         Student std = studentRepository.findByIndexNumber(Integer.valueOf(id));
 
-        if (u.findUserByUsername(username).getUsername() != null && !username.equals(std.getName())) {
+        if (userTable.findUserByUsername(username).getUsername() != null && !username.equals(std.getName())) {
             throw new Exception("Username is in use!");
         }
 
@@ -115,8 +124,8 @@ public class UsersController {
         std.setNumberOfBuilding(numberOfBuilding);
         std.setNumberOfFlat(numberOfFlat);
 
-        u.deleteUserByUsername(std.getUsername());
-        u.insertUser(username, password, "ROLE_STUDENT", "on");
+        userTable.deleteUserByUsername(std.getUsername());
+        userTable.insertUser(username, password, "ROLE_STUDENT", "on");
         std.setUsername(username);
 
         studentRepository.save(std);
@@ -138,7 +147,7 @@ public class UsersController {
 
         Tutor tutor = tutorRepository.findById(Integer.valueOf(id)).get();
 
-        if (u.findUserByUsername(username).getUsername() != null && !username.equals(tutor.getName())) {
+        if (userTable.findUserByUsername(username).getUsername() != null && !username.equals(tutor.getName())) {
             throw new Exception("Username is in use!");
         }
 
@@ -149,8 +158,8 @@ public class UsersController {
         tutor.setNumberOfBuilding(numberOfBuilding);
         tutor.setNumberOfFlat(numberOfFlat);
 
-        u.deleteUserByUsername(tutor.getUsername());
-        u.insertUser(username, password, "ROLE_TUTOR", "on");
+        userTable.deleteUserByUsername(tutor.getUsername());
+        userTable.insertUser(username, password, "ROLE_TUTOR", "on");
 
         tutor.setUsername(username);
 
@@ -166,15 +175,15 @@ public class UsersController {
         String oldusername = request.getParameter("oldusername");
         String role = request.getParameter("role");
         String enabled = request.getParameter("enabled");
-        System.out.println("Parameters: " + username + ", " +
-                password + ", " + role + ", " + enabled);
+        log.info("Parameters: " + username + ", " + password + ", " 
+                    + role + ", " + enabled);
 
-        if (u.findUserByUsername(username).getUsername() != null && !username.equals(oldusername)) {
+        if (userTable.findUserByUsername(username).getUsername() != null && !username.equals(oldusername)) {
             throw new Exception("Username is in use!");
         }
 
-        u.deleteUserByUsername(oldusername);
-        u.insertUser(username, password, role, enabled);
+        userTable.deleteUserByUsername(oldusername);
+        userTable.insertUser(username, password, role, enabled);
 
         return new ModelAndView("/informlogout.html");
     }
@@ -182,7 +191,7 @@ public class UsersController {
     private ModelAndView studentsOptions(String username) { //student & password
         ModelAndView model = new ModelAndView("student/myAccount.html");
         Optional<Student> student = studentRepository.findByUsername(username);
-        deanoffice.noentities.User user = u.findUserByUsername(username);
+        deanoffice.noentities.User user = userTable.findUserByUsername(username);
         model.addObject("student", student.get());
         model.addObject("password", user.getPassword());
         return model;
@@ -194,7 +203,7 @@ public class UsersController {
         if (tutor.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tutor doesn't exist");
         }
-        deanoffice.noentities.User user = u.findUserByUsername(username);
+        deanoffice.noentities.User user = userTable.findUserByUsername(username);
         model.addObject("tutor", tutor);
         model.addObject("password", user.getPassword());
         return model;
@@ -202,8 +211,9 @@ public class UsersController {
 
     private ModelAndView adminsOptions(String username) { //all from users & autorithy table
         ModelAndView model = new ModelAndView("admin/myAccount.html");
-        deanoffice.noentities.User user = u.findUserByUsername(username);
+        deanoffice.noentities.User user = userTable.findUserByUsername(username);
         model.addObject("user", user);
         return model;
     }
+
 }
