@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Optional;
@@ -63,13 +64,13 @@ public class UsersController {
             return new ModelAndView("hello.html");
         }
 
-        for (Object o : user.get().getAuthorities()) {
-            log.info("Who wants more options? " + o.toString());
-            if (o.toString().equals("ROLE_ADMIN")) {
+        for (GrantedAuthority auth : user.get().getAuthorities()) {
+            log.info("Who wants more options? " + auth.toString());
+            if (auth.getAuthority().equals("ROLE_ADMIN")) {
                 return new ModelAndView("admin/helloAdmin.html");
-            } else if (o.toString().equals("ROLE_TUTOR")) {
+            } else if (auth.getAuthority().equals("ROLE_TUTOR")) {
                 return new ModelAndView("tutor/helloTutor.html");
-            } else if (o.toString().equals("ROLE_STUDENT")) {
+            } else if (auth.getAuthority().equals("ROLE_STUDENT")) {
                 return new ModelAndView("student/helloStudent.html");
             }
         }
