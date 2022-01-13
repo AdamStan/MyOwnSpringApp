@@ -1,8 +1,11 @@
 package deanoffice.controllers;
 
 import static org.junit.Assert.fail;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
@@ -11,24 +14,32 @@ import java.util.Optional;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import deanoffice.entities.Student;
+import deanoffice.entities.Tutor;
 import deanoffice.mocks.MockUser;
+import deanoffice.noentities.User;
+import deanoffice.noentities.UsersTableData;
 import deanoffice.security.UserSecurityProvider;
 
 public class UsersControllerTest extends BaseControllersTest {
 
     @InjectMocks
     private UsersController usersController;
-    @Spy
+    @Mock
     private UserSecurityProvider provider;
+    @Mock
+    private UsersTableData table;
 
     @Before
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(usersController).build();
+        when(table.findUserByUsername(anyString())).thenReturn(new User());
     }
 
     @Test
@@ -82,52 +93,170 @@ public class UsersControllerTest extends BaseControllersTest {
     }
 
     @Test
-    public void testStudentUserOptions() {
-        fail("Not implemented yet");
+    public void testStudentUserOptions() throws Exception {
+        when(provider.getCurrentSecurityUser())
+                .thenReturn(Optional.of(MockUser.STUDENT));
+        when(studentRepository.findByUsername(anyString()))
+                .thenReturn(Optional.of(new Student()));
+        mockMvc.perform(get("/useroptions")).andExpect(status().isOk())
+                .andExpect(view().name("student/myAccount.html"));
     }
 
     @Test
-    public void testTutorUserOptions() {
-        fail("Not implemented yet");
+    public void testTutorUserOptions() throws Exception {
+        when(provider.getCurrentSecurityUser())
+                .thenReturn(Optional.of(MockUser.TUTOR));
+        when(tutorRepository.findByUsername(anyString()))
+                .thenReturn(Optional.of(new Tutor()));
+        mockMvc.perform(get("/useroptions")).andExpect(status().isOk())
+                .andExpect(view().name("tutor/myAccount.html"));
     }
 
     @Test
-    public void testAdminUserOptions() {
-        fail("Not implemented yet");
+    public void testAdminUserOptions() throws Exception {
+        when(provider.getCurrentSecurityUser())
+                .thenReturn(Optional.of(MockUser.ADMIN));
+        mockMvc.perform(get("/useroptions")).andExpect(status().isOk())
+                .andExpect(view().name("admin/myAccount.html"));
     }
 
     @Test
-    public void testNonUserOptions() {
-        fail("Not implemented yet");
+    public void testNonUserOptions() throws Exception {
+        mockMvc.perform(get("/useroptions")).andExpect(status().isOk())
+                .andExpect(view().name("hello.html"));
     }
 
     @Test
-    public void testConfirmStudent() {
-        fail("Not implemented yet");
+    public void testConfirmStudent() throws Exception {
+        String id = "12345";
+        String name = "name";
+        String surname = "surname";
+        String username = "username";
+        String city = "city";
+        String street = "street";
+        String numberOfBuilding = "numberofbuilding";
+        String numberOfFlat = "numberofflat";
+        String password = "password";
+        when(studentRepository.findByIndexNumber(any()))
+                .thenReturn(new Student());
+        when(table.findUserByUsername(anyString())).thenReturn(new User());
+
+        mockMvc.perform(post("/useroptions/student").param("indexNumber", id)
+                .param("name", name).param("surname", surname)
+                .param("username", username).param("city", city)
+                .param("street", street)
+                .param("numberofbuilding", numberOfBuilding)
+                .param("numberofflat", numberOfFlat)
+                .param("password", password))
+                .andExpect(view().name("/informlogout.html"));
+    }
+
+    @Test(expected = Exception.class)
+    public void testConfirmStudentUserNameInUse() throws Exception {
+        String id = "12345";
+        String name = "name";
+        String surname = "surname";
+        String username = "username";
+        String city = "city";
+        String street = "street";
+        String numberOfBuilding = "numberofbuilding";
+        String numberOfFlat = "numberofflat";
+        String password = "password";
+        when(studentRepository.findByIndexNumber(any()))
+                .thenReturn(new Student());
+        when(table.findUserByUsername(anyString()))
+                .thenReturn(new User("d", "r1"));
+
+        mockMvc.perform(post("/useroptions/student").param("indexNumber", id)
+                .param("name", name).param("surname", surname)
+                .param("username", username).param("city", city)
+                .param("street", street)
+                .param("numberofbuilding", numberOfBuilding)
+                .param("numberofflat", numberOfFlat)
+                .param("password", password));
     }
 
     @Test
-    public void testConfirmStudentException() {
-        fail("Not implemented yet");
+    public void testConfirmTutor() throws Exception {
+        String id = "12345";
+        String name = "name";
+        String surname = "surname";
+        String username = "username";
+        String city = "city";
+        String street = "street";
+        String numberOfBuilding = "numberofbuilding";
+        String numberOfFlat = "numberofflat";
+        String password = "password";
+        when(tutorRepository.findById(any()))
+                .thenReturn(Optional.of(new Tutor()));
+        when(table.findUserByUsername(anyString())).thenReturn(new User());
+
+        mockMvc.perform(
+                post("/useroptions/tutor").param("id", id).param("name", name)
+                        .param("surname", surname).param("username", username)
+                        .param("city", city).param("street", street)
+                        .param("numberofbuilding", numberOfBuilding)
+                        .param("numberofflat", numberOfFlat)
+                        .param("password", password))
+                .andExpect(view().name("/informlogout.html"));
+    }
+
+    @Test(expected = Exception.class)
+    public void testConfirmTutorUserNameIsInUse() throws Exception {
+        String id = "12345";
+        String name = "name";
+        String surname = "surname";
+        String username = "username";
+        String city = "city";
+        String street = "street";
+        String numberOfBuilding = "numberofbuilding";
+        String numberOfFlat = "numberofflat";
+        String password = "password";
+
+        final User user = new User("b", "r1");
+        when(tutorRepository.findById(any()))
+                .thenReturn(Optional.of(new Tutor()));
+        when(table.findUserByUsername(anyString())).thenReturn(user);
+
+        mockMvc.perform(
+                post("/useroptions/tutor").param("id", id).param("name", name)
+                        .param("surname", surname).param("username", username)
+                        .param("city", city).param("street", street)
+                        .param("numberofbuilding", numberOfBuilding)
+                        .param("numberofflat", numberOfFlat)
+                        .param("password", password))
+                .andExpect(view().name("/informlogout.html"));
     }
 
     @Test
-    public void testConfirmTutor() {
-        fail("Not implemented yet");
+    public void testConfirmAdmin() throws Exception {
+        String username = "username";
+        String password = "city";
+        String oldusername = "street";
+        String role = "numberofbuilding";
+        String enabled = "numberofflat";
+        when(table.findUserByUsername(anyString())).thenReturn(new User());
+
+        mockMvc.perform(post("/useroptions/admin").param("username", username)
+                .param("password", password).param("oldusername", oldusername)
+                .param("role", role).param("enabled", enabled))
+                .andExpect(view().name("/informlogout.html"));
     }
 
-    @Test
-    public void testConfimrTutorException() {
-        fail("Not implemented yet");
-    }
+    @Test(expected = Exception.class)
+    public void testConfirmAdminUserNameIsInUse() throws Exception {
+        String username = "username";
+        String password = "city";
+        String oldusername = "street";
+        String role = "numberofbuilding";
+        String enabled = "numberofflat";
+        when(table.findUserByUsername(anyString()))
+                .thenReturn(new User("d", "r1"));
 
-    @Test
-    public void testConfirmAdmin() {
-        fail("Not implemented yet");
-    }
-
-    public void testConfirmAdminException() {
-        fail("Not implemented yet");
+        mockMvc.perform(post("/useroptions/admin").param("username", username)
+                .param("password", password).param("oldusername", oldusername)
+                .param("role", role).param("enabled", enabled))
+                .andExpect(view().name("/informlogout.html"));
     }
 
 }

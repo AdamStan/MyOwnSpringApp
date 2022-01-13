@@ -27,14 +27,20 @@ import javax.servlet.http.HttpServletResponse;
 public class UsersController {
     private static final Logger log = Logger.getLogger(UsersController.class);
 
+    private final StudentRepository studentRepository;
+    private final TutorRepository tutorRepository;
+    private final UsersTableData userTable;
+    private final UserSecurityProvider fromContext;
+
     @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
-    private TutorRepository tutorRepository;
-    @Autowired
-    private UsersTableData userTable;
-    @Autowired
-    private UserSecurityProvider fromContext;
+    public UsersController(StudentRepository studentRepository,
+            TutorRepository tutorRepository, UsersTableData userTable,
+            UserSecurityProvider fromContext) {
+        this.studentRepository = studentRepository;
+        this.tutorRepository = tutorRepository;
+        this.userTable = userTable;
+        this.fromContext = fromContext;
+    }
 
     @RequestMapping(value = {"/whodidit"}, method = RequestMethod.GET)
     public ModelAndView authors() {
@@ -87,13 +93,13 @@ public class UsersController {
         }
         String username = user.get().getUsername();
 
-        for (Object o : user.get().getAuthorities()) {
-            log.info("Who wants more options? " + o.toString());
-            if (o.toString().equals("ROLE_ADMIN")) {
+        for (GrantedAuthority auth : user.get().getAuthorities()) {
+            log.info("Who wants more options? " + auth.toString());
+            if (auth.getAuthority().equals("ROLE_ADMIN")) {
                 model = this.adminsOptions(username);
-            } else if (o.toString().equals("ROLE_TUTOR")) {
+            } else if (auth.getAuthority().equals("ROLE_TUTOR")) {
                 model = this.tutortsOptions(username);
-            } else if (o.toString().equals("ROLE_STUDENT")) {
+            } else if (auth.getAuthority().equals("ROLE_STUDENT")) {
                 model = this.studentsOptions(username);
             }
         }
