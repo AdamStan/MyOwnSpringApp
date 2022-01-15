@@ -1,25 +1,28 @@
 package deanoffice.controllers.admin;
 
-import deanoffice.entities.Student;
-import deanoffice.entities.Subject;
-import deanoffice.entities.Tutor;
-import deanoffice.noentities.Couple;
-import deanoffice.noentities.CoupleTutor;
-import deanoffice.repositories.StudentRepository;
-import deanoffice.repositories.SubjectRepository;
-import deanoffice.repositories.TutorRepository;
+import java.util.ArrayList;
+import java.util.logging.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.Optional;
+import deanoffice.entities.Student;
+import deanoffice.entities.Subject;
+import deanoffice.entities.Tutor;
+import deanoffice.noentities.StudentSubject;
+import deanoffice.noentities.TutorSubject;
+import deanoffice.repositories.StudentRepository;
+import deanoffice.repositories.SubjectRepository;
+import deanoffice.repositories.TutorRepository;
 
 @Controller
 public class AdminManyToManyController {
+    private final static Logger log = Logger.getLogger(AdminManyToManyController.class.getName());
     @Autowired
     private TutorRepository tutorRepository;
     @Autowired
@@ -32,11 +35,11 @@ public class AdminManyToManyController {
         ModelAndView model = new ModelAndView("/admin/studenttosubject.html");
         Iterable<Subject> subjects = subjectRepository.findAll();
 
-        ArrayList<Couple> couples = new ArrayList<>();
+        ArrayList<StudentSubject> couples = new ArrayList<>();
 
         for(Subject subject : subjects){
             for(Student std : subject.getStudents()){
-                couples.add(new Couple(std, subject));
+                couples.add(new StudentSubject(std, subject));
             }
         }
 
@@ -49,11 +52,11 @@ public class AdminManyToManyController {
         ModelAndView model = new ModelAndView("/admin/tutortosubject.html");
         Iterable<Subject> subjects = subjectRepository.findAll();
 
-        ArrayList<CoupleTutor> couples = new ArrayList<>();
+        ArrayList<TutorSubject> couples = new ArrayList<>();
 
         for(Subject subject : subjects){
             for(Tutor tutor : subject.getTutors()){
-                couples.add(new CoupleTutor(tutor, subject));
+                couples.add(new TutorSubject(tutor, subject));
             }
         }
 
@@ -70,7 +73,7 @@ public class AdminManyToManyController {
     public ModelAndView confirmAddStudentToSubject(HttpServletRequest request){
         String subjectid = request.getParameter("subjectid");
         String studentid = request.getParameter("studentid");
-        //System.out.println("To by nie zadzialalo: " + subjectid + " " + studentid);
+        log.info("To by nie zadzialalo: " + subjectid + " " + studentid);
         Subject subject = subjectRepository.findById(Integer.valueOf(subjectid)).get();
         Student student = studentRepository.findByIndexNumber(Integer.valueOf(studentid));
 
@@ -86,7 +89,7 @@ public class AdminManyToManyController {
     @RequestMapping(value = "/admin/studenttosubject/delete", method = RequestMethod.POST)
     public ModelAndView deleteStudentToSubject(HttpServletRequest request){
         String parameter = request.getParameter("parameter");
-        System.out.println("To by nie zadzialalo: " + parameter );
+        log.info("To by nie zadzialalo: " + parameter );
         String[] ids = parameter.split("!");
         String studentid = ids[0];
         String subjectid = ids[1];
@@ -112,7 +115,7 @@ public class AdminManyToManyController {
     public ModelAndView confirmAddTutorToSubject(HttpServletRequest request){
         String subjectid = request.getParameter("subjectid");
         String tutorid = request.getParameter("tutorid");
-        //System.out.println("To by nie zadzialalo: " + subjectid + " " + studentid);
+        log.info("To by nie zadzialalo: " + subjectid + " " + tutorid);
         Subject subject = subjectRepository.findById(Integer.valueOf(subjectid)).get();
         Tutor tutor = tutorRepository.findById(Integer.valueOf(tutorid)).get();
 
@@ -128,7 +131,7 @@ public class AdminManyToManyController {
     @RequestMapping(value = "/admin/tutortosubject/delete", method = RequestMethod.POST)
     public ModelAndView deleteTutorToSubject(HttpServletRequest request){
         String parameter = request.getParameter("parameter");
-        System.out.println("To by nie zadzialalo: " + parameter );
+        log.info("To by nie zadzialalo: " + parameter );
         String[] ids = parameter.split("!");
         String tutorid = ids[0];
         String subjectid = ids[1];

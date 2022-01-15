@@ -3,11 +3,11 @@ package deanoffice.noentities;
 import deanoffice.entities.Student;
 import deanoffice.entities.Subject;
 
-public class Couple {
+public class StudentSubject {
     Student student;
     Subject subject;
 
-    public Couple(Student student, Subject subject) {
+    public StudentSubject(Student student, Subject subject) {
         this.student = student;
         this.subject = subject;
     }
