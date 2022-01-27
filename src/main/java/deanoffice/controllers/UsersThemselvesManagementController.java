@@ -1,16 +1,18 @@
 package deanoffice.controllers;
 
-import deanoffice.noentities.User;
-import deanoffice.noentities.UsersTableData;
+import java.util.List;
+import java.util.logging.Logger;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.logging.Logger;
+import deanoffice.noentities.User;
+import deanoffice.noentities.UsersTableData;
 
 @Controller
 public class UsersThemselvesManagementController {
@@ -21,7 +23,7 @@ public class UsersThemselvesManagementController {
 
     @RequestMapping(value = "/admin/allusers", method = RequestMethod.GET)
     public ModelAndView users() {
-        ArrayList<User> users = data.getAllUsers();
+        List<User> users = data.getAllUsers();
         ModelAndView model = new ModelAndView("/admin/users.html");
         model.addObject("users", users);
         return model;
@@ -62,8 +64,7 @@ public class UsersThemselvesManagementController {
 
     @RequestMapping(value = "/admin/addnewuser", method = RequestMethod.GET)
     public ModelAndView addUserForm() {
-        ModelAndView model = new ModelAndView("/admin/adding/adduser.html");
-        return model;
+        return new ModelAndView("/admin/adding/adduser.html");
     }
 
     @RequestMapping(value = "/admin/allusers/confirm", method = RequestMethod.POST)
