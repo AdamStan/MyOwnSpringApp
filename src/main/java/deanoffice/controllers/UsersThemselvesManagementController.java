@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import deanoffice.noentities.User;
-import deanoffice.noentities.UsersTableData;
+import deanoffice.security.User;
+import deanoffice.security.UserService;
 
 @Controller
 public class UsersThemselvesManagementController {
     private static final Logger log = Logger.getLogger(UsersThemselvesManagementController.class.getName());
 
     @Autowired
-    private UsersTableData data;
+    private UserService service;
 
     @RequestMapping(value = "/admin/allusers", method = RequestMethod.GET)
     public ModelAndView users() {
-        List<User> users = data.getAllUsers();
+        List<User> users = service.getAllUsers();
         ModelAndView model = new ModelAndView("/admin/users.html");
         model.addObject("users", users);
         return model;
@@ -33,7 +33,7 @@ public class UsersThemselvesManagementController {
     public ModelAndView deleteUser(HttpServletRequest request) {
         String username = request.getParameter("username");
         log.info("Username for delete: " + username);
-        data.deleteUserByUsername(username);
+        service.deleteUserByUsername(username);
         return this.users();
     }
 
@@ -42,7 +42,8 @@ public class UsersThemselvesManagementController {
         String username = request.getParameter("username");
         if (username != null) {
             log.info("User for edit: " + username);
-            User user = data.findUserByUsername(username);
+            // TODO: remove cast
+            User user = (User) service.loadUserByUsername(username);
             ModelAndView model = new ModelAndView("/admin/adding/edituser.html");
             model.addObject("user", user);
             return model;
@@ -58,7 +59,7 @@ public class UsersThemselvesManagementController {
         String enabled = request.getParameter("enabled");
         log.info("Parameters: " + username + ", " +
                 password + ", " + role + ", " + enabled);
-        data.updateUser(username, password, role, enabled);
+        service.updateUser(username, password, role, enabled);
         return this.users();
     }
 
@@ -75,7 +76,7 @@ public class UsersThemselvesManagementController {
         String enabled = request.getParameter("enabled");
         log.info("Parameters: " + username + ", " +
                 password + ", " + role + ", " + enabled);
-        data.insertUser(username, password, role, enabled);
+        service.insertUser(username, password, role, enabled);
         return this.users();
     }
 }

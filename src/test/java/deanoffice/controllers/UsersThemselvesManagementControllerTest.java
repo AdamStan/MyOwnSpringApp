@@ -9,18 +9,15 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
-import deanoffice.noentities.UsersTableData;
 
 public class UsersThemselvesManagementControllerTest
         extends BaseControllersTest {
     @InjectMocks
     private UsersThemselvesManagementController controller;
-    @Mock
-    private UsersTableData table;
+//    @Mock
+//    private UsersTableData table;
 
     @Before
     public void setUp() throws Exception {
