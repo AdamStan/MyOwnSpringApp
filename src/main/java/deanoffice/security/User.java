@@ -3,7 +3,6 @@ package deanoffice.security;
 import java.util.Collection;
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -14,20 +13,17 @@ import javax.persistence.Table;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "Users2")
 public class User implements UserDetails {
     private static final long serialVersionUID = 1L;
     @Id
-    @Column(nullable = false)
     private String username;
     private String password;
-    private Boolean enable;
+    private Boolean enabled;
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "username", referencedColumnName = "username")
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     public User() {
@@ -58,12 +54,12 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public Boolean getEnable() {
-        return enable;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    public void setEnable(Boolean enable) {
-        this.enable = enable;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Role getRole() {
@@ -77,7 +73,7 @@ public class User implements UserDetails {
     @Override
     public String toString() {
         return "User{" + "username='" + username + '\'' + ", password='"
-                + password + '\'' + ", enable=" + enable + '}';
+                + password + '\'' + ", enable=" + enabled + '}';
     }
 
     @Override
@@ -102,6 +98,6 @@ public class User implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-        return enable;
+        return enabled;
     }
 }

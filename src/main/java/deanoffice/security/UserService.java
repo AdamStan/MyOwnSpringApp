@@ -13,11 +13,13 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final PasswordEncoder encoder;
 
     @Autowired
-    public UserService(UserRepository userRepository, PasswordEncoder encoder) {
+    public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.encoder = encoder;
     }
 
@@ -41,26 +43,25 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    // TODO: role is just a string???
     public void updateUser(String username, String password, String role,
             String enabled) {
         User user = userRepository.getById(username);
         if (password.length() < 42) {
             user.setPassword(encoder.encode(password));
         }
-        user.setRole(new Role(user.getUsername(), role));
-        // TODO: please remove that equals!
-        user.setEnable(enabled.equals("on"));
+        Role dbaRole = roleRepository.findByAuthority(role).orElseThrow();
+        user.setRole(dbaRole);
+        user.setEnabled(enabled.equals("on"));
         userRepository.save(user);
     }
 
-    // TODO: role is just a string???
     public void insertUser(String username, String password, String role,
             String enabled) {
         User user = new User(username, encoder.encode(password));
-        user.setRole(new Role(username, role));
+        Role dbaRole = roleRepository.findByAuthority(role).orElseThrow();
+        user.setRole(dbaRole);
         // TODO: please remove that equals!
-        user.setEnable(enabled.equals("on"));
+        user.setEnabled(enabled.equals("on"));
         userRepository.save(user);
     }
 
