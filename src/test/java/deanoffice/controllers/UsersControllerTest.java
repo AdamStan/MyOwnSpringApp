@@ -22,6 +22,7 @@ import deanoffice.entities.Tutor;
 import deanoffice.mocks.MockUser;
 import deanoffice.security.User;
 import deanoffice.security.UserSecurityProvider;
+import deanoffice.security.UserService;
 
 public class UsersControllerTest extends BaseControllersTest {
 
@@ -29,14 +30,14 @@ public class UsersControllerTest extends BaseControllersTest {
     private UsersController usersController;
     @Mock
     private UserSecurityProvider provider;
-//    @Mock
-//    private UsersTableData table;
+    @Mock
+    private UserService users;
 
     @Before
     public void setUp() {
         MockitoAnnotations.openMocks(this);
         mockMvc = MockMvcBuilders.standaloneSetup(usersController).build();
-//        when(table.findUserByUsername(anyString())).thenReturn(new User());
+        when(users.findUser(anyString())).thenReturn(new User());
     }
 
     @Test
@@ -161,8 +162,7 @@ public class UsersControllerTest extends BaseControllersTest {
         String password = "password";
         when(studentRepository.findByIndexNumber(any()))
                 .thenReturn(new Student());
-//        when(table.findUserByUsername(anyString()))
-//                .thenReturn(new User("d", "r1"));
+        when(users.findUser(anyString())).thenReturn(new User("d", "r1"));
 
         mockMvc.perform(post("/useroptions/student").param("indexNumber", id)
                 .param("name", name).param("surname", surname)
@@ -186,7 +186,6 @@ public class UsersControllerTest extends BaseControllersTest {
         String password = "password";
         when(tutorRepository.findById(any()))
                 .thenReturn(Optional.of(new Tutor()));
-//        when(table.findUserByUsername(anyString())).thenReturn(new User());
 
         mockMvc.perform(
                 post("/useroptions/tutor").param("id", id).param("name", name)
@@ -213,7 +212,7 @@ public class UsersControllerTest extends BaseControllersTest {
         final User user = new User("b", "r1");
         when(tutorRepository.findById(any()))
                 .thenReturn(Optional.of(new Tutor()));
-//        when(table.findUserByUsername(anyString())).thenReturn(user);
+        when(users.findUser(anyString())).thenReturn(user);
 
         mockMvc.perform(
                 post("/useroptions/tutor").param("id", id).param("name", name)
@@ -232,7 +231,7 @@ public class UsersControllerTest extends BaseControllersTest {
         String oldusername = "street";
         String role = "numberofbuilding";
         String enabled = "numberofflat";
-//        when(table.findUserByUsername(anyString())).thenReturn(new User());
+        when(users.loadUserByUsername(anyString())).thenReturn(new User());
 
         mockMvc.perform(post("/useroptions/admin").param("username", username)
                 .param("password", password).param("oldusername", oldusername)
@@ -247,8 +246,7 @@ public class UsersControllerTest extends BaseControllersTest {
         String oldusername = "street";
         String role = "numberofbuilding";
         String enabled = "numberofflat";
-//        when(table.findUserByUsername(anyString()))
-//                .thenReturn(new User("d", "r1"));
+        when(users.findUser(anyString())).thenReturn(new User("d", "r1"));
 
         mockMvc.perform(post("/useroptions/admin").param("username", username)
                 .param("password", password).param("oldusername", oldusername)
