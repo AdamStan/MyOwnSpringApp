@@ -120,7 +120,7 @@ public class UsersController {
         String password = request.getParameter("password");
 
         Student std = studentRepository.findByIndexNumber(Integer.valueOf(id));
-        if (userService.findUser(username).getUsername() != null && !username.equals(std.getName())) {
+        if (isUserWithGivenUsernameExists(username) && !username.equals(std.getUsername())) {
             throw new Exception("Username is in use!");
         }
 
@@ -154,7 +154,7 @@ public class UsersController {
 
         Tutor tutor = tutorRepository.findById(Integer.valueOf(id)).get();
 
-        if (userService.findUser(username).getUsername() != null && !username.equals(tutor.getName())) {
+        if (isUserWithGivenUsernameExists(username) && !tutor.getUsername().equals(username)) {
             throw new Exception("Username is in use!");
         }
 
@@ -185,7 +185,7 @@ public class UsersController {
         log.info("Parameters: " + username + ", " + password + ", " 
                     + role + ", " + enabled);
 
-        if (userService.loadUserByUsername(username).getUsername() != null && !username.equals(oldusername)) {
+        if (userService.findUser(username) != null || username.isBlank()) {
             throw new Exception("Username is in use!");
         }
 
@@ -195,7 +195,7 @@ public class UsersController {
         return new ModelAndView("/informlogout.html");
     }
 
-    private ModelAndView studentsOptions(String username) { //student & password
+    private ModelAndView studentsOptions(String username) {
         ModelAndView model = new ModelAndView("student/myAccount.html");
         Optional<Student> student = studentRepository.findByUsername(username);
         User user = userService.findUser(username);
@@ -204,7 +204,7 @@ public class UsersController {
         return model;
     }
 
-    private ModelAndView tutortsOptions(String username) { //tutor & password
+    private ModelAndView tutortsOptions(String username) {
         ModelAndView model = new ModelAndView("tutor/myAccount.html");
         Optional<Tutor> tutor = tutorRepository.findByUsername(username);
         if (tutor.isEmpty()) {
@@ -216,11 +216,15 @@ public class UsersController {
         return model;
     }
 
-    private ModelAndView adminsOptions(String username) { //all from users & autorithy table
+    private ModelAndView adminsOptions(String username) {
         ModelAndView model = new ModelAndView("admin/myAccount.html");
         User user = userService.findUser(username);
         model.addObject("user", user);
         return model;
+    }
+
+    private boolean isUserWithGivenUsernameExists(String username) {
+        return userService.findUser(username) != null || username.isBlank();
     }
 
 }

@@ -3,7 +3,7 @@
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
-    <title>Add user</title>
+    <title>Edit my account</title>
     <div th:replace="fragments/header.html :: header-css"/>
 </head>
 <body>
@@ -33,9 +33,9 @@
                 <label> Authority </label>
             </div>
             <div class="col">
-                <input name = "role" type="radio" value="ROLE_ADMIN"> Admin
-                <input name = "role" type="radio" value="ROLE_TUTOR"> Tutor
-                <input name = "role" type="radio" value="ROLE_STUDENT"> Student
+                <input name = "role" type="radio" value="ROLE_ADMIN" th:checked="${user.role.authority} == 'ROLE_ADMIN' ? 'checked'"> Admin
+                <input name = "role" type="radio" value="ROLE_TUTOR" th:checked="${user.role.authority} == 'ROLE_TUTOR' ? 'checked'"> Tutor
+                <input name = "role" type="radio" value="ROLE_STUDENT" th:checked="${user.role.authority} == 'ROLE_STUDENT' ? 'checked'"> Student
             </div>
         </div>
         <div class="row">
@@ -43,7 +43,7 @@
                 <label> Enabled </label>
             </div>
             <div class="col">
-                <input name = "enabled" type="checkbox" value="on"> yes
+                <input name = "enabled" type="checkbox" value="on" th:checked="${user.enabled} ? 'checked'"> yes
             </div>
         </div>
         <div class="row">

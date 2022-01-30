@@ -57,7 +57,10 @@ public class UserService implements UserDetailsService {
 
     public void insertUser(String username, String password, String role,
             String enabled) {
-        User user = new User(username, encoder.encode(password));
+        User user = new User(username, password);
+        if (password.length() < 42) {
+            user.setPassword(encoder.encode(password));
+        }
         Role dbaRole = roleRepository.findByAuthority(role).orElseThrow();
         user.setRole(dbaRole);
         // TODO: please remove that equals!
