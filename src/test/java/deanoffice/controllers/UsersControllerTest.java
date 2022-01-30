@@ -137,7 +137,7 @@ public class UsersControllerTest extends BaseControllersTest {
         String password = "password";
         when(studentRepository.findByIndexNumber(any()))
                 .thenReturn(new Student());
-//        when(table.findUserByUsername(anyString())).thenReturn(new User());
+        when(users.findUser(anyString())).thenReturn(null);
 
         mockMvc.perform(post("/useroptions/student").param("indexNumber", id)
                 .param("name", name).param("surname", surname)
@@ -186,6 +186,7 @@ public class UsersControllerTest extends BaseControllersTest {
         String password = "password";
         when(tutorRepository.findById(any()))
                 .thenReturn(Optional.of(new Tutor()));
+        when(users.findUser(anyString())).thenReturn(null);
 
         mockMvc.perform(
                 post("/useroptions/tutor").param("id", id).param("name", name)
@@ -231,7 +232,7 @@ public class UsersControllerTest extends BaseControllersTest {
         String oldusername = "street";
         String role = "numberofbuilding";
         String enabled = "numberofflat";
-        when(users.loadUserByUsername(anyString())).thenReturn(new User());
+        when(users.findUser(anyString())).thenReturn(null);
 
         mockMvc.perform(post("/useroptions/admin").param("username", username)
                 .param("password", password).param("oldusername", oldusername)
