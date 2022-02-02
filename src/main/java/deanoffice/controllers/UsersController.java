@@ -4,6 +4,7 @@ import deanoffice.entities.Student;
 import deanoffice.entities.Tutor;
 import deanoffice.repositories.StudentRepository;
 import deanoffice.repositories.TutorRepository;
+import deanoffice.security.Role;
 import deanoffice.security.User;
 import deanoffice.security.UserSecurityProvider;
 import deanoffice.security.UserService;
@@ -73,7 +74,7 @@ public class UsersController {
 
         for (GrantedAuthority auth : user.get().getAuthorities()) {
             log.info("Who wants more options? " + auth.toString());
-            if (auth.getAuthority().equals("ROLE_ADMIN")) {
+            if (auth.getAuthority().equals(Role.ROLE_ADMIN.name())) {
                 return new ModelAndView("admin/helloAdmin.html");
             } else if (auth.getAuthority().equals("ROLE_TUTOR")) {
                 return new ModelAndView("tutor/helloTutor.html");

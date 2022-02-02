@@ -11,6 +11,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import deanoffice.security.Role;
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -35,11 +37,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().authorizeRequests()
                 .antMatchers("/", "/home", "/whodidit", "/news/**").permitAll()
                 .antMatchers("/Admin", "/admin/**", "/useroptions/admin")
-                .access("hasRole('ROLE_ADMIN')")
+                .access("hasRole('" + Role.ROLE_ADMIN.name() + "')")
                 .antMatchers("/Student", "/student/**", "/useroptions/student")
-                .access("hasRole('ROLE_STUDENT')")
+                .access("hasRole('" + Role.ROLE_STUDENT.name() + "')")
                 .antMatchers("/Tutor", "/tutor/**", "/useroptions/tutor")
-                .access("hasRole('ROLE_TUTOR')").anyRequest().authenticated()
+                .access("hasRole('" + Role.ROLE_TUTOR.name() + "')").anyRequest().authenticated()
                 .and().formLogin().loginPage("/login").permitAll().and()
                 .logout().permitAll().and();
     }

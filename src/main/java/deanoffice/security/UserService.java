@@ -48,9 +48,9 @@ public class UserService implements UserDetailsService {
         if (password.length() < 42) {
             user.setPassword(encoder.encode(password));
         }
-        user.setRole(new Role(user.getUsername(), role));
+        user.setRole(Role.valueOf(role));
         // TODO: please remove that equals!
-        user.setEnable(enabled.equals("on"));
+        user.setEnabled(enabled.equals("on"));
         userRepository.save(user);
     }
 
@@ -58,9 +58,9 @@ public class UserService implements UserDetailsService {
     public void insertUser(String username, String password, String role,
             String enabled) {
         User user = new User(username, encoder.encode(password));
-        user.setRole(new Role(username, role));
+        user.setRole(Role.valueOf(role));
         // TODO: please remove that equals!
-        user.setEnable(enabled.equals("on"));
+        user.setEnabled(enabled.equals("on"));
         userRepository.save(user);
     }
 
