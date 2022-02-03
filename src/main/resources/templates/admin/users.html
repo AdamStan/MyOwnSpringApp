@@ -15,7 +15,7 @@
             <th> username </th>
             <th> password </th>
             <th> role </th>
-            <th> enable </th>
+            <th> enabled </th>
             <th> edit/delete </th>
         </tr>
         </thead>
@@ -24,7 +24,7 @@
             <td th:text="${user.username}"> name </td>
             <td th:text="${user.password}"> description </td>
             <td th:text="${user.role}"> description </td>
-            <td th:text="${user.enable}"> description </td>
+            <td th:text="${user.enabled}"> description </td>
             <td>
                 <form action="/admin/allusers/deleted" id="delete"> </form>
                 <button type="submit" form="delete" name = "username" th:value = "${user.username}">

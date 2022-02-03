@@ -13,14 +13,14 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import deanoffice.noentities.UsersTableData;
+import deanoffice.security.UserService;
 
 public class UsersThemselvesManagementControllerTest
         extends BaseControllersTest {
     @InjectMocks
     private UsersThemselvesManagementController controller;
     @Mock
-    private UsersTableData table;
+    private UserService table;
 
     @Before
     public void setUp() throws Exception {

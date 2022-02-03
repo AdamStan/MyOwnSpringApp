@@ -2,10 +2,12 @@ package deanoffice.controllers;
 
 import deanoffice.entities.Student;
 import deanoffice.entities.Tutor;
-import deanoffice.noentities.UsersTableData;
 import deanoffice.repositories.StudentRepository;
 import deanoffice.repositories.TutorRepository;
+import deanoffice.security.Role;
+import deanoffice.security.User;
 import deanoffice.security.UserSecurityProvider;
+import deanoffice.security.UserService;
 
 import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +31,16 @@ public class UsersController {
 
     private final StudentRepository studentRepository;
     private final TutorRepository tutorRepository;
-    private final UsersTableData userTable;
+    private final UserService userService;
     private final UserSecurityProvider fromContext;
 
     @Autowired
     public UsersController(StudentRepository studentRepository,
-            TutorRepository tutorRepository, UsersTableData userTable,
+            TutorRepository tutorRepository, UserService userService,
             UserSecurityProvider fromContext) {
         this.studentRepository = studentRepository;
         this.tutorRepository = tutorRepository;
-        this.userTable = userTable;
+        this.userService = userService;
         this.fromContext = fromContext;
     }
 
@@ -72,7 +74,7 @@ public class UsersController {
 
         for (GrantedAuthority auth : user.get().getAuthorities()) {
             log.info("Who wants more options? " + auth.toString());
-            if (auth.getAuthority().equals("ROLE_ADMIN")) {
+            if (auth.getAuthority().equals(Role.ROLE_ADMIN.name())) {
                 return new ModelAndView("admin/helloAdmin.html");
             } else if (auth.getAuthority().equals("ROLE_TUTOR")) {
                 return new ModelAndView("tutor/helloTutor.html");
@@ -119,8 +121,7 @@ public class UsersController {
         String password = request.getParameter("password");
 
         Student std = studentRepository.findByIndexNumber(Integer.valueOf(id));
-
-        if (userTable.findUserByUsername(username).getUsername() != null && !username.equals(std.getName())) {
+        if (isUserWithGivenUsernameExists(username) && !std.getUsername().equals(username)) {
             throw new Exception("Username is in use!");
         }
 
@@ -131,8 +132,8 @@ public class UsersController {
         std.setNumberOfBuilding(numberOfBuilding);
         std.setNumberOfFlat(numberOfFlat);
 
-        userTable.deleteUserByUsername(std.getUsername());
-        userTable.insertUser(username, password, "ROLE_STUDENT", "on");
+        userService.deleteUserByUsername(std.getUsername());
+        userService.insertUser(username, password, "ROLE_STUDENT", "on");
         std.setUsername(username);
 
         studentRepository.save(std);
@@ -154,7 +155,7 @@ public class UsersController {
 
         Tutor tutor = tutorRepository.findById(Integer.valueOf(id)).get();
 
-        if (userTable.findUserByUsername(username).getUsername() != null && !username.equals(tutor.getName())) {
+        if (isUserWithGivenUsernameExists(username) && !tutor.getUsername().equals(username)) {
             throw new Exception("Username is in use!");
         }
 
@@ -165,8 +166,8 @@ public class UsersController {
         tutor.setNumberOfBuilding(numberOfBuilding);
         tutor.setNumberOfFlat(numberOfFlat);
 
-        userTable.deleteUserByUsername(tutor.getUsername());
-        userTable.insertUser(username, password, "ROLE_TUTOR", "on");
+        userService.deleteUserByUsername(tutor.getUsername());
+        userService.insertUser(username, password, "ROLE_TUTOR", "on");
 
         tutor.setUsername(username);
 
@@ -185,12 +186,12 @@ public class UsersController {
         log.info("Parameters: " + username + ", " + password + ", " 
                     + role + ", " + enabled);
 
-        if (userTable.findUserByUsername(username).getUsername() != null && !username.equals(oldusername)) {
+        if (!oldusername.equals(username) && isUserWithGivenUsernameExists(username)) {
             throw new Exception("Username is in use!");
         }
 
-        userTable.deleteUserByUsername(oldusername);
-        userTable.insertUser(username, password, role, enabled);
+        userService.deleteUserByUsername(oldusername);
+        userService.insertUser(username, password, role, enabled);
 
         return new ModelAndView("/informlogout.html");
     }
@@ -198,7 +199,7 @@ public class UsersController {
     private ModelAndView studentsOptions(String username) { //student & password
         ModelAndView model = new ModelAndView("student/myAccount.html");
         Optional<Student> student = studentRepository.findByUsername(username);
-        deanoffice.noentities.User user = userTable.findUserByUsername(username);
+        User user = userService.findUser(username);
         model.addObject("student", student.get());
         model.addObject("password", user.getPassword());
         return model;
@@ -210,7 +211,7 @@ public class UsersController {
         if (tutor.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tutor doesn't exist");
         }
-        deanoffice.noentities.User user = userTable.findUserByUsername(username);
+        User user = userService.findUser(username);
         model.addObject("tutor", tutor);
         model.addObject("password", user.getPassword());
         return model;
@@ -218,9 +219,13 @@ public class UsersController {
 
     private ModelAndView adminsOptions(String username) { //all from users & autorithy table
         ModelAndView model = new ModelAndView("admin/myAccount.html");
-        deanoffice.noentities.User user = userTable.findUserByUsername(username);
+        User user = userService.findUser(username);
         model.addObject("user", user);
         return model;
+    }
+
+    private boolean isUserWithGivenUsernameExists(String username) {
+        return userService.findUser(username) != null || username.isBlank();
     }
 
 }
