@@ -121,7 +121,7 @@ public class UsersController {
         String password = request.getParameter("password");
 
         Student std = studentRepository.findByIndexNumber(Integer.valueOf(id));
-        if (userService.findUser(username).getUsername() != null && !username.equals(std.getName())) {
+        if (isUserWithGivenUsernameExists(username)) {
             throw new Exception("Username is in use!");
         }
 
@@ -155,7 +155,7 @@ public class UsersController {
 
         Tutor tutor = tutorRepository.findById(Integer.valueOf(id)).get();
 
-        if (userService.findUser(username).getUsername() != null && !username.equals(tutor.getName())) {
+        if (isUserWithGivenUsernameExists(username)) {
             throw new Exception("Username is in use!");
         }
 
@@ -186,7 +186,7 @@ public class UsersController {
         log.info("Parameters: " + username + ", " + password + ", " 
                     + role + ", " + enabled);
 
-        if (userService.loadUserByUsername(username).getUsername() != null && !username.equals(oldusername)) {
+        if (isUserWithGivenUsernameExists(username)) {
             throw new Exception("Username is in use!");
         }
 
@@ -222,6 +222,10 @@ public class UsersController {
         User user = userService.findUser(username);
         model.addObject("user", user);
         return model;
+    }
+    
+    private boolean isUserWithGivenUsernameExists(String username) {
+        return userService.findUser(username) != null || username.isBlank();
     }
 
 }
