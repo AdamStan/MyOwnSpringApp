@@ -41,7 +41,6 @@ public class UserService implements UserDetailsService {
         return userRepository.findAll();
     }
 
-    // TODO: role is just a string???
     public void updateUser(String username, String password, String role,
             String enabled) {
         User user = userRepository.getById(username);
@@ -54,10 +53,12 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    // TODO: role is just a string???
     public void insertUser(String username, String password, String role,
             String enabled) {
-        User user = new User(username, encoder.encode(password));
+        User user = new User(username);
+        if (password.length() < 42) {
+            user.setPassword(encoder.encode(password));
+        }
         user.setRole(Role.valueOf(role));
         // TODO: please remove that equals!
         user.setEnabled(enabled.equals("on"));
