@@ -38,6 +38,13 @@ public class User implements UserDetails {
         this.password = password;
     }
 
+    public User(String username, String password, Boolean enabled, Role role) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.role = role;
+    }
+
     public String getUsername() {
         return username;
     }
